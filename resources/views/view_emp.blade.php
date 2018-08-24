@@ -28,7 +28,7 @@
 								<select id="f_tahun" class="form-control">
 									<option value="">Choose Year</option>
 									@foreach ($tahun as $listtahun)
-										<option value="{{ $listtahun->TAHUN_ID }}">{{ $listtahun->TAHUN }}</option>
+										<option value="{{ $listtahun->TAHUN }}">{{ $listtahun->TAHUN }}</option>
 									@endforeach
 								</select>
 							</div>
@@ -79,6 +79,7 @@ $('#btn-view-emp').click(function(){
 			data: {'unit': unit, 'tahun': tahun},
 			dataType: 'json',
 			success:function(r){
+				// console.log(r);
 				var t = ''; var no = 1; $('.result-emp tr').remove();
 				if(r.content.length > 0) {
 					$.each(r.content, function(k, v){

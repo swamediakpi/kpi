@@ -5,13 +5,13 @@
 	<div id=\"yfReportContainer59f3bf13-4f3a-4517-8a83-bd950357621a\"></div>
 </div>
 <!-- <script type="text/javascript" src="http://localhost:8090/JsAPI?dashUUID=0537286a-a4a7-411d-9650-d6003810018c"></script> -->
-<script type="text/javascript" src="http://localhost:8090/JsAPI?reportUUID=59f3bf13-4f3a-4517-8a83-bd950357621a&amp;yfFilterfec90b31-c705-4e98-b651-6f191d099041=Ade+Setiyanto"></script>
+<script type="text/javascript" src="http://localhost:8090/JsAPI?reportUUID=59f3bf13-4f3a-4517-8a83-bd950357621a&amp;yfFilterfec90b31-c705-4e98-b651-6f191d099041"></script>
 
-<script type="text/javascript" src="http://localhost:8090/JsAPI?reportUUID=1bfad5e3-5389-4bc2-9c94-d113179e9174&amp;yfFilterf815dfd4-1908-4641-b521-7374883b1026=Ade+Setiyanto"></script>
+<script type="text/javascript" src="http://localhost:8090/JsAPI?reportUUID=1bfad5e3-5389-4bc2-9c94-d113179e9174&amp;yfFilterf815dfd4-1908-4641-b521-7374883b1026"></script>
 
-<script type="text/javascript" src="http://localhost:8090/JsAPI?reportUUID=a5ab3580-f915-4026-b747-77660e4368d8&amp;yfFilter072022f4-27d1-4479-969e-3bceabe7c944=Ade+Setiyanto"></script>
+<script type="text/javascript" src="http://localhost:8090/JsAPI?reportUUID=a5ab3580-f915-4026-b747-77660e4368d8&amp;yfFilter072022f4-27d1-4479-969e-3bceabe7c944"></script>
 
-  <!-- <div class="row">
+  <div class="row">
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="dashboard_graph">
 		  <div class="row x_title">
@@ -474,6 +474,6 @@ $(document).ready(function(){
 		});
 	});
 });
-</script> -->
+</script>
 
 @endsection
