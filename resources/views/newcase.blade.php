@@ -182,7 +182,7 @@ $(document).ready(function(){
 
                 appendEmp += '<option value="" >Choose Employee</option>';
                 $.each(data.contentEmp, function(k, v){
-                    appendEmp += '<option value="'+v.EMPLOYEE_ID+'">'+v.EMPLOYEE_NAME+'</option>';
+                    appendEmp += '<option value="'+v.EMPLOYEE_ID+'">'+v.EMPLOYEE_ID+'//'+v.EMPLOYEE_NAME+'</option>';
                 });
                 
                 appendPrjct += '<option value="" >Choose Project</option>'; 

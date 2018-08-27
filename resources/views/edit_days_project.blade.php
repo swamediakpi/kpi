@@ -181,7 +181,7 @@ $(document).ready(function(){
 
             op+='<option value="" >Choose Employee</option>';
             for(var i = 0 ; i < data.length ; i++){
-              op+='<option value="'+data[i].EMPLOYEE_ID+'">'+data[i].EMPLOYEE_NAME+'</option>';
+              op+='<option value="'+data[i].EMPLOYEE_ID+'">'+data[i].EMPLOYEE_ID+'//'+data[i].EMPLOYEE_NAME+'</option>';
             }
           }
                              
@@ -212,7 +212,7 @@ $(document).ready(function(){
 
             op+='<option value="" >Choose Employee</option>';
             for(var i = 0 ; i < data.length ; i++){
-              op+='<option value="'+data[i].EMPLOYEE_ID+'">'+data[i].EMPLOYEE_NAME+'</option>';
+              op+='<option value="'+data[i].EMPLOYEE_ID+'">'+data[i].EMPLOYEE_ID+'//'+data[i].EMPLOYEE_NAME+'</option>';
             }
           }
                              
@@ -242,7 +242,7 @@ $(document).ready(function(){
 
             op+='<option value="" >Choose Employee</option>';
             for(var i = 0 ; i < data.length ; i++){
-              op+='<option value="'+data[i].EMPLOYEE_ID+'">'+data[i].EMPLOYEE_NAME+'</option>';
+              op+='<option value="'+data[i].EMPLOYEE_ID+'">'+data[i].EMPLOYEE_ID+'//'+data[i].EMPLOYEE_NAME+'</option>';
             }
           }
                              
