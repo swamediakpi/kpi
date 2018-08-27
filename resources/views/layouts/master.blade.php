@@ -84,8 +84,11 @@
 		<div class="col-md-3 left_col">
 		  <div class="left_col scroll-view">
 			<div class="navbar nav_title" style="border: 0;">
-						   
+			@if (Auth::user()->dashboard=='1')
 			  <img src="public/css/landingpage/img/logo white.png" alt="logo-kpi" style="width:90px; margin-left:5%; margin-top:5%;">
+			@else
+			  <img src="../public/css/landingpage/img/logo white.png" alt="logo-kpi" style="width:90px; margin-left:5%; margin-top:5%;">
+			@endif
 			</div>
 
 			<div class="clearfix"></div>
