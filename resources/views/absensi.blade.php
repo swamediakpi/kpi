@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+<!--script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=f448845e-b064-48fa-b4a8-74268f05fb60"></script-->
 <div class="col-md-12 col-sm-4 col-xs-12">
 	<div class="x_panel">
 		<div class="x_title">
@@ -107,8 +108,8 @@
 		<div class="x_content">
 			<div class="result-search-absen"></div>
 			<table class="table table-hover table-bordered table-striped " >
-				<th style="color:#fff;background-color:#212529;border-color:#32383e">Poin Presentase:</th>
-				<th style="color:#fff;background-color:#212529;border-color:#32383e">Skor</th>
+				<th class="table-head" >Poin Presentase:</th>
+				<th class="table-head" >Skor</th>
 				<tr>
 					<td>90 - 95</td>
 					<td>20</td>
