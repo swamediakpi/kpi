@@ -76,25 +76,17 @@
 	var baseUrl = '<?php echo URL::to('/');?>';
 </script>
 <body class="nav-md"> 
-<<<<<<< HEAD
-   <div class="container body">
-	  <div class="main_container">
-		<div class="col-md-3 left_col">
-		  <div class="left_col scroll-view">
-			<div class="navbar nav_title" style="border: 0;">
-			@if (Auth::user()->dashboard=='1')
-			  <img src="public/css/landingpage/img/logo white.png" alt="logo-kpi" style="width:90px; margin-left:5%; margin-top:5%;">
-			@else
-			  <img src="../public/css/landingpage/img/logo white.png" alt="logo-kpi" style="width:90px; margin-left:5%; margin-top:5%;">
-			@endif
-			</div>
-=======
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
 				<div class="left_col scroll-view">
 					<div class="navbar nav_title" style="border: 0;">
+					@if (Auth::user()->dashboard == '1')
+
 						<img src="public/css/landingpage/img/logo white.png" alt="logo-kpi" style="width:90px; margin-left:5%; margin-top:5%;">
+					@else 
+						<img src="../public/css/landingpage/img/logo white.png" alt="logo-kpi" style="width:90px; margin-left:5%; margin-top:5%;">
+					@endif
 					</div>
 
 					<div class="clearfix"></div>
@@ -102,7 +94,11 @@
 					<div class="profile clearfix">
 						<div class="profile_pic">
 							{{-- class="img-circle profile_img" --}}
-							<img src="public/avatars/{{ Auth::user()->avatar }}" alt="..." class="img-circle profile_img" style="width: 80px;">
+							@if(Auth::user()->dashboard == '1')
+								<img src="public/avatars/{{ Auth::user()->avatar }}" alt="..." class="img-circle profile_img" style="width: 80px;">
+							@else
+								<img src="../public/avatars/{{ Auth::user()->avatar }}" alt="..." class="img-circle profile_img" style="width: 80px;">
+							@endif
 						</div>
 
 						<div class="profile_info">
@@ -112,7 +108,6 @@
 					</div>
 					<!-- /menu profile quick info -->
 					<br/>
->>>>>>> 30b961e689e111df612d5fe06d346ace9efd51c5
 
 					<!-- sidebar menu -->
 					<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
@@ -138,24 +133,6 @@
 									</ul>
 								</li>
 
-<<<<<<< HEAD
-			<!-- menu profile quick info -->
-			<div class="profile clearfix">
-			  <div class="profile_pic">
-			  {{-- class="img-circle profile_img" --}}
-				@if (Auth::user()->dashboard=='1')
-
-					<img src="public/avatars/{{ Auth::user()->avatar }}" alt="..." class="img-circle profile_img" style="width: 80px;">
-				@else
-					<img src="../public/avatars/{{ Auth::user()->avatar }}" alt="..." class="img-circle profile_img" style="width: 80px;">
-				@endif
-				
-			  </div>
-			  <div class="profile_info">
-				<span>Welcome,</span>
-				<h2>{{ Auth::user()->EMPLOYEE_NAME }}</h2>
-			  </div>
-=======
 								@if (Auth::user()->ROLE_ID == '5') {{--
 									<li><a href="#"><i class="fa fa-user"></i> Admin <span class="fa fa-chevron-down"></span></a>
 										<ul class="nav child_menu">
@@ -197,7 +174,6 @@
 						</div>
 					</div>
 				</div>
->>>>>>> 30b961e689e111df612d5fe06d346ace9efd51c5
 			</div>
 
 			<!-- top navigation -->
