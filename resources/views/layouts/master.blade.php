@@ -100,6 +100,7 @@
 				@else
 					<img src="../public/avatars/{{ Auth::user()->avatar }}" alt="..." class="img-circle profile_img" style="width: 80px;">
 				@endif
+				
 			  </div>
 			  <div class="profile_info">
 				<span>Welcome,</span>
