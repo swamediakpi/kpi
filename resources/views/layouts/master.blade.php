@@ -94,7 +94,12 @@
 			<div class="profile clearfix">
 			  <div class="profile_pic">
 			  {{-- class="img-circle profile_img" --}}
-				<img src="public/avatars/{{ Auth::user()->avatar }}" alt="..." class="img-circle profile_img" style="width: 80px;">
+				@if (Auth::user()->dashboard=='1')
+
+					<img src="public/avatars/{{ Auth::user()->avatar }}" alt="..." class="img-circle profile_img" style="width: 80px;">
+				@else
+					<img src="../public/avatars/{{ Auth::user()->avatar }}" alt="..." class="img-circle profile_img" style="width: 80px;">
+				@endif
 			  </div>
 			  <div class="profile_info">
 				<span>Welcome,</span>
