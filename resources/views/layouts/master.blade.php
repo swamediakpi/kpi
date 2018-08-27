@@ -109,6 +109,7 @@
 				<h3>Menu</h3>
 				<ul class="nav side-menu">
 				  <li><a href="{{ url('/index') }}"><i class="fa fa-home"></i> Dashboard</a></li>
+				  <li><a href="{{ url('/index') }}"><i class="fa fa-home"></i> Dashboard 2</a></li>
 				  <li><a href="{{ url('/reportkpi') }}"><i class="fa fa-sticky-note"></i> Reporting KPI</a></li>
 				  <li><a href="#"><i class="fa fa-briefcase"></i> Kinerja <span class="fa fa-chevron-down"></span></a>
 					<ul class="nav child_menu">
