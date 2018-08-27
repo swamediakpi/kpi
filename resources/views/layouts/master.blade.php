@@ -81,11 +81,12 @@
 			<div class="col-md-3 left_col">
 				<div class="left_col scroll-view">
 					<div class="navbar nav_title" style="border: 0;">
-					@if (Auth::user()->dashboard == '1')
-
-						<img src="public/css/landingpage/img/logo white.png" alt="logo-kpi" style="width:90px; margin-left:5%; margin-top:5%;">
-					@else 
+					@if (Auth::user()->dashboard == '2')
 						<img src="../public/css/landingpage/img/logo white.png" alt="logo-kpi" style="width:90px; margin-left:5%; margin-top:5%;">
+
+					@else 
+						<img src="public/css/landingpage/img/logo white.png" alt="logo-kpi" style="width:90px; margin-left:5%; margin-top:5%;">
+
 					@endif
 					</div>
 
@@ -94,10 +95,11 @@
 					<div class="profile clearfix">
 						<div class="profile_pic">
 							{{-- class="img-circle profile_img" --}}
-							@if(Auth::user()->dashboard == '1')
-								<img src="public/avatars/{{ Auth::user()->avatar }}" alt="..." class="img-circle profile_img" style="width: 80px;">
-							@else
+							@if (Auth::user()->dashboard == '2')
 								<img src="../public/avatars/{{ Auth::user()->avatar }}" alt="..." class="img-circle profile_img" style="width: 80px;">
+							
+							@else
+								<img src="public/avatars/{{ Auth::user()->avatar }}" alt="..." class="img-circle profile_img" style="width: 80px;">
 							@endif
 						</div>
 
