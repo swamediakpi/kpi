@@ -24,11 +24,19 @@
 		<link href="{{ asset('public/css/font-awesome.min.css') }}" rel="stylesheet">
 		<!--  Theme Style -->
 		<link href= " {{ asset('public/css/custom.min.css') }}" rel="stylesheet">
+		
 
 		<link href="{{ asset('public/css/jquery-ui.css') }}" rel="stylesheet" >
 		<link href="{{ asset('public/css/jquery-ui-timepicker-addon.css') }}" rel="stylesheet">    
 		<link href="{{ asset('public/css/dataTables.bootstrap.min.css') }}" type="text/css" rel="stylesheet"/>
+		<link href="{{ asset('public/css/Table-Head.css') }}" type="text/css" rel="stylesheet"/>
 		<style>
+			.table-head {
+				color:#fff;
+				background-color:#212529;
+				border-color:#32383e;
+				text-align:center;
+			}
 			.ajax-loader {
 				visibility: hidden;
 				background-color: rgba(255,255,255,0.7);        
@@ -66,6 +74,7 @@
 		<script src="{{ asset('public/js/jquery-ui-timepicker-addon.js') }}"></script>    
 
 		<script src=" {{ asset('public/js/highcharts.js') }}"></script>
+		<script src=" {{ asset('public/js/drilldown.js') }}"></script>
 		<script src=" {{ asset('public/js/exporting.js') }}"></script>
 
 		<script src=" {{ asset('public/js/jquery.dataTables.min.js') }}"></script>
@@ -105,7 +114,7 @@
 
 						<div class="profile_info">
 							<span>Welcome,</span>
-							<h2>{{ Auth::user()->EMPLOYEE_NAME }}</h2>
+							<h2>{{ Auth::user()->username }}</h2>
 						</div>
 					</div>
 					<!-- /menu profile quick info -->

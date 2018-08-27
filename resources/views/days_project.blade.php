@@ -35,20 +35,20 @@
 						<table id="mandaysTable" class="table table-striped table-bordered">
 							<thead>
 								<tr>
-									<th>NO</th>
-									<th>NAMA</th>
-									<th>JABATAN</th>
-									<th>PROJECT</th>
-									<th>POSISI DALAM PROJECT</th>
-									<th><center>START WORK</center></th>
-									<th><center>END WORK</center></th>
-									<th><center>WORK DURATION</center></th>
-									<th><center>START PROJECT</center></th>
-									<th><center>FINISH PROJECT</center></th>
-									<th><center>DAYS PROJECT</center></th>
-									<th><center>ACTION</center></th>
-									<th><center>STATUS</center></th>
-									<th><center>HISTORY</center></th>
+									<th class="table-head" >NO</th>
+									<th class="table-head" >NAMA</th>
+									<th class="table-head" >JABATAN</th>
+									<th class="table-head" >PROJECT</th>
+									<th class="table-head" >POSISI DALAM PROJECT</th>
+									<th class="table-head" ><center>START WORK</center></th>
+									<th class="table-head" ><center>END WORK</center></th>
+									<th class="table-head" ><center>WORK DURATION</center></th>
+									<th class="table-head" ><center>START PROJECT</center></th>
+									<th class="table-head" ><center>FINISH PROJECT</center></th>
+									<th class="table-head" ><center>DAYS PROJECT</center></th>
+									<th class="table-head" ><center>ACTION</center></th>
+									<th class="table-head" ><center>STATUS</center></th>
+									<th class="table-head" ><center>HISTORY</center></th>
 								</tr>
 							</thead>
 						</table>
@@ -201,14 +201,14 @@
 						<table class="table table-bordered table-responsive table-hover">
 							<thead>
 								<tr>
-									<th>NO</th>
-									<th>NAMA</th>
-									<th>JABATAN</th>
-									<th>PROJECT</th>
-									<th>POSISI DALAM PROJECT</th>
-									<th><center>START WORK</center></th>
-									<th><center>END WORK</center></th>
-									<th><center>WORK DURATION</center></th>								
+									<th class="table-head" >NO</th>
+									<th class="table-head" >NAMA</th>
+									<th class="table-head" >JABATAN</th>
+									<th class="table-head" >PROJECT</th>
+									<th class="table-head" >POSISI DALAM PROJECT</th>
+									<th class="table-head" ><center>START WORK</center></th>
+									<th class="table-head" ><center>END WORK</center></th>
+									<th class="table-head" ><center>WORK DURATION</center></th>								
 								</tr>
 							</thead>
 							<tbody class="result-mandays">

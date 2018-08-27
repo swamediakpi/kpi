@@ -40,7 +40,7 @@
 					<div class="clearfix"></div>
 				</div>
 				
-				<div class="x_content">            
+				<div class="x_content">
 					<div class="w_center w_55">
 						<div id="mandaysChart" name="mandaysChart" style="width: 500px; height: 300px;"></div>
 					</div>
@@ -404,32 +404,162 @@
 
 @elseif (Auth::user()->dashboard == '3')
 	<div class="row">
-		<div class="col-md-12 col-sm-12 col-xs-12">
-			<div class="dashboard_graph">
-				<div class="row x_title">
-					<div class="col-md-6">
-						<h2>Dashboard</h2>
-						<ul class="nav navbar-right panel_toolbox"></ul>
+		<div class="col-md-12">
+			<div class="x_panel">
+				<div class="x_title" style="height: 35px;">
+					<div class="col-md-3">
+						<h2><i class="fa fa-bar-chart"></i>&nbsp;Title Graph</h2>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				
+				<div class="x_content">
+					<div class="col-md-12">
+						<div id="barDrilldown" name="barDrilldown"></div>
 						<div class="clearfix"></div>
 					</div>
 				</div>
 			</div>
-		</div> 
-	</div><br>
+		</div>
+	</div>
 
 	<div class="row">
-		<div class="col-md-12 col-sm-12 col-xs-12">
-			<div class="dashboard_graph">
-				<div class="row x_title">
-					<div class="col-md-6">
-						<h2>Graph</h2>
-						<ul class="nav navbar-right panel_toolbox"></ul>
+		<div class="col-md-12">
+			<div class="x_panel">
+				<div class="x_title" style="height: 35px;">
+					<h2><i class="fa fa-pie-chart"></i>&nbsp;Title Graph</h2>
+					<div class="clearfix"></div>
+				</div>
+				
+				<div class="x_content">
+					<div class="col-md-12">
+						Content
 						<div class="clearfix"></div>
 					</div>
 				</div>
 			</div>
-		</div> 
+		</div>
 	</div>
+<<<<<<< HEAD
 	
+=======
+
+	<script type="text/javascript">
+		$(function() {
+			$.ajax({
+				url : baseUrl +'/index/GrafMnd',
+				type: 'POST',
+				data: {'p_tahun': '2017'},
+				dataType: 'json',
+				beforeSend: function(){
+					$('.ajax-loader').css("visibility", "visible");
+				},
+				success : function(data){
+					// var seriesData = data.seriesData;
+					// var drilldownData = data.drilldownData;
+
+					barDrildownChart();
+				},
+				complete: function(){
+					$('.ajax-loader').css("visibility", "hidden");
+				}
+			});
+		});
+
+		function barDrildownChart(){
+			Highcharts.chart('barDrilldown', {
+				chart: { type: 'column' },
+				title: { text: '' },
+				subtitle: { text: '' },
+				xAxis: { type: 'category' },
+				yAxis: {
+					title: { text: '' }
+				},
+				legend: { enabled: false },
+				plotOptions: {
+					series: {
+						borderWidth: 0,
+						dataLabels: {
+							enabled: true,
+							format: '{point.y:.1f}%'
+						}
+					}
+				},
+
+				tooltip: {
+					headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+					pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+				},
+				series: [{
+					name: "Test",
+					colorByPoint: true,
+					data: [{
+						name: "Chrome",
+						y: 62.74,
+						drilldown: "Chrome"
+					},{
+						name: "Firefox",
+						y: 10.57,
+						drilldown: "Firefox"
+					},{
+						name: "Internet Explorer",
+						y: 7.23,
+						drilldown: "Internet Explorer"
+					}]
+				}],
+				drilldown: {
+					series: [{
+						name: "Chrome",
+						id: "Chrome",
+						data: [
+							["v65.0", 0.1],
+							["v64.0", 1.3],
+							["v63.0", 53.02],
+							["v62.0", 1.4 ],
+							["v61.0", 0.88],
+							["v60.0", 0.56],
+							["v59.0", 0.45],
+							["v58.0", 0.49],
+							["v57.0", 0.32],
+							["v56.0", 0.29],
+							["v55.0", 0.79],
+							["v54.0", 0.18],
+							["v51.0", 0.13],
+							["v49.0", 2.16],
+							["v48.0", 0.13],
+							["v47.0", 0.11],
+							["v43.0", 0.17],
+							["v29.0", 0.26]
+						]
+					},{
+						name: "Firefox",
+						id: "Firefox",
+						data: [
+							["v58.0", 1.02],
+							["v57.0", 7.36],
+							["v56.0", 0.35],
+							["v55.0", 0.11],
+							["v54.0", 0.1],
+							["v52.0", 0.95],
+							["v51.0", 0.15],
+							["v50.0", 0.1],
+							["v48.0", 0.31],
+							["v47.0", 0.12]
+						]
+					},{
+						name: "Internet Explorer",
+						id: "Internet Explorer",
+						data: [
+							["v11.0", 6.2],
+							["v10.0", 0.29],
+							["v9.0", 0.27],
+							["v8.0", 0.47]
+						]
+					}]
+				}
+			});
+		}
+	</script>
+>>>>>>> 55e92a89124828235807d9012c4daf95603b7ce2
 @endif
 @endsection

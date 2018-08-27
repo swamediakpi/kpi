@@ -13,7 +13,7 @@ class absensiController extends Controller
 		$id_name = Auth::user()->EMPLOYEE_ID;
 		$id_unit = Auth::user()->UNIT_ID;
 		$months = array();
-		
+
 		//$query =  DB::select("call spViewAbsen('$id_name')");	
 
 		if(Auth::user()->ROLE_ID == '1' || Auth::user()->ROLE_ID == '2' || Auth::user()->ROLE_ID == '5' || Auth::user()->ROLE_ID == '8') {
@@ -62,9 +62,11 @@ class absensiController extends Controller
 	public function getEmployeeFromUnit(Request $request){
         $idUnit = $request->get('id');
 
-        $data = DB::table('employee')->select('EMPLOYEE_ID','EMPLOYEE_NAME')                                   
+        $data = DB::table('employee')->select('employee.EMPLOYEE_ID','EMPLOYEE_NAME') 
+									->join('user','employee.EMPLOYEE_ID','=','employee.EMPLOYEE_ID')  
                                     ->where('UNIT_ID','=',$idUnit)
                                     ->whereNotIn('EMPLOYEE_NAME',['admin'])
+                                    ->groupBy('EMPLOYEE_NAME')
                                     ->get();
 
         return response()->json($data);
