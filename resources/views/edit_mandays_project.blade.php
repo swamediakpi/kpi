@@ -36,14 +36,6 @@
 	              	</div>
                 </div>
                 <div class="form-group">
-	            	<label class="control-label col-md-1 col-sm-3 col-xs-12">Start Date</label>
-	            	<div class="col-md-9 col-sm-9 col-xs-12">
-	            		<select class="form-control strtdate">
-	                		<option value="" disabled="true" selected="true">Choose Employee name First</option>
-	                	</select>
-	              	</div>
-                </div>
-                <div class="form-group">
                   <div class="col-md-9 col-sm-9 col-xs-12 col-md-9">     
                     <button class="btn btn-success pull-right btn-view-prjct">Search</button>
                   </div>
@@ -98,8 +90,7 @@ $(document).ready(function(){
 
 	            op+='<option value="" >Choose Project</option>';
 		            for(var i = 0 ; i < data.length ; i++){
-						var string_Nik = data[i].EMPLOYEE_ID;
-						op+='<option value="'+data[i].EMPLOYEE_ID+'">'+string_Nik+'//'+data[i].EMPLOYEE_NAME+'</option>';
+						op+='<option value="'+data[i].PROJECT_DETAIL_ID+'"> '+ data[i].PROJECT_NAME+'</option>';
 		            }
 	          }	                             
 	          $('.prjctname').append(op);	                    
@@ -135,45 +126,15 @@ $(document).ready(function(){
 	        }
 	    });
   	});
-  	
-  	$('.empname').change(function(){
-  		var id       = $(this).val();
-  		var prjct_id = $('.prjctname').val();
-	    var op = "";
-
-	    $.ajax({	          
-	        type  :'get',
-	        url   :'{{URL::to('getStrDateFromEmp')}}',
-	        data  : {'id':id , 'prjct_id':prjct_id},
-	        success:function(data){
-	          
-	          $('.strtdate option').remove();
-
-	          if(data.length == ""){	          	
-	          	
-	          	op+='<option value="" >Empty</option>';
-	          
-	          }else{
-
-	            op+='<option value="" >Choose Start Date</option>';
-		            for(var i = 0 ; i < data.length ; i++){
-		              op+='<option value="'+data[i].START_WORK+'">'+data[i].START_WORK+'</option>';
-		            }
-	          }	                             
-	          $('.strtdate').append(op);	                    
-	        }
-	    });
-  	});
-  	
+  	  	
 
   	$('.btn-view-prjct').click(function(){
 
   		var unit = $('.unitname').val();
   		var prjct  = $('.prjctname').val();
   		var emp  = $('.empname').val();
-  		var strdate = $('.strtdate').val();
 
-  		if(emp == "" || unit == "" || prjct =="" || strdate =="")
+  		if(emp == "" || unit == "" || prjct =="")
   		{
 	  		$("#error1").html("Your Data is not complete!");
 	      	$('#myModal1').modal("show");
@@ -183,7 +144,7 @@ $(document).ready(function(){
 	    	$.ajax({
 	    		url : baseUrl +'/editMandaysProject/view',
 		        type: 'POST',
-		        data: {'emp_id': emp,'prjct_id': prjct,'strdate': strdate},
+		        data: {'emp_id': emp,'prjct_id': prjct},
 		        dataType: 'json',
 		        success:function(r)
 		        {
