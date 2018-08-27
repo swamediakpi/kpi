@@ -162,7 +162,7 @@
 		
 		$('.unitname').change(function(){
 			var id = $('.unitname').val(); var op = "";
-
+			
 			$.ajax({
 				type  :'get',
 				url   :'{{URL::to('getEmployeeFromUnit')}}',
@@ -177,7 +177,8 @@
 					}else {
 						op+='<option value="" >Choose Employee</option>';
 						for(var i = 0 ; i < data.length ; i++) {
-							op+='<option value="'+data[i].EMPLOYEE_ID+'">'+data[i].EMPLOYEE_ID+'//'+data[i].EMPLOYEE_NAME+'</option>';
+							var string_Nik = data[i].EMPLOYEE_ID;
+							op+='<option value="'+data[i].EMPLOYEE_ID+'">'+string_Nik+'//'+data[i].EMPLOYEE_NAME+'</option>';
 						}
 					}
 					$('.empname').append(op);
