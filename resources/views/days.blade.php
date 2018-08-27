@@ -71,12 +71,12 @@
             	<table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th rowspan="2" style="text-align: center">Project Name</th>
-                    <th colspan="2" style="text-align: center">Days Of Project</th>
+                    <th rowspan="2" class="table-head" >Project Name</th>
+                    <th colspan="2" class="table-head" >Days Of Project</th>
                   </tr>                    
                   <tr>
-                    <th>Jabatan</th>
-                    <th>Work Duration</th>
+                    <th class="table-head" >Jabatan</th>
+                    <th class="table-head" >Work Duration</th>
                   </tr>
                 </thead>
                 @if (Auth::user()->ROLE_ID == '1' || Auth::user()->ROLE_ID == '2' || Auth::user()->ROLE_ID == '3' || Auth::user()->ROLE_ID == '5'|| Auth::user()->ROLE_ID == '6' || Auth::user()->ROLE_ID == '7' || Auth::user()->ROLE_ID == '8')
@@ -147,8 +147,8 @@
             <table class="table table-bordered">
                 <thead>
                    <tr>
-                      <th>Parameter Poin</th>
-                      <th>Skor</th>
+                      <th class="table-head" >Parameter Poin</th>
+                      <th class="table-head" >Skor</th>
                    </tr>
                 </thead>
                 <tbody>

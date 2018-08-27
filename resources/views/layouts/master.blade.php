@@ -24,11 +24,19 @@
 		<link href="{{ asset('public/css/font-awesome.min.css') }}" rel="stylesheet">
 		<!--  Theme Style -->
 		<link href= " {{ asset('public/css/custom.min.css') }}" rel="stylesheet">
+		
 
 		<link href="{{ asset('public/css/jquery-ui.css') }}" rel="stylesheet" >
 		<link href="{{ asset('public/css/jquery-ui-timepicker-addon.css') }}" rel="stylesheet">    
 		<link href="{{ asset('public/css/dataTables.bootstrap.min.css') }}" type="text/css" rel="stylesheet"/>
+		<link href="{{ asset('public/css/Table-Head.css') }}" type="text/css" rel="stylesheet"/>
 		<style>
+			.table-head {
+				color:#fff;
+				background-color:#212529;
+				border-color:#32383e;
+				text-align:center;
+			}
 			.ajax-loader {
 				visibility: hidden;
 				background-color: rgba(255,255,255,0.7);        

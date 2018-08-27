@@ -78,11 +78,11 @@
             <table class="table table-bordered">
               <thead>
                   <tr>
-                    <th style="text-align: center">No</th>
-                    <th style="text-align: center">Area Kinerja Utama</th>
-                    <th style="text-align: center">KPI</th>
-                    <th style="text-align: center">BOBOT</th>
-                    <th style="text-align: center">Pencapaian</th>
+                    <th class="table-head" >No</th>
+                    <th class="table-head" >Area Kinerja Utama</th>
+                    <th class="table-head" >KPI</th>
+                    <th class="table-head" >BOBOT</th>
+                    <th class="table-head" >Pencapaian</th>
                   </tr>
               </thead>
               <tbody class="result-search-asman">
@@ -93,8 +93,8 @@
           <table class="table table-bordered">
               <thead>
                  <tr>                           
-                   <th style="text-align: center;">Alfabet</th>
-                   <th style="text-align: center;">Skor</th>
+                   <th class="table-head" >Alfabet</th>
+                   <th class="table-head" >Skor</th>
                  </tr>
              </thead>
              <tbody>
@@ -194,11 +194,11 @@
   <table class="table table-striped table-bordered table-hover table-condensed">
     <thead>
       <tr>
-        <th>No</th>
-        <th>Area Kinerja Utama</th>
-        <th>Kpi</th>
-        <th>Bobot</th>
-        <th>Pencapaian</th>
+        <th class="table-head" >No</th>
+        <th class="table-head" >>Area Kinerja Utama</th>
+        <th class="table-head" >Kpi</th>
+        <th class="table-head" >Bobot</th>
+        <th class="table-head" >Pencapaian</th>
       </tr>
     </thead>
     <tbody>
@@ -236,8 +236,8 @@
   <table class="table table-bordered">
       <thead>
          <tr>                           
-           <th style="text-align: center;">Alfabet</th>
-           <th style="text-align: center;">Skor</th>
+           <th class="table-head" >Alfabet</th>
+           <th class="table-head" >Skor</th>
          </tr>
      </thead>
      <tbody>
