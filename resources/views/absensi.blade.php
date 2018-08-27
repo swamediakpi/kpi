@@ -106,9 +106,9 @@
 
 		<div class="x_content">
 			<div class="result-search-absen"></div>
-			<table class="table table-hover table-bordered">
-				<th>Poin Presentase:</th>
-				<th>Skor</th>
+			<table class="table table-hover table-bordered table-striped " >
+				<th style="color:#fff;background-color:#212529;border-color:#32383e">Poin Presentase:</th>
+				<th style="color:#fff;background-color:#212529;border-color:#32383e">Skor</th>
 				<tr>
 					<td>90 - 95</td>
 					<td>20</td>
