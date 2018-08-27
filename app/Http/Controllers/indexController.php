@@ -11,10 +11,17 @@ class indexController extends Controller
 {
     public function showElement(Request $request){
     $roleAuth = Auth::user()->ROLE_ID;
-    $nameAuth = Auth::user()->EMPLOYEE_NAME;    
-
+    $nameAuth = Auth::user()->EMPLOYEE_NAME;  
+    Auth::user()->dashboard = 1;
     
 		return view('index',compact(['EmployeeName','bulan','tahun']));
+	}
+	public function showElementyf(Request $request){
+    $roleAuth = Auth::user()->ROLE_ID;
+    $nameAuth = Auth::user()->EMPLOYEE_NAME;
+	Auth::user()->dashboard = 2; ;
+    
+		return view('index',compact(['yfAUTH']));
 	}
 	
 	public function photo(Request $request){
