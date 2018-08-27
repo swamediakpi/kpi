@@ -56,6 +56,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/index','indexController@showElement');
 	Route::get('/index/yf','indexController@showElementyf');
+	Route::get('/index/dashboard2','indexController@showElement2');
 	Route::post('/indexphoto','indexController@photo');
 	Route::get('getProjectFromYear','indexController@showProjectbyYear');
 	Route::post('/index/GrafMnd','indexController@Graf_Mnd');
