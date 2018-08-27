@@ -19,7 +19,7 @@ class edit_mandays_projectController extends Controller
         
         $idUnit = $request->get('id');
 
-        $data = DB::table('project_detail')->select('PROJECT_DETAIL_ID','PROJECT_NAME')
+        $data = DB::table('project')->select('PROJECT_DETAIL_ID','PROJECT_NAME')
                                     ->where('UNIT_ID','=',$idUnit)
                                     ->orderBy('PROJECT_NAME', 'asc')
                                     ->get();
@@ -31,10 +31,10 @@ class edit_mandays_projectController extends Controller
         $id_prjct = $request->get('id');
 
         $data = DB::table('employee')->select('employee.EMPLOYEE_ID','EMPLOYEE_NAME')
-                            ->join('project','employee.EMPLOYEE_ID','=','project.EMPLOYEE_ID')
-                            ->join('project_detail','project.PROJECT_DETAIL_ID','=','project_detail.PROJECT_DETAIL_ID')
+                            ->join('project_employee','employee.EMPLOYEE_ID','=','project_employee.EMPLOYEE_ID')
+                            ->join('project','project.PROJECT_DETAIL_ID','=','project_employee.PROJECT_DETAIL_ID')
                             ->groupBy('EMPLOYEE_NAME')
-                            ->where('project_detail.PROJECT_DETAIL_ID','=',$id_prjct)
+                            ->where('project_employee.PROJECT_DETAIL_ID','=',$id_prjct)
                             ->where('END_WORK','!=',null)
                             ->get();
 
@@ -56,17 +56,14 @@ class edit_mandays_projectController extends Controller
     public function filter_prjct(Request $request){
     	$prjct_id = $request->get('prjct_id');
         $emp_id   = $request->get('emp_id');
-        $strdate  = $request->get('strdate');
     	
 		$dataPrjct = DB::table('employee')
-                        ->select('employee.EMPLOYEE_ID','project_detail.project_detail_id','employee.EMPLOYEE_NAME','project_name','project_role_emp','START_WORK','END_WORK','WORK_DURATION','project.PROJECT_ID')
-                        ->join('project','employee.EMPLOYEE_ID','=','project.EMPLOYEE_ID')
-                        ->join('project_detail','project.PROJECT_DETAIL_ID','=','project_detail.PROJECT_DETAIL_ID')
-                        ->join('list_project_role','list_project_role.LIST_PROJECT_ROLE_ID','=','project.LIST_PROJECT_ROLE_ID')
-                        ->where('START_WORK','=',$strdate)
+                        ->select('employee.EMPLOYEE_ID','project.project_detail_id','employee.EMPLOYEE_NAME','project_name','project_role_emp','START_WORK','END_WORK','WORK_DURATION','project_employee.PROJECT_ID')
+                        ->join('project_employee','employee.EMPLOYEE_ID','=','project_employee.EMPLOYEE_ID')
+                        ->join('project','project_employee.PROJECT_DETAIL_ID','=','project.PROJECT_DETAIL_ID')
+                        ->join('list_project_role','list_project_role.LIST_PROJECT_ROLE_ID','=','project_employee.LIST_PROJECT_ROLE_ID')
                         ->where('employee.EMPLOYEE_ID','=',$emp_id)
-                        ->where('project.PROJECT_DETAIL_ID','=',$prjct_id)
-                        ->where('END_WORK','!=',null)
+                        ->where('project_employee.PROJECT_DETAIL_ID','=',$prjct_id)
                         ->get();
 
         $data ['content'] = $dataPrjct;
