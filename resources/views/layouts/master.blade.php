@@ -66,6 +66,7 @@
 		<script src="{{ asset('public/js/jquery-ui-timepicker-addon.js') }}"></script>    
 
 		<script src=" {{ asset('public/js/highcharts.js') }}"></script>
+		<script src=" {{ asset('public/js/drilldown.js') }}"></script>
 		<script src=" {{ asset('public/js/exporting.js') }}"></script>
 
 		<script src=" {{ asset('public/js/jquery.dataTables.min.js') }}"></script>
