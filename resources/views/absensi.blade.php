@@ -54,7 +54,7 @@
 					<label class="control-label col-md-1 col-sm-3 col-xs-12">Year</label>
 					<div class="col-md-9 col-sm-9 col-xs-12">
 						<select class="form-control year">
-							<option value="">Select Unit</option>
+							<option value="">Select Year</option>
 							<option value="2017">2017</option>
 							<option value="2018">2018</option>
 						</select>

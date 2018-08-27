@@ -92,15 +92,15 @@ class daysController extends Controller
         $emp_id   = Auth::user()->EMPLOYEE_ID;
         $year     = $request->get('year');
         
-        $dataDays = DB::table('project')
+        $dataDays = DB::table('project_employee')
                         ->select('project_role_emp','project_name','WORK_DURATION')
-                        ->join('project_detail','project.PROJECT_DETAIL_ID','=','project_detail.PROJECT_DETAIL_ID')
+                        ->join('project','project_employee.PROJECT_DETAIL_ID','=','project_detail.PROJECT_DETAIL_ID')
                         ->join('list_project_role','list_project_role.LIST_PROJECT_ROLE_ID','=','project.LIST_PROJECT_ROLE_ID')
                         ->join('employee','employee.EMPLOYEE_ID','=','project.EMPLOYEE_ID')
                         ->where('employee.EMPLOYEE_ID','=',$emp_id)
                         ->get();
 
-        $countWD = DB::table('project')->select(DB::raw('SUM(WORK_DURATION) as tot_WD'))
+        $countWD = DB::table('project_employee')->select(DB::raw('SUM(WORK_DURATION) as tot_WD'))
                                       ->where('employee_id','=',$emp_id)
                                       ->get();
 

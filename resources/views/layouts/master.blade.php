@@ -105,7 +105,7 @@
 
 						<div class="profile_info">
 							<span>Welcome,</span>
-							<h2>{{ Auth::user()->EMPLOYEE_NAME }}</h2>
+							<h2>{{ Auth::user()->username }}</h2>
 						</div>
 					</div>
 					<!-- /menu profile quick info -->
