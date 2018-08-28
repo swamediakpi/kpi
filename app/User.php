@@ -29,5 +29,5 @@ class User extends Authenticatable
 
     protected $table = 'employee';
     protected $primaryKey = 'EMPLOYEE_ID';
-
+    protected $connection = 'mysql2';
 }

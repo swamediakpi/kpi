@@ -24,15 +24,6 @@ class indexController extends Controller {
 
 		return view('index',compact(['yfAUTH']));
 	}
-
-	public function showElement2(Request $request){
-		$roleAuth = Auth::user()->ROLE_ID;
-		$nameAuth = Auth::user()->EMPLOYEE_NAME;
-		$tahun = DB::table('t_tahun')->get();
-		Auth::user()->dashboard = 3;
-
-		return view('index',compact(['EmployeeName', 'tahun']));
-	}
 	
 	public function photo(Request $request){
 	   if($request->hasFile('avatar')){
