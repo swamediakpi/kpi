@@ -383,25 +383,27 @@
 		});
 	</script>
 @elseif (Auth::user()->dashboard == '2')
-<!--
-	<div class="row">
+
+	<!--div class="row">
 	
 		<div id=\"yfReportContainerbdaa80fd-202e-4111-b04a-9d906d1f4ecd\"></div>
 		
 	</div>
 
 	 <script type="text/javascript" src="http://localhost:8090/JsAPI?dashUUID=0537286a-a4a7-411d-9650-d6003810018c"></script> 
-	<script type="text/javascript" src="http://192.168.88.58:8090/JsAPI?reportUUID=59f3bf13-4f3a-4517-8a83-bd950357621a&amp;yfFilterfec90b31-c705-4e98-b651-6f191d099041=Ade+Setiyanto"></script>
+	<script type="text/javascript" src="http://192.168.88.58:8090/JsAPI?reportUUID=59f3bf13-4f3a-4517-8a83-bd950357621a&amp;yfFilterfec90b31-c705-4e98-b651-6f191d099041"></script>
 
 	<script type="text/javascript" src="http://192.168.88.58:8090/JsAPI?reportUUID=1bfad5e3-5389-4bc2-9c94-d113179e9174&amp;yfFilterf815dfd4-1908-4641-b521-7374883b1026"></script>
 
 	<script type="text/javascript" src="http://192.168.88.58:8090/JsAPI?reportUUID=a5ab3580-f915-4026-b747-77660e4368d8&amp;yfFilter072022f4-27d1-4479-969e-3bceabe7c944"></script-->
-	<div class="row">
 	
-	<div id=\"yfReportContainera17406ec-c9ed-44a2-8f7e-b9e248fbe107\"></div>
+	<div class="row">
+		<div id=\"yfReportContainera17406ec-c9ed-44a2-8f7e-b9e248fbe107\"></div>
 	</div>
+	<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=963500f9-70c1-403b-bb61-337ade16e93d"></script>
 	<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=a17406ec-c9ed-44a2-8f7e-b9e248fbe107"></script>
-
+	<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=a2baacb4-9012-4fac-97c4-3a1f2cb56683"></script>
+	<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=8652081c-f0d8-4241-8315-6550e849fd3c"></script>
 @elseif (Auth::user()->dashboard == '3')
 	<div class="row">
 		<div class="col-md-12">
