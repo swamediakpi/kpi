@@ -18,12 +18,8 @@ class newcaseController extends Controller
 
 	public function getEmpPrjct(Request $request){
 		$unitid = $request->get('id');
-		$dataEmp = DB::table('employee')->select('EMPLOYEE_ID','EMPLOYEE_NAME')                            
-                                    ->where('UNIT_ID','=',$unitid)
-                                    ->get();
-        $dataPrjct = DB::table('project_detail')->select('PROJECT_DETAIL_ID','PROJECT_NAME')
-                                    ->where('UNIT_ID','=',$unitid)
-                                    ->get();
+		$dataEmp = DB::select("call spGetEmployeeFromUnit('".$unitid."')");
+        $dataPrjct = DB::select("call spgetProjectfromunit('".$unitid."')");
 
 		$data ['contentEmp']   = $dataEmp;
         $data ['contentPrjct'] = $dataPrjct;
@@ -38,21 +34,12 @@ class newcaseController extends Controller
         $Cdate     = $request->get('Cdate');
         $date      = $request->get('date');
         
-        // var_dump($unit);
-        // var_dump($emp);
-        // var_dump($prjct);
-        // var_dump($prjctrole);
-        // var_dump($Cdate);
-        // var_dump($date);
-
         if (is_array($date) || is_object($date)){ 
         
             foreach ($date as $key) {
                 $listdate = $key['date'];
-                
-                $save = array("EMPLOYEE_ID"=>$emp,"PROJECT_DETAIL_ID"=>$prjct,"LIST_PROJECT_ROLE_ID"=>$prjctrole,"START_WORK"=>$listdate,"WORK_DURATION"=>$Cdate);
-
-                DB::table('project')->insert($save);
+ 
+                DB::raw("call spInputSingelMandaysproject('".$emp."', '".$prjct."', '".$prjctrole."', '".$listdate."', '".$Cdate."')" );
             }
                 $msg['msg'] = 'Success Insert';
 	    }else{

@@ -189,7 +189,16 @@
 				}
 			});
 		});
+		function delimiter(x) {
+			if (x!=null){
+			    x = x.toString();
+			    var pattern = /(-?\d+)(\d{3})/;
+			    while (pattern.test(x))
+			        x = x.replace(pattern, "$1,$2");
+		    }
+		    return x;
 
+		}
 		//result-search-absen
 		$('.btn-search-absen').click(function() {
 			var emp_id = $('.empname').val(); var month  = $('.month').val();
@@ -214,25 +223,25 @@
 						$.each(r.content, function(k, v){
 							t += '<table class="table table-hover table-bordered">';
 							t += '<tr>';
-							t +=    '<td>Nama Karyawan:</td>';
-							t +=    '<td colspan="3">'+v.EMPLOYEE_NAME+'</td>';
-							t +=    '<td colspan="2">Total Hari Kerja</td>';
-							t +=    '<td>'+v.hari_kerja+'</td>';
+							t +=    '<td class="table-head-absensi">Nama Karyawan:</td>';
+							t +=    '<td colspan="3">'+(v.EMPLOYEE_NAME)+'</td>';
+							t +=    '<td class="table-head-absensi" colspan="2">Jumlah Hari Kerja</td>';
+							t +=    '<td>'+delimiter(v.hari_kerja)+'</td>';
 							t += '</tr>';
 							t += '<tr>';
-							t +=    '<td>Jabatan / Posisi</td>';
+							t +=    '<td class="table-head-absensi">Jabatan / Posisi</td>';
 							t +=    '<td colspan="3">'+v.EMPLOYEE_TITLE+'</td>';
-							t +=    '<td colspan="2">Total Jam Kerja</td>';
-							t +=    '<td>'+v.jam_kerja+'</td>';
+							t +=    '<td class="table-head-absensi" colspan="2">Jumlah Jam Kerja</td>';
+							t +=    '<td>'+delimiter(v.jam_kerja)+'</td>';
 							t += '</tr>';
 							t += '<tr>';
-							t +=    '<td>Unit</td>';
+							t +=    '<td class="table-head-absensi">Unit</td>';
 							t +=    '<td colspan="3">'+v.unit+'</td>';
-							t +=    '<td colspan="2">Total Menit Kerja</td>';
-							t +=    '<td>'+v.menit_kerja+'</td>';
+							t +=    '<td class="table-head-absensi" colspan="2">Jumlah Menit Kerja</td>';
+							t +=    '<td>'+delimiter(v.menit_kerja)+'</td>';
 							t += '</tr>';
 							t += '<tr>';
-							t +=    '<td></td>';
+							t +=    '<td ></td>';
 							t +=    '<td colspan="3"></td>';
 							t +=    '<td colspan="2" style="color: red">*Asumsi Kerja 8 jam sehari</td>';
 							t +=    '<td rowspan="2"></td>';
@@ -246,44 +255,44 @@
 
 							t+=  '<table class="table table-hover table-bordered">';
 							t+=  '<tr>';
-							t+=    '<td>Jumlah Hari Masuk Kerja:</td>';
-							t+=    '<td style="width: 30%">'+v.jumlah_hari_kerja+'</td>';
+							t+=    '<td class="table-head-absensi">Jumlah Hari Masuk Kerja:</td>';
+							t+=    '<td class="number-absensi" style="width: 30%">'+delimiter(v.jumlah_hari_kerja)+'</td>';
 							t+=  '</tr>';
 							t+=  '<tr>';
-							t+=     '<td>Total Jam Masuk Kerja :</td>';
-							t+=     '<td style="width: 30%">'+v.total_jam_kerja+'</td>';  
+							t+=     '<td class="table-head-absensi">Jumlah Jam Masuk Kerja :</td>';
+							t+=     '<td class="number-absensi" style="width: 30%">'+delimiter(v.total_jam_kerja)+'</td>';  
 							t+=  '</tr>';
 							t+=  '<tr>';
-							t+=    '<td>Total Ijin (menit) :</td>';
-							t+=    '<td style="width: 30%">'+v.ijin+'</td>';  
+							t+=    '<td class="table-head-absensi">Jumlah Ijin (menit) :</td>';
+							t+=    '<td class="number-absensi" style="width: 30%">'+delimiter(v.ijin)+'</td>';  
 							t+=  '</tr>';
 							t+=  '<tr>';
-							t+=    '<td>Total Telat Masuk (menit) :</td>';
-							t+=    '<td style="width: 30%">'+v.telat+'</td>'; 
+							t+=    '<td class="table-head-absensi">Jumlah Telat Masuk (menit) :</td>';
+							t+=    '<td class="number-absensi" style="width: 30%">'+delimiter(v.telat)+'</td>'; 
 							t+=  '</tr>';
 							t+=  '<tr>';
-							t+=    '<td>Total Telat + Ijin (menit) :</td>';
-							t+=    '<td style="width: 30%">'+v.ijin_telat+'</td>';  
+							t+=    '<td class="table-head-absensi">Total Telat + Ijin (menit) :</td>';
+							t+=    '<td class="number-absensi" style="width: 30%">'+delimiter(v.ijin_telat)+'</td>';  
 							t+=  '</tr>'
 							t+=  '<tr>'
 							t+=    '<td style="color: white"></td>';
 							t+=    '<td style="width: 30%"></td>';  
 							t+=  '</tr>';
 							t+=  '<tr>';
-							t+=    '<td>Total Jam Kerja ( dikurangi ijin ) (menit ) :</td>';
-							t+=    '<td style="width: 30%">'+v.grand_total+'</td>';
+							t+=    '<td class="table-head-absensi">Jumlah Jam Kerja ( dikurangi ijin ) (menit ) :</td>';
+							t+=    '<td class="number-absensi" style="width: 30%">'+delimiter(v.grand_total)+'</td>';
 							t+=  '</tr>';
 							t+=  '<tr>';
-							t+=    '<td>Target KPI (%)</td>';
+							t+=    '<td class="table-head-absensi">Target KPI (%)</td>';
 							t+=    '<td style="width: 30%"></td>';  
 							t+=  '</tr>';
 							t+=  '<tr>';
-							t+=     '<td>Persentasi Kehadiran ( % ) :</td>';
-							t+=   '<td style="width: 30%">'+v.final_total+'</td>'; 
+							t+=     '<td class="table-head-absensi">Persentasi Kehadiran ( % ) :</td>';
+							t+=   '<td class="number-absensi"  style="width: 30%">'+delimiter(v.final_total)+'</td>'; 
 							t+=  '</tr>';
 							t+=  '<tr>';
-							t+=    '<td>Skor :</td>';
-							t+=    '<td style="width: 30%">'+v.skor+'</td>';  
+							t+=    '<td class="table-head-absensi">Skor :</td>';
+							t+=    '<td class="number-absensi" style="width: 30%">'+delimiter(v.skor)+'</td>';  
 							t+=  '</tr>';
 							t+= '</table>';
 						});

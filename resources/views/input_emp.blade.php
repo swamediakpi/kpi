@@ -18,7 +18,7 @@
       <div class="form-group">
         <label class="control-label col-md-1 col-sm-3 col-xs-12">No Employee</label>
         <div class="col-md-9 col-sm-9 col-xs-12">
-          <input type="number" class="form-control" id="emp-no">
+          <input type="number" class="form-control" id="emp-no" disabled="true">
         </div>
       </div>
       
@@ -66,7 +66,7 @@
           <input type="text" class="form-control" id="emp-title">
         </div>
       </div>
-
+      <hr>
       <div class="form-group">
         <label class="control-label col-md-1 col-sm-3 col-xs-12">Username</label>
         <div class="col-md-9 col-sm-9 col-xs-12">

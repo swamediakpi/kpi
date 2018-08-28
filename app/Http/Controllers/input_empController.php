@@ -34,7 +34,7 @@ class input_empController extends Controller
         $saveData = array("EMPLOYEE_ID"=>$noemp,"ROLE_ID"=>$role,"UNIT_ID"=>$unit,"EMPLOYEE_NAME"=>$name,"EMPLOYEE_EMAIL"=>$email,"EMPLOYEE_TITLE"=>$title,"username"=>$username,"password"=>bcrypt($password));
 		
 
-        DB::table('employee')->insert($saveData);
+        DB::raw("call spInputEmp('".$noemp."', '".$role."', '".$unit."', '".$name."', '".$email."', '".$title."', '".$username."', '".bcrypt($password)."')");
 
         $msg['msg'] = 'Success Insert';
 
