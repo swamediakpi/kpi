@@ -12,7 +12,6 @@
 */
 
 Route::group(['middleware' => 'auth'], function () {
-
 	Route::get('/days_project','daysProjectController@showElement');
 	Route::post('/days_project/input','daysProjectController@insert_project');
 	Route::post('/mandays/search','daysProjectController@search_mandays');
@@ -83,6 +82,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/holiday','holidayController@show');
 	Route::get('getHoliday','holidayController@getholiday');
 	Route::post('/holiday/input','holidayController@input_holiday');
+	Route::post('/holiday/update','holidayController@update_holiday');
+	Route::post('/holiday/delete','holidayController@delete_holiday');
 	
 	Route::get('/input_given_point','input_given_pointController@showAreaKinerja');
 	Route::get('/input_given_point','input_given_pointController@showAreaKinerja');
@@ -142,6 +143,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-	Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
+
+Route::get('/obu', 'ObuPlnController@index');
+Route::get('/obu/graphObu', 'ObuPlnController@graphObu');
+Route::get('/obu/yf', 'ObuPlnController@ObuYf');
+
+Route::get('/pln', 'ObuPlnController@pln');
+Route::any('/getKontrakData', 'ObuPlnController@getKontrakData');
+Route::any('/getKontrakBulanData', 'ObuPlnController@getKontrakBulanData');
+Route::any('/getVsData', 'ObuPlnController@getVsData');
+Route::any('/getVsDataBulan', 'ObuPlnController@getVsDataBulan');
 
 Auth::routes();

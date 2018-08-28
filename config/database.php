@@ -26,6 +26,7 @@ return [
     |
     */
 
+    'arperal' => env('DB_CONNECTION_SECOND', 'mysql2'),
     'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
@@ -59,6 +60,24 @@ return [
             'database' => env('DB_DATABASE', 'petamudi_kpi'),
             'username' => env('DB_USERNAME', 'kpibim'),
             'password' => env('DB_PASSWORD', 'kpi123'),
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+            'strict' => false,
+            'engine' => null,
+            // 'modes' => [
+            //    'NO_ZERO_DATE',
+            //    'ONLY_FULL_GROUP_BY',
+            // ],
+        ],
+
+        'mysql2' => [
+            'driver' => env('DB_CONNECTION_SECOND', 'mysql'),
+            'host' => env('DB_HOST_SECOND', 'localhost'),
+            'port' => env('DB_PORT_SECOND', '3306'),
+            'database' => env('DB_DATABASE_SECOND', 'arperal'),
+            'username' => env('DB_USERNAME_SECOND', 'root'),
+            'password' => env('DB_PASSWORD_SECOND', ''),
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',

@@ -431,8 +431,8 @@ $(document).ready(function(){
 
                   });
                   t += '<tr>';
-                  t += '<td colspan="2" style="text-align:center">TOTAL</td>';
-                  t += '<td colspan="2" style="text-align:center">'+tn+'</td>';
+                  t += '<td class="table-head" colspan="2" style="text-align:center">TOTAL</td>';
+                  t += '<td class="table-head" colspan="3" style="text-align:center">'+tn+'</td>';
                   t += '</tr>';                
                   
                   $('.result-search-hrd').append(t);

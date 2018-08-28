@@ -37,6 +37,15 @@
 				border-color:#32383e;
 				text-align:center;
 			}
+			.table-head-absensi {
+				color:#fff;
+				background-color:gray;
+				border-color:#32383e;
+				text-align:left;
+			}
+			.number-absensi {
+				text-align:right;
+			}
 			.ajax-loader {
 				visibility: hidden;
 				background-color: rgba(255,255,255,0.7);        
@@ -79,6 +88,7 @@
 
 		<script src=" {{ asset('public/js/jquery.dataTables.min.js') }}"></script>
 		<script src=" {{ asset('public/js/dataTables.bootstrap.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset("Public/js/FungsiSend.js") }}"></script>
 	</head>
 
 <script type="text/javascript">
@@ -129,7 +139,6 @@
 									<ul class="nav child_menu">
 										<li><a href="{{ url('/index') }}"><i class="fa fa-home"></i>Dashboard</a></li>
 										<li><a href="{{ url('/index/yf') }}"><i class="fa fa-home"></i> Dashboard YF</a></li>
-										<li><a href="{{ url('/index/dashboard2') }}"><i class="fa fa-home"></i> Dashboard 2</a></li>
 									</ul>
 								</li>
 								<li><a href="{{ url('/reportkpi') }}"><i class="fa fa-sticky-note"></i> Reporting KPI</a></li>
