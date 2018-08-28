@@ -25,10 +25,10 @@
               <table class="table table-bordered">
                   <thead>
                        <tr>
-                         <th style="text-align: center;">No</th>
-                         <th style="text-align: center;">Area Kinerja Utama</th>
-                         <th style="text-align: center;">KPI</th>
-                         <th style="text-align: center;">Status</th>
+                         <th class ="table-head" style="text-align: center;">No</th>
+                         <th class ="table-head" style="text-align: center;">Area Kinerja Utama</th>
+                         <th class ="table-head" style="text-align: center;">KPI</th>
+                         <th class ="table-head" style="text-align: center;">Status</th>
                        </tr>
                  </thead>
                  <tbody>
@@ -76,10 +76,10 @@
           <table class="table table-bordered">
                 <thead>
                      <tr>
-                       <th style="text-align: center;">No</th>
-                       <th style="text-align: center;">Area Kinerja Utama</th>
-                       <th style="text-align: center;">KPI</th>
-                       <th style="text-align: center;">Status</th>
+                       <th class ="table-head" style="text-align: center;">No</th>
+                       <th class ="table-head" style="text-align: center;">Area Kinerja Utama</th>
+                       <th class ="table-head" style="text-align: center;">KPI</th>
+                       <th class ="table-head" style="text-align: center;">Status</th>
                      </tr>
                </thead>
                <tbody>
@@ -128,10 +128,10 @@
                     <table class="table table-bordered">
                         <thead>
                              <tr>
-                               <th style="text-align: center;">No</th>
-                               <th style="text-align: center;">Area Kinerja Utama</th>
-                               <th style="text-align: center;">KPI</th>
-                               <th style="text-align: center;">Status</th>
+                               <th class ="table-head" style="text-align: center;">No</th>
+                               <th class ="table-head" style="text-align: center;">Area Kinerja Utama</th>
+                               <th class ="table-head" style="text-align: center;">KPI</th>
+                               <th class ="table-head" style="text-align: center;">Status</th>
                              </tr>
                        </thead>
                        <tbody>
