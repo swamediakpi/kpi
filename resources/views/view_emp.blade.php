@@ -43,11 +43,11 @@
 						<table class="table table-bordered">
 							<thead>
 								<tr>
-									<th>NO</th>
-									<th>Employee Name</th>
-									<th>Employee Title</th>
-									<th>Unit</th>
-									<th>Role</th>
+									<th class ="table-head">NO</th>
+									<th class ="table-head">Employee Name</th>
+									<th class ="table-head">Employee Title</th>
+									<th class ="table-head">Unit</th>
+									<th class ="table-head">Role</th>
 								</tr>
 							</thead>
 							

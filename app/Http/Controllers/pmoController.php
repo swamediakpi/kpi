@@ -17,12 +17,8 @@ class pmoController extends Controller
         $rolepmo    = DB::table('role')->select('ROLE_ID')
                                     ->where('ROLE_NAME','=','PMO')
                                     ->get();
-        $listInsert = DB::table('header_kpi')->join('kinerja','header_kpi.KINERJA_ID','=','kinerja.KINERJA_ID')
-                                             ->join('kpi','header_kpi.KPI_ID','=','kpi.KPI_ID')
-                                             ->join('role','header_kpi.ROLE_ID','=','role.ROLE_ID')
-                                             ->where('header_kpi.ROLE_ID','=','2')
-                                             ->where('STATUS','=','aktif')
-                                             ->get();    	
+        $listInsert = DB::select('call splistinsertheader_kpi(2)'); 
+        //dd(count($listInsert));   	
         $countlist = count($listInsert);
 
         if(Auth::user()->ROLE_ID == '4'){
@@ -60,15 +56,9 @@ class pmoController extends Controller
         $empAuth    = Auth::user()->EMPLOYEE_ID;
         
         if(Auth::user()->ROLE_ID == '4'){
-        $data = DB::table('employee')->select('EMPLOYEE_ID','EMPLOYEE_NAME')
-                                     ->where('UNIT_ID','=',$idUnit)
-                                     ->where('EMPLOYEE_ID','=',$empAuth)
-                                     ->get();}
+        $data = DB::select('call spGetEmployeeFromUnitLogin('.$empAuth.')');}
         else{
-        $data = DB::table('employee')->select('EMPLOYEE_ID','EMPLOYEE_NAME')
-                                     ->where('UNIT_ID','=',$idUnit)
-                                     ->get();}
-
+        $data = DB::select('call spGetEmployeeFromUnit('.$idUnit.')');}
         return response()->json($data);                                                      
     }
 
@@ -78,10 +68,7 @@ class pmoController extends Controller
         $idUnit = $request->get('id');
 
 
-        $data = DB::table('employee')->select('EMPLOYEE_ID','EMPLOYEE_NAME')                                   
-                                    ->where('UNIT_ID','=',$idUnit)                                    
-                                    ->where('EMPLOYEE_NAME','!=',$nameAuth)
-                                    ->get();
+        $data = DB::select('call spGetEmployeeFromUnit('.$idUnit.')');
 
         return response()->json($data);                                                      
     }
@@ -110,21 +97,10 @@ class pmoController extends Controller
         $role = $request->get('role');
         $list = $request->get('list_bobot');
 
-        $compareDB =  DB::table('penilaian')
-                        ->select('EMPLOYEE_ID','BULAN_ID','TAHUN_ID','ROLE_ID')
-                        ->where('EMPLOYEE_ID','=',$nama)
-                        ->where('BULAN_ID','=',$bulan)    
-                        ->where('TAHUN_ID','=',$tahun)    
-                        ->where('ROLE_ID','=',$role)                                
-                        ->get();
+        $compareDB =  DB::select("call spcompareDBinserheader_kpi('$nama', '$bulan', '$tahun', '$role')");
 
-        $cekKosongDB = json_decode($compareDB);
-
-        if($cekKosongDB == []){
-
-            $savePenilaian = array("EMPLOYEE_ID"=>$nama,"BULAN_ID"=>$bulan,"TAHUN_ID"=>$tahun,"ROLE_ID"=>$role,"KRITIK_SARAN"=>$kritik,"TOTAL"=>$total);
-
-            DB::table('penilaian')->insert($savePenilaian);
+        if($compareDB == null){
+            DB::raw("call spinsertpenilaiankpi('".$nama."', '".$bulan."', '".$tahun."', '".$role."', '".$kritik."', '".$total."')");
 
             $b = DB::table('penilaian')->select('PENILAIAN_ID')
                                        ->orderby('PENILAIAN_ID','DESC')                                      
@@ -137,8 +113,7 @@ class pmoController extends Controller
                 foreach ($list as $key) {
                     $listid = $key['list_id'];
                     $bobot = $key['bobot'];
-                    $saveHasilKinerja = array("PENILAIAN_ID"=>$getLastID,"LIST_ID"=>$listid,"BOBOT"=>$bobot);
-                    DB::table('hasil_kinerja')->insert($saveHasilKinerja);
+                    DB::raw("call spinsertpenilaian_hasil_kinerja('".$getLastID."', '".$listid."', '".$bobot."')");
                 }
                 $msg['msg'] = 'Success Insert';
             }else{

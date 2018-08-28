@@ -39,11 +39,11 @@
 			<table class="table table-bordered">
 	    		<thead>
 	      			<tr>
-	        			<th style="text-align: center">No</th>
-	        			<th style="text-align: center">Project Name</th>
-	        			<th style="text-align: center">Project Start</th>
-	        			<th style="text-align: center">Project End</th>
-	        			<th style="text-align: center">Project Duration</th>        			
+	        			<th class ="table-head" style="text-align: center">No</th>
+	        			<th class ="table-head" style="text-align: center">Project Name</th>
+	        			<th class ="table-head" style="text-align: center">Project Start</th>
+	        			<th class ="table-head" style="text-align: center">Project End</th>
+	        			<th class ="table-head" style="text-align: center">Project Duration</th>        			
 	      			</tr>
 	            </thead>
 	            <tbody class="result-prjct">

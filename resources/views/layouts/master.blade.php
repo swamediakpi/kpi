@@ -37,6 +37,15 @@
 				border-color:#32383e;
 				text-align:center;
 			}
+			.table-head-absensi {
+				color:#fff;
+				background-color:gray;
+				border-color:#32383e;
+				text-align:left;
+			}
+			.number-absensi {
+				text-align:right;
+			}
 			.ajax-loader {
 				visibility: hidden;
 				background-color: rgba(255,255,255,0.7);        
@@ -114,7 +123,7 @@
 
 						<div class="profile_info">
 							<span>Welcome,</span>
-							<h2>{{ Auth::user()->EMPLOYEE_NAME }}</h2>
+							<h2>{{ Auth::user()->username }}</h2>
 						</div>
 					</div>
 					<!-- /menu profile quick info -->

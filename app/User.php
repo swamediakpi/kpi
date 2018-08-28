@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'EMPLOYEE_ID','ROLE_ID','UNIT_ID','EMPLOYEE_NAME','EMPLOYEE_EMAIL','EMPLOYEE_TITLE','username','password',        
+        'EMPLOYEE_ID','ROLE_ID','UNIT_ID','username','password',        
     ];
 
     /**
@@ -27,7 +27,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    protected $table = 'employee';
-    protected $primaryKey = 'EMPLOYEE_ID';
+    protected $table = 'user';
+    protected $primaryKey = 'user_id';
     protected $connection = 'mysql2';
 }

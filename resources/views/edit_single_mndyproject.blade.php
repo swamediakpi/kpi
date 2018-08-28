@@ -35,14 +35,14 @@
 	                	</select>
 	              	</div>
                 </div>
-                <div class="form-group">
+                <!--div class="form-group">
 	            	<label class="control-label col-md-1 col-sm-3 col-xs-12">Start Date</label>
 	            	<div class="col-md-9 col-sm-9 col-xs-12">
 	            		<select class="form-control strtdate">
 	                		<option value="" disabled="true" selected="true">Choose Employee name First</option>
 	                	</select>
 	              	</div>
-                </div>
+                </div-->
                 <div class="form-group">
                   <div class="col-md-9 col-sm-9 col-xs-12 col-md-9">     
                     <button class="btn btn-success pull-right btn-view-prjct">Search</button>
@@ -55,12 +55,12 @@
 			<table class="table table-bordered">
         		<thead>
           			<tr>
-            			<th style="text-align: center">No</th>
-            			<th style="text-align: center">Project Name</th>
-            			<th style="text-align: center">Jabatan On Project</th>
-            			<th style="text-align: center">Start Work</th>
-            			{{-- <th style="text-align: center">End Work</th>
-            			<th style="text-align: center">Work Duration</th> --}}
+            			<th class ="table-head" style="text-align: center">No</th>
+            			<th class ="table-head" style="text-align: center">Project Name</th>
+            			<th class ="table-head" style="text-align: center">Jabatan On Project</th>
+            			<th class ="table-head" style="text-align: center">Start Work</th>
+            			{{-- <th class ="table-head" style="text-align: center">End Work</th>
+            			<th class ="table-head" style="text-align: center">Work Duration</th> --}}
           			</tr>
                 </thead>
 	            <tbody class="result-prjct">
