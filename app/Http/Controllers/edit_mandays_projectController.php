@@ -19,10 +19,7 @@ class edit_mandays_projectController extends Controller
         
         $idUnit = $request->get('id');
 
-        $data = DB::table('project')->select('PROJECT_DETAIL_ID','PROJECT_NAME')
-                                    ->where('UNIT_ID','=',$idUnit)
-                                    ->orderBy('PROJECT_NAME', 'asc')
-                                    ->get();
+        $data = DB::select("call spgetProjectfromunit('".$idUnit."')");
 
         return response()->json($data);
     }
@@ -30,41 +27,30 @@ class edit_mandays_projectController extends Controller
     public function getEmpFromPrjct(Request $request){
         $id_prjct = $request->get('id');
 
-        $data = DB::table('employee')->select('employee.EMPLOYEE_ID','EMPLOYEE_NAME')
-                            ->join('project_employee','employee.EMPLOYEE_ID','=','project_employee.EMPLOYEE_ID')
-                            ->join('project','project.PROJECT_DETAIL_ID','=','project_employee.PROJECT_DETAIL_ID')
-                            ->groupBy('EMPLOYEE_NAME')
-                            ->where('project_employee.PROJECT_DETAIL_ID','=',$id_prjct)
-                            ->where('END_WORK','!=',null)
-                            ->get();
+        $data = DB::select("call spEmployeeFromProject('".$id_prjct."')");
 
         return response()->json($data);
 
     }
-    public function getStrDateFromEmp(Request $request){
-        $id_emp = $request->get('id');
-        $prjct_id = $request->get('prjct_id');
 
-        $data = DB::table('project')->select('START_WORK')                            
-                            ->where('EMPLOYEE_ID','=',$id_emp)
-                            ->where('PROJECT_DETAIL_ID','=',$prjct_id)
-                            ->get();            
+    // public function getStrDateFromEmp(Request $request){
+    //     dd(1);
+    //     $id_emp = $request->get('id');
+    //     $prjct_id = $request->get('prjct_id');
 
-        return response()->json($data);        
-    }
+    //     $data = DB::table('project')->select('START_WORK')                            
+    //                         ->where('EMPLOYEE_ID','=',$id_emp)
+    //                         ->where('PROJECT_DETAIL_ID','=',$prjct_id)
+    //                         ->get();            
+
+    //     return response()->json($data);        
+    // }
 
     public function filter_prjct(Request $request){
     	$prjct_id = $request->get('prjct_id');
         $emp_id   = $request->get('emp_id');
     	
-		$dataPrjct = DB::table('employee')
-                        ->select('employee.EMPLOYEE_ID','project.project_detail_id','employee.EMPLOYEE_NAME','project_name','project_role_emp','START_WORK','END_WORK','WORK_DURATION','project_employee.PROJECT_ID')
-                        ->join('project_employee','employee.EMPLOYEE_ID','=','project_employee.EMPLOYEE_ID')
-                        ->join('project','project_employee.PROJECT_DETAIL_ID','=','project.PROJECT_DETAIL_ID')
-                        ->join('list_project_role','list_project_role.LIST_PROJECT_ROLE_ID','=','project_employee.LIST_PROJECT_ROLE_ID')
-                        ->where('employee.EMPLOYEE_ID','=',$emp_id)
-                        ->where('project_employee.PROJECT_DETAIL_ID','=',$prjct_id)
-                        ->get();
+		$dataPrjct = DB::select("call spMandaysfilter_prjct('".$emp_id."', '".$prjct_id."')");
 
         $data ['content'] = $dataPrjct;
         
@@ -82,7 +68,7 @@ class edit_mandays_projectController extends Controller
 
         $updateArr = array('START_WORK' => $start,'END_WORK' => $finish,'WORK_DURATION' => $duration);
         
-        DB::table('project')
+        DB::table('project_employee')
             ->where('PROJECT_ID', $PROJECT)            
             ->update($updateArr);            
 

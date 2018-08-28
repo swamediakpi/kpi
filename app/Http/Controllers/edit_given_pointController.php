@@ -10,23 +10,11 @@ class edit_given_pointController extends Controller
 {
 	public function showElement(){
 
-        $areaHRD = DB::table('header_kpi')->join('kinerja','header_kpi.KINERJA_ID','=','kinerja.KINERJA_ID')
-                                        ->join('kpi','header_kpi.KPI_ID','=','kpi.KPI_ID')
-                                        ->join('role','header_kpi.ROLE_ID','=','role.ROLE_ID')
-                                        ->where('header_kpi.ROLE_ID','=','1')
-                                        ->get();
+        $areaHRD = DB::select("call splistinsertheader_kpi('1')");
 
-        $areaPMO = DB::table('header_kpi')->join('kinerja','header_kpi.KINERJA_ID','=','kinerja.KINERJA_ID')
-                                        ->join('kpi','header_kpi.KPI_ID','=','kpi.KPI_ID')
-                                        ->join('role','header_kpi.ROLE_ID','=','role.ROLE_ID')
-                                        ->where('header_kpi.ROLE_ID','=','2')
-                                        ->get();
+        $areaPMO = DB::select("call splistinsertheader_kpi('2')");
 
-        $areaUNIT = DB::table('header_kpi')->join('kinerja','header_kpi.KINERJA_ID','=','kinerja.KINERJA_ID')
-                                        ->join('kpi','header_kpi.KPI_ID','=','kpi.KPI_ID')
-                                        ->join('role','header_kpi.ROLE_ID','=','role.ROLE_ID')
-                                        ->where('header_kpi.ROLE_ID','=','3')
-                                        ->get();                                    
+        $areaUNIT = DB::select("call splistinsertheader_kpi('3')");                                    
 		
         return view('edit_given_point',compact(['areaHRD','areaPMO','areaUNIT']));
 	}
@@ -41,9 +29,7 @@ class edit_given_pointController extends Controller
                 $listid = $key['list'];
                 $status = $key['status'];
 
-                DB::table('header_kpi')                                    
-                                    ->where('LIST_ID',$listid)
-                                    ->update(['STATUS'=>$status]);               
+                DB::raw("call spupdateheader_kpi('".$listid."', '".$status."')");               
             }
             $msg['msg'] = 'Success Update';
         }

@@ -9,9 +9,7 @@ use DB;
 class edit_days_project_touchController  extends Controller
 {
 	public function showElement(){
-        $listproject = DB::table('project_detail')->select('PROJECT_DETAIL_ID','PROJECT_NAME')
-                                                  ->orderBy('PROJECT_NAME','asc')
-                                                  ->get();
+        $listproject = DB::select('call spgetproject');;
 
         return view('edit_days_project_touch',compact('listproject'));
     }
@@ -19,12 +17,7 @@ class edit_days_project_touchController  extends Controller
     public function getEmployee_touch(Request $request){
         $idProject = $request->get('id');
 
-        $data = DB::table('employee')->select('employee.EMPLOYEE_ID','EMPLOYEE_NAME')
-                                    ->join('project','employee.EMPLOYEE_ID','=','project.EMPLOYEE_ID')
-                                    ->join('project_detail','project.PROJECT_DETAIL_ID','=','project_detail.PROJECT_DETAIL_ID')
-                                    ->where('project_detail.PROJECT_DETAIL_ID','=',$idProject)
-                                    ->orderBy('EMPLOYEE_NAME','asc')
-                                    ->get();
+        $data = DB::select('call spEmployeeFromProject('.$idProject.')');;
 
         return response()->json($data);
     }
@@ -33,20 +26,7 @@ class edit_days_project_touchController  extends Controller
         $pd_id  = $request->get('pd_id');
         $emp_id = $request->get('emp_id');
         
-
-        // UNTUK MENCARI PROJECTID DARI TABLE PROJECT
-        $getProjectID = DB::table('project')->select('PROJECT_ID')
-                                            ->where('EMPLOYEE_ID','=',$emp_id)
-                                            ->where('PROJECT_DETAIL_ID','=',$pd_id)
-                                            ->get();        
-        $getID = json_encode($getProjectID[0]->PROJECT_ID);
-
-
-        // UNTUK MENCARI TIMELAPS DAN PROJECTID DARI TABLE SCHEDULE
-        $data = DB::table('schedule')->select('TIMELAPS')                                   
-                                     ->where('PROJECT_ID','=',$getID)                                     
-                                     ->where('STATUS','=',0)
-                                     ->get();
+        $data = DB::select("call spGetschedule('".$emp_id."', '".$pd_id."', '0')");
 
         return response()->json($data);                        
     }
@@ -57,25 +37,7 @@ class edit_days_project_touchController  extends Controller
         $emp_id    = $request->get('emp_id');
         $startdate = $request->get('startdate');
 
-         // UNTUK MENCARI PROJECTID DARI TABLE PROJECT
-        $getProjectID = DB::table('project')->select('PROJECT_ID')
-                                            ->where('EMPLOYEE_ID','=',$emp_id)
-                                            ->where('PROJECT_DETAIL_ID','=',$pd_id)
-                                            ->get();        
-        $getID = json_encode($getProjectID[0]->PROJECT_ID);
-
-
-        // UNTUK MENCARIvPROJECTID DARI TABLE SCHEDULE
-        $data = DB::table('schedule')->select('PROJECT_ID')                                   
-                                     ->where('PROJECT_ID','=',$getID)                                     
-                                     ->where('STATUS','=',0)
-                                     ->get();
-        $getdataID = json_encode($data[0]->PROJECT_ID);                                     
-
-        $query = DB::table('schedule')->where('PROJECT_ID','=',$getdataID)
-                                      ->where('STATUS','=',0)
-                                      ->where('TIMELAPS','=',$startdate)                                    
-                                      ->delete();
+        $query = DB::raw("call spDELETEschedule('".$emp_id."', '".$pd_id."', '0', '".$startdate."')");
 
          $msg['msg'] = 'Success Update';
          return json_encode($msg);
@@ -85,20 +47,7 @@ class edit_days_project_touchController  extends Controller
         $pd_id  = $request->get('pd_id');
         $emp_id = $request->get('emp_id');
         
-
-        // UNTUK MENCARI PROJECTID DARI TABLE PROJECT
-        $getProjectID = DB::table('project')->select('PROJECT_ID')
-                                            ->where('EMPLOYEE_ID','=',$emp_id)
-                                            ->where('PROJECT_DETAIL_ID','=',$pd_id)
-                                            ->get();        
-        $getID = json_encode($getProjectID[0]->PROJECT_ID);
-
-
-        // UNTUK MENCARI TIMELAPS DAN PROJECTID DARI TABLE SCHEDULE
-        $data = DB::table('schedule')->select('TIMELAPS')                                   
-                                     ->where('PROJECT_ID','=',$getID)                                     
-                                     ->where('STATUS','=',1)
-                                     ->get();
+        $data = DB::select("call spGetschedule('".$emp_id."', '".$pd_id."', '1')");
 
         return response()->json($data);                        
     }
@@ -109,26 +58,7 @@ class edit_days_project_touchController  extends Controller
         $emp_id    = $request->get('emp_id');
         $pausedate = $request->get('pausedate');
 
-         // UNTUK MENCARI PROJECTID DARI TABLE PROJECT
-        $getProjectID = DB::table('project')->select('PROJECT_ID')
-                                            ->where('EMPLOYEE_ID','=',$emp_id)
-                                            ->where('PROJECT_DETAIL_ID','=',$pd_id)
-                                            ->get();        
-        $getID = json_encode($getProjectID[0]->PROJECT_ID);
-
-
-        // UNTUK MENCARIvPROJECTID DARI TABLE SCHEDULE
-        $data = DB::table('schedule')->select('PROJECT_ID')                                   
-                                     ->where('PROJECT_ID','=',$getID)                                     
-                                     ->where('STATUS','=',1)
-                                     ->get();
-        $getdataID = json_encode($data[0]->PROJECT_ID);                                     
-
-        $query = DB::table('schedule')->where('PROJECT_ID','=',$getdataID)
-                                      ->where('STATUS','=',1)
-                                      ->where('TIMELAPS','=',$pausedate)                                    
-                                      ->delete();
-
+        $query = DB::raw("call spDELETEschedule('".$emp_id."', '".$pd_id."', '1', '".$pausedate."')");
          $msg['msg'] = 'Success Update';
          return json_encode($msg);
     }
@@ -136,22 +66,7 @@ class edit_days_project_touchController  extends Controller
     public function getTimelapsStop(Request $request){
         $pd_id  = $request->get('pd_id');
         $emp_id = $request->get('emp_id');
-        
-
-        // UNTUK MENCARI PROJECTID DARI TABLE PROJECT
-        $getProjectID = DB::table('project')->select('PROJECT_ID')
-                                            ->where('EMPLOYEE_ID','=',$emp_id)
-                                            ->where('PROJECT_DETAIL_ID','=',$pd_id)
-                                            ->get();        
-        $getID = json_encode($getProjectID[0]->PROJECT_ID);
-
-
-        // UNTUK MENCARI TIMELAPS DAN PROJECTID DARI TABLE SCHEDULE
-        $data = DB::table('schedule')->select('TIMELAPS')                                   
-                                     ->where('PROJECT_ID','=',$getID)                                     
-                                     ->where('STATUS','=',2)
-                                     ->get();
-
+        $data = DB::select("call spGetschedule('".$emp_id."', '".$pd_id."', '2')");
         return response()->json($data);                        
     }
 
@@ -162,25 +77,8 @@ class edit_days_project_touchController  extends Controller
         $emp_id    = $request->get('emp_id');
         $stopdate  = $request->get('stopdate');
 
-         // UNTUK MENCARI PROJECTID DARI TABLE PROJECT
-        $getProjectID = DB::table('project')->select('PROJECT_ID')
-                                            ->where('EMPLOYEE_ID','=',$emp_id)
-                                            ->where('PROJECT_DETAIL_ID','=',$pd_id)
-                                            ->get();        
-        $getID = json_encode($getProjectID[0]->PROJECT_ID);
+        $query = DB::raw("call spDELETEschedule('".$emp_id."', '".$pd_id."', '2', '".$stopdate."')");
 
-
-        // UNTUK MENCARIvPROJECTID DARI TABLE SCHEDULE
-        $data = DB::table('schedule')->select('PROJECT_ID')                                   
-                                     ->where('PROJECT_ID','=',$getID)                                     
-                                     ->where('STATUS','=',2)
-                                     ->get();
-        $getdataID = json_encode($data[0]->PROJECT_ID);                                     
-
-        $query = DB::table('schedule')->where('PROJECT_ID','=',$getdataID)
-                                      ->where('STATUS','=',2)
-                                      ->where('TIMELAPS','=',$stopdate)                                    
-                                      ->delete();
 
         $msg['msg'] = 'Success Update';
         return json_encode($msg);

@@ -36,14 +36,6 @@
 	              	</div>
                 </div>
                 <div class="form-group">
-	            	<label class="control-label col-md-1 col-sm-3 col-xs-12">Start Date</label>
-	            	<div class="col-md-9 col-sm-9 col-xs-12">
-	            		<select class="form-control strtdate">
-	                		<option value="" disabled="true" selected="true">Choose Employee name First</option>
-	                	</select>
-	              	</div>
-                </div>
-                <div class="form-group">
                   <div class="col-md-9 col-sm-9 col-xs-12 col-md-9">     
                     <button class="btn btn-success pull-right btn-view-prjct">Search</button>
                   </div>
@@ -134,45 +126,15 @@ $(document).ready(function(){
 	        }
 	    });
   	});
-  	
-  	$('.empname').change(function(){
-  		var id       = $(this).val();
-  		var prjct_id = $('.prjctname').val();
-	    var op = "";
-
-	    $.ajax({	          
-	        type  :'get',
-	        url   :'{{URL::to('getStrDateFromEmp1')}}',
-	        data  : {'id':id , 'prjct_id':prjct_id},
-	        success:function(data){
-	          
-	          $('.strtdate option').remove();
-
-	          if(data.length == ""){	          	
-	          	
-	          	op+='<option value="" >Empty</option>';
-	          
-	          }else{
-
-	            op+='<option value="" >Choose Start Date</option>';
-		            for(var i = 0 ; i < data.length ; i++){
-		              op+='<option value="'+data[i].START_WORK+'">'+data[i].START_WORK+'</option>';
-		            }
-	          }	                             
-	          $('.strtdate').append(op);	                    
-	        }
-	    });
-  	});
-  	
+  	  	
 
   	$('.btn-view-prjct').click(function(){
 
   		var unit = $('.unitname').val();
   		var prjct  = $('.prjctname').val();
   		var emp  = $('.empname').val();
-  		var strdate = $('.strtdate').val();
 
-  		if(emp == "" || unit == "" || prjct =="" || strdate =="")
+  		if(emp == "" || unit == "" || prjct =="")
   		{
 	  		$("#error1").html("Your Data is not complete!");
 	      	$('#myModal1').modal("show");
@@ -182,7 +144,7 @@ $(document).ready(function(){
 	    	$.ajax({
 	    		url : baseUrl +'/edit_single_mndyproject/view',
 		        type: 'POST',
-		        data: {'emp_id': emp,'prjct_id': prjct,'strdate': strdate},
+		        data: {'emp_id': emp,'prjct_id': prjct},
 		        dataType: 'json',
 		        success:function(r)
 		        {
@@ -198,8 +160,8 @@ $(document).ready(function(){
 	                	t+=     '<input type="hidden" class="emp_id" value="'+v.EMPLOYEE_ID+'">'
 	                	t+=     '<input type="hidden" class="PROJECT_id" value="'+v.PROJECT_ID+'">'
             			t+=			'<td style="text-align:center">'+no+'</td>';
-            			t+=			'<td style="text-align:center">'+v.project_name+'</td>';
-            			t+=			'<td style="text-align:center">'+v.project_role_emp+'</td>';
+            			t+=			'<td style="text-align:center">'+v.PROJECT_NAME+'</td>';
+            			t+=			'<td style="text-align:center">'+v.PROJECT_ROLE_EMP+'</td>';
             			t+=			'<td style="text-align:center"><input type="text" style="width:120px" class="form-control startdate" value="'+v.START_WORK+'"></td>';
             			// t+=			'<td><input type="text" style="width:120px" class="form-control finishdate" value="'+v.END_WORK+'"></td>';
             			// t+=			'<td><input type="text" class="form-control calldays" readonly="true" value="'+v.WORK_DURATION+'"></td>';
