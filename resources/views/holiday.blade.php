@@ -326,7 +326,18 @@ $(document).ready(function () {
 							
 			var String_holiday_id   = $(".holiday_ddl_del option:Selected").val();
 			//alert(String_holiday_id);
-			$.ajax({
+			var val = { 'holiday_id': String_holiday_id }
+			httpSend(baseUrl +'/holiday/delete', val).done(r => {
+				if(r.msg){
+					 $("#error2").html(r.msg);
+						$('#myModal2').modal("show");
+						setTimeout(function(){
+							location.reload(); 
+						  }, 1000); 
+				}
+			});
+
+			/*$.ajax({
 		        url : baseUrl +'/holiday/delete',
 		        type: 'POST',
 		        data: {'holiday_id': String_holiday_id},
@@ -340,7 +351,7 @@ $(document).ready(function () {
 						  }, 1000); 
 		            }
 		        }
-	    	});
+	    	});*/
 
 		});
 
