@@ -83,16 +83,9 @@ class reportkpiController extends Controller
         $empAuth = Auth::user()->EMPLOYEE_ID;
         
         if(Auth::user()->ROLE_ID == '4'){
-        $data = DB::table('employee')->select('EMPLOYEE_ID','EMPLOYEE_NAME')
-                                     ->where('UNIT_ID','=',$idUnit)
-                                     ->where('EMPLOYEE_ID','=',$empAuth)
-                                     ->get();
-                                     }
+        $data = DB::select('call spGetEmployeeFromUnitLogin('.$empAuth.')');}
         else{
-        $data = DB::table('employee')->select('EMPLOYEE_ID','EMPLOYEE_NAME')
-                                     ->where('UNIT_ID','=',$idUnit)
-                                     ->whereNotIn('EMPLOYEE_NAME',['admin'])
-                                     ->get();}
+        $data = DB::select('call spGetEmployeeFromUnit('.$idUnit.')');}
 
         return response()->json($data);
     }
