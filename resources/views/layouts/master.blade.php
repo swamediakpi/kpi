@@ -37,6 +37,15 @@
 				border-color:#32383e;
 				text-align:center;
 			}
+			.table-head-absensi {
+				color:#fff;
+				background-color:gray;
+				border-color:#32383e;
+				text-align:left;
+			}
+			.number-absensi {
+				text-align:right;
+			}
 			.ajax-loader {
 				visibility: hidden;
 				background-color: rgba(255,255,255,0.7);        

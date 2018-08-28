@@ -44,7 +44,7 @@ class daysController extends Controller
     public function getEmployeeFromUnit(Request $request){
         $idUnit = $request->get('id');
 
-        $data = DB::select('spGetEmployeeFromUnit('.$idUnit.')');                                    
+        $data = DB::select('call spGetEmployeeFromUnit('.$idUnit.')');                                    
 
         return response()->json($data);
     }
@@ -81,13 +81,13 @@ class daysController extends Controller
         $emp_id   = $request->get('emp_id');
         $year     = $request->get('year');
         
-        $dataDays = DB::select('call spfilter_days_emp_dataDays('.$emp_id.')');
+        $dataDays = DB::select("call spfilter_days_emp_dataDays('$emp_id','$year')");
 
-        $countWD = DB::select('call spfilter_days_emp_countWD('. $emp_id.')');
+        $countWD = DB::select("call spfilter_days_emp_countWD('$emp_id','$year')");
 
         $dataPekerjaan = DB::select("call spfilter_days_emp_dataPekerjaan('$emp_id', '$year')");
 
-        $totalDays = DB::select('call spfilter_days_emp_totalDays('.$emp_id.')');
+        $totalDays = DB::select("call spfilter_days_emp_totalDays('$emp_id','$year')");
         
         $finalDays = DB::select("call spFinalDays('$emp_id','$year')");
         $fixDays   = DB::select("call spGetScoreDays('$emp_id','$year')");         
