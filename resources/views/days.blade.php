@@ -96,7 +96,7 @@
                     </tr>
                     @endforeach
                     <tr>
-                      <td colspan="2" style="text-align: center; font-weight: bold;">TOTAL</td>
+                      <td class ="table-head" colspan="2" style="text-align: center; font-weight: bold;">TOTAL</td>
                       <td>
                         @foreach ($data1 as $list)
                           {{ $list->TOTAL }}
@@ -265,7 +265,7 @@ $(document).ready(function(){
               });
               $.each(r.contentempat, function(k, v){
                   t += '<tr>';
-                  t +=    '<td colspan="2" style="text-align: center; font-weight: bold;">TOTAL</td>';
+                  t +=    '<td class ="table-head" colspan="2" style="text-align: center; font-weight: bold;">TOTAL</td>';
                   t +=    '<td>'+v.tot_WD+'</td>';
                   t += '</tr>';
               });
@@ -351,8 +351,8 @@ $(document).ready(function(){
               });
               $.each(r.contentempat, function(k, v){
                   t += '<tr>';
-                  t +=    '<td colspan="2" style="text-align: center; font-weight: bold;">TOTAL</td>';
-                  t +=    '<td>'+v.tot_WD+'</td>';
+                  t +=    '<td colspan="2" class="table-head" style="text-align: center; font-weight: bold;">TOTAL</td>';
+                  t +=    '<td class="table-head">'+v.tot_WD+'</td>';
                   t += '</tr>';
               });
                   t += '<tr>';
