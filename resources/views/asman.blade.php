@@ -431,8 +431,8 @@ $(document).ready(function(){
                   });
 
                     t += '<tr>';
-                    t += '<td colspan="2" style="text-align:center">TOTAL</td>';
-                    t += '<td colspan="2" style="text-align:center">'+tn+'</td>';
+                    t += '<td colspan="2" class ="table-head" style="text-align:center">TOTAL</td>';
+                    t += '<td colspan="3" class ="table-head" style="text-align:center">'+tn+'</td>';
                     t += '</tr>';              
                     
                     $('.result-search-asman').append(t);
