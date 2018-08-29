@@ -115,13 +115,12 @@
 						<div class="profile_pic">
 							{{-- class="img-circle profile_img" --}}
 							@if (Auth::user()->dashboard == '2')
-								<img src="../public/avatars/{{ Auth::user()->avatar }}" alt="..." class="img-circle profile_img" style="width: 80px;">
+								<img src="<?php echo asset("public/avatars/".session('avatar')."") ; ?>" alt="..." class="img-circle profile_img" style="width: 80px;">
 							
 							@else
-								<img src="public/avatars/{{ Auth::user()->avatar }}" alt="..." class="img-circle profile_img" style="width: 80px;">
+								<img src="<?php echo asset("public/avatars/".session('avatar')."") ; ?>" alt="..." class="img-circle profile_img" style="width: 80px;">
 							@endif
 						</div>
-
 						<div class="profile_info">
 							<span>Welcome,</span>
 							<h2>{{ Auth::user()->username }}</h2>
@@ -207,7 +206,7 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li class="">
 								<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-									<img src="" alt="">{{ Auth::user()->EMPLOYEE_NAME }}
+									<img src="" alt="">{{ Auth::user()->username }}
 									<span class=" fa fa-angle-down"></span>
 								</a>
 

@@ -9,7 +9,6 @@ use DB;
 class edit_projectController extends Controller
 {
 	public function showElement(){
-
 		$showUnit = DB::table('unit')->get();
 
 		return view("edit_project",compact(["showUnit"]));

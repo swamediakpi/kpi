@@ -84,6 +84,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/holiday/input','holidayController@input_holiday');
 	Route::post('/holiday/update','holidayController@update_holiday');
 	Route::post('/holiday/delete','holidayController@delete_holiday');
+	Route::post('/holiday/filter','holidayController@filter_tahun_holiday');
 	
 	Route::get('/input_given_point','input_given_pointController@showAreaKinerja');
 	Route::get('/input_given_point','input_given_pointController@showAreaKinerja');
