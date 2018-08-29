@@ -119,11 +119,11 @@ $(document).ready(function(){
 
             			t+=	'<tr>';
             			t+=		'<td style="text-align:center">'+no+'</td>';
-            			t+=		'<td>'+v.project_name+'</td>';
-            			t+=     '<input type="hidden" class="prjct_id" value="'+v.project_detail_id+'">'
-            			t+=		'<td><input type="text" style="width:120px" class="form-control startdate" value="'+v.project_start+'"></td>';
-            			t+=		'<td><input type="text" style="width:120px" class="form-control finishdate" value="'+v.project_end+'"></td>';
-            			t+=		'<td><input type="text" style="width:120px" class="form-control calldays" readonly="true" value="'+v.project_duration+'"></td>';            			
+            			t+=		'<td>'+v.PROJECT_NAME+'</td>';
+            			t+=     '<input type="hidden" class="prjct_id" value="'+v.PROJECT_DETAIL_ID+'">'
+            			t+=		'<td><input type="text" style="width:120px" class="form-control startdate" value="'+v.PROJECT_START+'"></td>';
+            			t+=		'<td><input type="text" style="width:120px" class="form-control finishdate" value="'+v.PROJECT_END+'"></td>';
+            			t+=		'<td><input type="text" style="width:120px" class="form-control calldays" readonly="true" value="'+v.PROJECT_DURATION+'"></td>';            			
             			t+= '</tr>';	                	
             			
             			no++;

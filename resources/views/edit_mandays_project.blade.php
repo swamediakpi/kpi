@@ -160,8 +160,8 @@ $(document).ready(function(){
 	                	t+=     '<input type="hidden" class="emp_id" value="'+v.EMPLOYEE_ID+'">'
 	                	t+=     '<input type="hidden" class="PROJECT_id" value="'+v.PROJECT_ID+'">'	                	
             			t+=			'<td style="text-align:center">'+no+'</td>';
-            			t+=			'<td>'+v.project_name+'</td>';
-            			t+=			'<td>'+v.project_role_emp+'</td>';
+            			t+=			'<td>'+v.PROJECT_NAME+'</td>';
+            			t+=			'<td>'+v.PROJECT_ROLE_EMP+'</td>';
             			t+=			'<td><input type="text" style="width:120px" class="form-control startdate" value="'+v.START_WORK+'"></td>';
             			t+=			'<td><input type="text" style="width:120px" class="form-control finishdate" value="'+v.END_WORK+'"></td>';
             			t+=			'<td><input type="text" class="form-control calldays" readonly="true" value="'+v.WORK_DURATION+'"></td>';

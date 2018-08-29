@@ -12,20 +12,14 @@ class daysProjectController extends Controller
 	}
 
 	public function showElement(){
-		$data = DB::table('project')->join('project_detail','project.PROJECT_DETAIL_ID','=','project_detail.PROJECT_DETAIL_ID')
-											->join('employee','project.EMPLOYEE_ID','=','employee.EMPLOYEE_ID')
-											->join('list_project_role','project.LIST_PROJECT_ROLE_ID','=','list_project_role.LIST_PROJECT_ROLE_ID')                                            
-											->select('project.PROJECT_ID','project.EMPLOYEE_ID','EMPLOYEE_NAME' , 'EMPLOYEE_TITLE' , 'PROJECT_NAME' , 'PROJECT_ROLE_EMP' ,'PROJECT_START' , 'PROJECT_END' , 'PROJECT_DURATION','START_WORK','END_WORK','WORK_DURATION', DB::raw("get_timeline_status(`project`.`PROJECT_ID`) AS timeline_status"))
-											->orderBy('project.EMPLOYEE_ID','asc')
-											->orderBy('project.PROJECT_ID','asc')
-											->get();
+		$data = DB::select('call spGetListProjectEmp');
 		$countlist = count($data);
 
 		$listprojectRole = DB::table('list_project_role')
 								->orderBy('PROJECT_ROLE_EMP','asc')
 								->get();
 		$employeeName = DB::table('employee')->select('EMPLOYEE_NAME','EMPLOYEE_ID')->get();
-		$projectname = DB::table('project_detail')
+		$projectname = DB::table('project')
 								->orderBy('PROJECT_NAME','asc')
 								->get();
 
@@ -36,12 +30,7 @@ class daysProjectController extends Controller
 		
 		$idEmployee = $request->get('nama');
 		
-		$result = DB::table('project')->join('project_detail','project.PROJECT_DETAIL_ID','=','project_detail.PROJECT_DETAIL_ID')
-											->join('employee','project.EMPLOYEE_ID','=','employee.EMPLOYEE_ID')
-											->join('list_project_role','project.LIST_PROJECT_ROLE_ID','=','list_project_role.LIST_PROJECT_ROLE_ID')                                            
-											->select('EMPLOYEE_NAME' , 'EMPLOYEE_TITLE' , 'PROJECT_NAME' , 'PROJECT_ROLE_EMP','START_WORK','END_WORK','WORK_DURATION')
-											->where('employee.EMPLOYEE_ID','=',$idEmployee)
-											->get();
+		$result = DB::select("call spGetsearch_mandaysEmp('".$idEmployee."')");
 		$data ['content'] = $result;
 		
 		return json_encode($data);
@@ -58,7 +47,7 @@ class daysProjectController extends Controller
 
 		$saveData = array("EMPLOYEE_ID"=>$idemployee,"PROJECT_DETAIL_ID"=>$idprojek,"LIST_PROJECT_ROLE_ID"=>$idprojekRole,"START_WORK"=>$startwork,"END_WORK"=>$endwork,"WORK_DURATION"=>$workduration);
 
-		DB::table('project')->insert($saveData);
+		DB::table('project_employee')->insert($saveData);
 
 		$msg['msg'] = 'Success Insert';
 
@@ -80,7 +69,7 @@ class daysProjectController extends Controller
 	public function getInfoProjek(Request $request){
 		if($request -> ajax())
 		{
-			$tempInfoProjek = DB::table('project_detail')
+			$tempInfoProjek = DB::table('project')
 										->select('PROJECT_START','PROJECT_END','PROJECT_DURATION')
 										->where('PROJECT_DETAIL_ID','=',$request->getInfoProjek)
 										->get();
@@ -153,7 +142,7 @@ class daysProjectController extends Controller
 					$innerTable .= '<td>' . implode(', ', $return) . '</td>';
 					$innerTable .= '</tr>';
 					
-					$data_project = DB::table('project')->select('PROJECT_ID')
+					$data_project = DB::table('project_employee')->select('PROJECT_ID')
 										 ->where('PROJECT_ID','=',$project_id)                                    
 										 ->get(); 
 
@@ -161,12 +150,12 @@ class daysProjectController extends Controller
 					{
 						
 						$save = array("PROJECT_ID"=>$project_id);
-						DB::table('project')->insert($save);                         
+						DB::table('project_employee')->insert($save);                         
 
 					}else{
 
 						$days = $total_interval->d + 1;
-						DB::table('project')                                    
+						DB::table('project_employee')                                    
 									->where('PROJECT_ID',$project_id)
 									->update(['REALIZE_TIME'=>$total_interval->d + 1]);
 					}                   
@@ -201,13 +190,7 @@ class daysProjectController extends Controller
 	}
 
 	public function getMandays(Request $request){
-		$list = DB::table('project')->join('project_detail','project.PROJECT_DETAIL_ID','=','project_detail.PROJECT_DETAIL_ID')
-											->join('employee','project.EMPLOYEE_ID','=','employee.EMPLOYEE_ID')
-											->join('list_project_role','project.LIST_PROJECT_ROLE_ID','=','list_project_role.LIST_PROJECT_ROLE_ID')                                            
-											->select('project.PROJECT_ID','project.EMPLOYEE_ID','EMPLOYEE_NAME' , 'EMPLOYEE_TITLE' , 'PROJECT_NAME' , 'PROJECT_ROLE_EMP' ,'PROJECT_START' , 'PROJECT_END' , 'PROJECT_DURATION','START_WORK','END_WORK','WORK_DURATION', DB::raw("get_timeline_status(`project`.`PROJECT_ID`) AS timeline_status"))
-											->orderBy('project.EMPLOYEE_ID','asc')
-											->orderBy('project.PROJECT_ID','asc')
-											->get();
+		$list = DB::select('call spGetListProjectEmp');
 
 		if(count($list) > 0) {
 			for ($i=0; $i < count($list); $i++) {

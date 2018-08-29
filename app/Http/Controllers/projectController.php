@@ -18,7 +18,7 @@ class projectController extends Controller
 
         $saveData = array("UNIT_ID"=>$unit,"PROJECT_NAME"=>$namaProject,"PROJECT_START"=>$start,"PROJECT_END"=>$finish,"PROJECT_DURATION"=>$days);
 
-        DB::table('project_detail')->insert($saveData);
+        DB::raw("call spInputProject('".$unit."', '".$namaProject."', '".$start."', '".$finish."', '".$days."')");
 
         $msg['msg'] = 'Success Insert';
 
