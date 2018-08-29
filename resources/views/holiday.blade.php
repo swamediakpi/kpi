@@ -17,7 +17,44 @@
 			<a href="#tab_content_delete_holiday" id="edit_holiday_id" role="tab" data-toggle="tab" aria-expanded="true">Delete Holiday</a>
 		</li>		    
 	</ul>
-	
+	<div class="modal fade" id="modal_holiday_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Edit Holiday</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        ...
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary">Save changes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div class="modal fade" id="modal_holiday_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Delete Holiday</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        ...
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary">Save changes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 	<div id="myTabContent" class="tab-content">
 		<div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">	
 			<div class="col-md-12 col-sm-4 col-xs-12">
@@ -66,6 +103,7 @@
 								<th class="table-head" ><center>NO</center></th>
 								<th class="table-head" ><center>Date Holiday</center></th>
 								<th class="table-head" >Information</th>
+								<th class="table-head"><center>Action</center>
 							</thead>
 							<tbody>
 								@php $no = 1; @endphp
@@ -77,6 +115,16 @@
 										<td><center>{{ $no ++ }}</center></td>
 										<td><center>{{ date('d F Y',$date_holiday) }}</center></td>
 										<td>{{ $value->keterangan }}</td>
+										<td><center>
+											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_holiday_edit">
+												Update
+											</button>
+											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_holiday_delete">
+												Delete
+											</button>
+												<!-- <button style="">Update</button>
+												<button color="red">Delete</button> -->
+											</center></td>
 									</tr>
 								@endforeach
 							</tbody>
@@ -265,8 +313,18 @@ $(document).ready(function () {
 				$("#error1").html("Your Data is not complete!");
 				$('#myModal1').modal("show");
 			}else{
-
-			   $.ajax({
+				var val = {'holiday': holiday, 'ket' : ket};
+				httpSend(baseUrl +'/holiday/input', val).done(r => {
+					if(r.msg){
+						 $("#error2").html(r.msg);
+							$('#myModal2').modal("show");
+							setTimeout(function(){
+								location.reload(); 
+							  }, 1000); 
+					}
+				});
+				// old method input 
+			   /*$.ajax({
 					url : baseUrl +'/holiday/input',
 					type: 'POST',
 					data: {'holiday': holiday, 'ket' : ket},
@@ -280,7 +338,7 @@ $(document).ready(function () {
 						  }, 1000); 
 						}
 					}
-				});
+				});*/
 			}
 		});
 		
@@ -305,8 +363,19 @@ $(document).ready(function () {
 			var String_holiday = $(".holiday_ddl option:Selected").html();
 			var String_holiday_date = $("#tb_holidays_date").val();
 			var String_holiday_ket = $("#tb_holidays_ket").val();
+			var val = {'holiday_id': String_holiday_id, 'holiday_date' : String_holiday_date, 'holiday_ket':String_holiday_ket};
+			httpSend(baseUrl +'/holiday/update', val).done(r => {
+				if(r.msg){
+					 $("#error2").html(r.msg);
+						$('#myModal2').modal("show");
+						setTimeout(function(){
+							location.reload(); 
+						  }, 1000); 
+				}
+			});
+			//old method of update holiday
 			//alert(String_holiday_id);
-			$.ajax({
+			/*$.ajax({
 		        url : baseUrl +'/holiday/update',
 		        type: 'POST',
 		        data: {'holiday_id': String_holiday_id, 'holiday_date' : String_holiday_date, 'holiday_ket':String_holiday_ket},
@@ -320,13 +389,13 @@ $(document).ready(function () {
 						  }, 1000); 
 		            }
 		        }
-	    	});
+	    	});*/
 		});
 		$('.btn-delete-holiday').click(function(){
 							
 			var String_holiday_id   = $(".holiday_ddl_del option:Selected").val();
 			//alert(String_holiday_id);
-			var val = { 'holiday_id': String_holiday_id }
+			var val = { 'holiday_id': String_holiday_id };
 			httpSend(baseUrl +'/holiday/delete', val).done(r => {
 				if(r.msg){
 					 $("#error2").html(r.msg);
@@ -336,7 +405,7 @@ $(document).ready(function () {
 						  }, 1000); 
 				}
 			});
-
+			// old method of delete holiday
 			/*$.ajax({
 		        url : baseUrl +'/holiday/delete',
 		        type: 'POST',
