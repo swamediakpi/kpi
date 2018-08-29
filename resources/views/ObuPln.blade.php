@@ -3,167 +3,167 @@
 @if($dashboard == '1')
 	@section('contentLevel')
 		<ol class="breadcrumb">
-			<li><a href="/"><i class="fa fa-dashboard active"></i> Dashboard OBU YellowFin</a></li>
+			<li><a href="/"><i class="fa fa-dashboard active"></i> Dashboard OBU</a></li>
 		</ol>
 	@endsection
 
 	@section('content')
 		<div class="row">
 			<div class="col-md-12">
-				<div class="x_panel">
-					<div class="x_title" style="height: 35px;">
-						<div class="col-md-3">
-							<h2><i class="fa fa-bar-chart"></i>&nbsp;Title Graph</h2>
+				<div class="box">
+					<div class="box-header with-border">
+						<h3 class="box-title"><i class="fa fa-bar-chart"></i> Total OBU</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 						</div>
-						<div class="clearfix"></div>
 					</div>
-					
-					<div class="x_content">
-						<div class="col-md-12">
-							<div id="barDrilldown" name="barDrilldown"></div>
-							<div class="clearfix"></div>
+
+					<div class="box-body">
+						<div class="row">
+							<div class="col-lg-12">
+								<div id="chartTotalObu"></div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</div><br/>
 
 		<div class="row">
 			<div class="col-md-12">
-				<div class="x_panel">
-					<div class="x_title" style="height: 35px;">
-						<h2><i class="fa fa-pie-chart"></i>&nbsp;Title Graph</h2>
-						<div class="clearfix"></div>
+				<div class="box">
+					<div class="box-header with-border">
+						<h3 class="box-title"><i class="fa fa-bar-chart"></i> Total Per-Lokasi</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+						</div>
 					</div>
-					
-					<div class="x_content">
-						<div class="col-md-12">
-							Content
-							<div class="clearfix"></div>
+
+					<div class="box-body">
+
+						<div class="row">
+							<div class="col-lg-9">
+								<div id="ChartPerLoc"></div>
+							</div>
+							<div class="col-lg-3">
+								<div id="miniChartOBU"></div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</div><br/>
 	@endsection
 
 	@push('scripts')
 		<script>
 			$(function() {
 				$('#Liobu').addClass('active');
-				barDrildownChart();
-				// $.ajax({
-				// 	url : baseUrl +'/obu/GrafMnd',
-				// 	type: 'POST',
-				// 	data: {'p_tahun': '2017'},
-				// 	dataType: 'json',
-				// 	beforeSend: function(){
-				// 		$('.ajax-loader').css("visibility", "visible");
-				// 	},
-				// 	success : function(data){
-				// 		// var seriesData = data.seriesData;
-				// 		// var drilldownData = data.drilldownData;
+				$.ajaxSetup({
+					headers: { 'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content') }
+				});
 
-				// 		barDrildownChart();
-				// 	},
-				// 	complete: function(){
-				// 		$('.ajax-loader').css("visibility", "hidden");
-				// 	}
-				// });
+				// $('#unit').change(function(){ drawChartVs(); });
+
+				// $('#bulan_VS').change(function() { drawChartVs(); });
+
+				drawTotalChart();
+				drawPerLoc();
+				// drawChartVs();
 			});
+			function drawTotalChart(){
+				var val = { type: 'type_total' }
+				httpSend('getObuTotal', val).done(r => {
+					Highcharts.chart('chartTotalObu', {
+						chart: { type: 'column' },
+						title: { text: '' },
+						xAxis: { type: 'category'},
+						yAxis: {
+							title: { text: "Total" }
+						},
+						legend: { enabled: true },
+						tooltip: {
+							headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+							pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b><br/>',
+						},
+						plotOptions: {
+							series: {
+								borderWidth: 0, dataLabels: { enabled: true, format: '<span style="font-size:8px">{point.y}</span><br>' }
+							},
+						},
+						series: [r.seriesData]
+					});
+				});
+			}
 
-			function barDrildownChart(){
-				Highcharts.chart('barDrilldown', {
+			function drawPerLoc(){
+				var val = { type: 'type' };
+				httpSend('getOBUData', val).done(r => {
+					tempData = r.legend;
+					for (var i=0; i < tempData.length; i++) {
+						tempData[i].jmlh = formatStrRupiah(tempData[i].jmlh);
+					}
+					r.legend = tempData;
+					drawKontrak(r);
+				});
+			}
+
+			function drawKontrak(data) {
+				$('#miniChartOBU').html('');
+
+				var legend = data.legend;
+				var strLegend =
+					'<label>Saldo Per-Lokasi</label>'+
+					'<ul class="chart-legend clearfix">';
+				for (var i= 0; i < legend.length; i++) {
+					strLegend +=
+							'<li>'+
+								'<i class="fa fa-caret-right"></i> '+
+								legend[i].name+' - '+legend[i].jmlh+
+							'</li>';
+				};
+				strLegend += '</ul>';
+				$('#miniChartOBU').html(strLegend);
+				var seriesData = data.seriesData;
+				var drilldownData = data.drilldownData;
+
+				Highcharts.chart('ChartPerLoc', {
 					chart: { type: 'column' },
 					title: { text: '' },
-					subtitle: { text: '' },
+					subtitle: { text: 'Click the columns to view details.' },
 					xAxis: { type: 'category' },
 					yAxis: {
-						title: { text: '' }
+						title: { text: 'Total Per-Lokasi' }
 					},
-					legend: { enabled: false },
+					legend: { enabled: true },
 					plotOptions: {
-						series: {
-							borderWidth: 0,
-							dataLabels: {
+						series: { borderWidth: 0, dataLabels: {
 								enabled: true,
-								format: '{point.y:.1f}%'
+								format: '<span style="font-size:8px">{point.y}</span><br>'
 							}
 						}
 					},
-
 					tooltip: {
 						headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-						pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+						pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b><br/>'
 					},
-					series: [{
-						name: "Test",
-						colorByPoint: true,
-						data: [{
-							name: "Chrome",
-							y: 62.74,
-							drilldown: "Chrome"
-						},{
-							name: "Firefox",
-							y: 10.57,
-							drilldown: "Firefox"
-						},{
-							name: "Internet Explorer",
-							y: 7.23,
-							drilldown: "Internet Explorer"
-						}]
-					}],
+					series: [seriesData],
 					drilldown: {
-						series: [{
-							name: "Chrome",
-							id: "Chrome",
-							data: [
-								["v65.0", 0.1],
-								["v64.0", 1.3],
-								["v63.0", 53.02],
-								["v62.0", 1.4 ],
-								["v61.0", 0.88],
-								["v60.0", 0.56],
-								["v59.0", 0.45],
-								["v58.0", 0.49],
-								["v57.0", 0.32],
-								["v56.0", 0.29],
-								["v55.0", 0.79],
-								["v54.0", 0.18],
-								["v51.0", 0.13],
-								["v49.0", 2.16],
-								["v48.0", 0.13],
-								["v47.0", 0.11],
-								["v43.0", 0.17],
-								["v29.0", 0.26]
-							]
-						},{
-							name: "Firefox",
-							id: "Firefox",
-							data: [
-								["v58.0", 1.02],
-								["v57.0", 7.36],
-								["v56.0", 0.35],
-								["v55.0", 0.11],
-								["v54.0", 0.1],
-								["v52.0", 0.95],
-								["v51.0", 0.15],
-								["v50.0", 0.1],
-								["v48.0", 0.31],
-								["v47.0", 0.12]
-							]
-						},{
-							name: "Internet Explorer",
-							id: "Internet Explorer",
-							data: [
-								["v11.0", 6.2],
-								["v10.0", 0.29],
-								["v9.0", 0.27],
-								["v8.0", 0.47]
-							]
-						}]
+						series: drilldownData
 					}
 				});
+			}
+
+
+			function formatStrRupiah(number) {
+				var val = 0; var str = "";
+				if(number >= 1000000 && number < 1000000000){
+					val = number / 1000000;
+					str = "Rp. "+Highcharts.numberFormat(val,0,',','.')+" Juta"; return str;
+				}else{
+					val = number / 1000000000;
+					str = "Rp. "+Highcharts.numberFormat(val,0,',','.')+" M"; return str;
+				}
 			}
 		</script>
 	@endpush
@@ -312,7 +312,7 @@
 					headers: { 'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content') }
 				});
 
-				google.charts.load('upcoming', {'packages':['corechart', 'map']});
+				// google.charts.load('upcoming', {'packages':['corechart', 'map']});
 
 				$('input[type="radio"].flat-red').iCheck({
 					checkboxClass: 'icheckbox_flat-green',
