@@ -19,7 +19,8 @@ class holidayController extends Controller
 	public function getholiday(Request $request){
 		if($request -> ajax())
     	{
-    		$showDate = DB::table('holiday')->select('day')					 							 
+    		$showDate = DB::table('holiday')->select('day')
+    										->where('day_id',$holiday_id)			 							 
     									 	->get();
     	
     		return json_encode($showDate);

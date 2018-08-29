@@ -146,13 +146,15 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index');
 
 Route::get('/obu', 'ObuPlnController@index');
-Route::get('/obu/graphObu', 'ObuPlnController@graphObu');
+Route::any('/getObuTotal', 'obuController@getObuTotal');
+Route::any('/getOBUData', 'obuController@getOBUData');
+
 Route::get('/obu/yf', 'ObuPlnController@ObuYf');
 
 Route::get('/pln', 'ObuPlnController@pln');
-Route::any('/getKontrakData', 'ObuPlnController@getKontrakData');
-Route::any('/getKontrakBulanData', 'ObuPlnController@getKontrakBulanData');
-Route::any('/getVsData', 'ObuPlnController@getVsData');
-Route::any('/getVsDataBulan', 'ObuPlnController@getVsDataBulan');
+Route::any('/getKontrakData', 'plnController@getKontrakData');
+Route::any('/getKontrakBulanData', 'plnController@getKontrakBulanData');
+Route::any('/getVsData', 'plnController@getVsData');
+Route::any('/getVsDataBulan', 'plnController@getVsDataBulan');
 
 Auth::routes();
