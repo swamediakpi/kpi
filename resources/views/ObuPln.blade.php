@@ -53,6 +53,31 @@
 				</div>
 			</div>
 		</div><br/>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="box">
+					<div class="box-header with-border">
+						<h3 class="box-title"><i class="fa fa-pie-chart"></i> Registration & Saldo</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+						</div>
+					</div>
+
+					<div class="box-body">
+						<div class="row">
+							<div class="col-lg-6">
+								<div id="ChartPercentTotal"></div>
+							</div>
+
+							<div class="col-lg-6">
+								<div id="ChartPercentSaldo"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	@endsection
 
 	@push('scripts')
@@ -63,16 +88,12 @@
 					headers: { 'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content') }
 				});
 
-				// $('#unit').change(function(){ drawChartVs(); });
-
-				// $('#bulan_VS').change(function() { drawChartVs(); });
-
 				drawTotalChart();
 				drawPerLoc();
-				// drawChartVs();
+				drawChartPercent();
 			});
 			function drawTotalChart(){
-				var val = { type: 'type_total' }
+				var val = { _token: $('meta[name="csrf_token"]').attr('content') }
 				httpSend('getObuTotal', val).done(r => {
 					Highcharts.chart('chartTotalObu', {
 						chart: { type: 'column' },
@@ -97,7 +118,7 @@
 			}
 
 			function drawPerLoc(){
-				var val = { type: 'type' };
+				var val = { _token: $('meta[name="csrf_token"]').attr('content') };
 				httpSend('getOBUData', val).done(r => {
 					tempData = r.legend;
 					for (var i=0; i < tempData.length; i++) {
@@ -154,6 +175,51 @@
 				});
 			}
 
+			function drawChartPercent(){
+				var val = { _token: $('meta[name="csrf_token"]').attr('content') };
+				httpSend('getPercentData', val).done(r => {
+					drawVs(r);
+				});
+			}
+
+			function drawVs(data) {
+				var seriesDataTotal = data.seriesDataTotal;
+				var seriesDataSaldo = data.seriesDataSaldo;
+
+				//Vs Total
+				Highcharts.chart('ChartPercentTotal', {
+					chart: { plotBackgroundColor: null, plotBorderWidth: null, plotShadow: false, type: 'pie' },
+					title: { text: 'Registration' },
+					tooltip: { pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>' },
+					plotOptions: {
+						pie: {
+							allowPointSelect: true, cursor: 'pointer',
+							dataLabels: {
+								enabled: true, format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+								style: { color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black' }
+							}
+						}
+					},
+					series: [seriesDataTotal]
+				});
+
+				//Vs Saldo
+				Highcharts.chart('ChartPercentSaldo', {
+					chart: { plotBackgroundColor: null, plotBorderWidth: null, plotShadow: false, type: 'pie' },
+					title: { text: 'Saldo' },
+					tooltip: { pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>' },
+					plotOptions: {
+						pie: {
+							allowPointSelect: true, cursor: 'pointer',
+							dataLabels: {
+								enabled: true, format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+								style: { color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black' }
+							}
+						}
+					},
+					series: [seriesDataSaldo]
+				});
+			}
 
 			function formatStrRupiah(number) {
 				var val = 0; var str = "";
@@ -175,7 +241,8 @@
 	@endsection
 
 	@section('content')
-		Dashboard OBU YF
+		<script type="text/javascript" src="http://localhost:8090/JsAPI?reportUUID=f17f670e-5c1b-4356-b787-2dd508e89c17"></script>
+		<script type="text/javascript" src="http://localhost:8090/JsAPI?reportUUID=7ce6b7de-d391-4c6d-863b-f57c4c4b8dcc"></script>
 	@endsection
 
 	@push('script')

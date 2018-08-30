@@ -148,6 +148,7 @@ Route::get('/home', 'HomeController@index');
 Route::get('/obu', 'ObuPlnController@index');
 Route::any('/getObuTotal', 'obuController@getObuTotal');
 Route::any('/getOBUData', 'obuController@getOBUData');
+Route::any('/getPercentData', 'obuController@getPercentData');
 
 Route::get('/obu/yf', 'ObuPlnController@ObuYf');
 

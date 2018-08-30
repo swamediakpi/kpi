@@ -80,4 +80,69 @@ class obuController extends Controller {
 		}
 		return json_encode($data);
 	}
+
+	function getPercentData(Request $request){
+		$input = $request->all();
+		$getDataTotal = $this->getDataTotal();
+		$data = $getDataTotal;
+		$getDataSaldo = $this->getDataSaldo();
+		$data += $getDataSaldo;
+		return json_encode($data);
+	}
+
+	function getDataTotal() {
+		$listLoc = DB::connection('mysql2')->select(DB::raw('SELECT erp_1_loc loc FROM obu GROUP BY erp_1_loc'));
+		$data['seriesDataTotal'] = new \stdClass;
+		$data['seriesDataTotal']->name = 'Total';
+		$data['seriesDataTotal']->colorByPoint = 'true';
+		$data['seriesDataTotal']->data = [];
+
+		//percent PRK
+		$sql = DB::connection('mysql2')->select(DB::raw('SELECT COUNT(1) total FROM obu'));
+		$maksOBU = $sql[0]->total;
+		
+		$sql = DB::connection('mysql2')->select(DB::raw('SELECT COUNT(1) total FROM obu WHERE erp_1_loc = "" OR erp_1_loc IS NOT NULL'));
+		$registrasiOBU = $sql[0]->total;
+
+		$sql = DB::connection('mysql2')->select(DB::raw('SELECT COUNT(1) total FROM obu WHERE erp_1_loc = "" OR erp_1_loc IS NULL'));
+		$nonRegistrasiOBU = $sql[0]->total;
+
+		$percentObu = ($registrasiOBU / $maksOBU) * 100;
+		$percentNon = ($nonRegistrasiOBU / $maksOBU) * 100;
+
+		$data['seriesDataTotal']->data[0] = new \stdClass;
+		$data['seriesDataTotal']->data[0]->name = 'Registrasi';
+		$data['seriesDataTotal']->data[0]->y = round($percentObu,2);
+		$data['seriesDataTotal']->data[1] = new \stdClass;
+		$data['seriesDataTotal']->data[1]->name = 'Belum Registrasi';
+		$data['seriesDataTotal']->data[1]->y = round($percentNon,2);
+		
+		return $data;
+	}
+
+	function getDataSaldo() {
+		$listLoc = DB::connection('mysql2')->select(DB::raw(
+			'SELECT erp_1_loc loc FROM obu WHERE erp_1_loc IS NOT NULL or erp_1_loc = "" GROUP BY erp_1_loc'
+		));
+
+		$data['seriesDataSaldo'] = new \stdClass;
+		$data['seriesDataSaldo']->name = 'Saldo';
+		$data['seriesDataSaldo']->colorByPoint = 'true';
+		$data['seriesDataSaldo']->data = [];
+
+		//percent Saldo
+		$sql = DB::connection('mysql2')->select(DB::raw('SELECT SUM(saldo_obu_total) total FROM obu'));
+		$maksSaldo = $sql[0]->total;
+		
+		for($i=0; $i < sizeof($listLoc); $i++){
+			$sql = DB::connection('mysql2')->select(DB::raw('SELECT SUM(saldo_obu_total) total FROM obu WHERE erp_1_loc = "'.$listLoc[$i]->loc.'"'));
+			$saldoLoc = $sql[0]->total;
+			$percentSaldo = ($saldoLoc / $maksSaldo) * 100;
+			$data['seriesDataSaldo']->data[$i] = new \stdClass;
+			$data['seriesDataSaldo']->data[$i]->name = $listLoc[$i]->loc;
+			$data['seriesDataSaldo']->data[$i]->y = round($percentSaldo);
+		}
+		
+		return $data;
+	}
 }
