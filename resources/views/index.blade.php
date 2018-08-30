@@ -394,11 +394,28 @@
 	<script type="text/javascript" src="http://192.168.88.58:8090/JsAPI?reportUUID=1bfad5e3-5389-4bc2-9c94-d113179e9174&amp;yfFilterf815dfd4-1908-4641-b521-7374883b1026"></script>
 
 	<script type="text/javascript" src="http://192.168.88.58:8090/JsAPI?reportUUID=a5ab3580-f915-4026-b747-77660e4368d8&amp;yfFilter072022f4-27d1-4479-969e-3bceabe7c944"></script-->
-	
-	<div class="row">
-		<div id=\"yfReportContainera17406ec-c9ed-44a2-8f7e-b9e248fbe107\"></div>
-	</div>
-	<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=963500f9-70c1-403b-bb61-337ade16e93d"></script>
-	<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=a17406ec-c9ed-44a2-8f7e-b9e248fbe107"></script>
+	@if  (Auth::user()->ROLE_ID == '4')
+
+		<!--script type="text/javascript" src="http://localhost/JsAPI?reportUUID=a2baacb4-9012-4fac-97c4-3a1f2cb56683&amp;yfFilterf6832479-8eaf-49ae-83c2-09b170499583=Adiyansyah+Dwi+Putra"></script-->
+		@foreach ($result as $listTahun)
+			<div class="row">
+				<div id=\"yfReportContainera17406ec-c9ed-44a2-8f7e-b9e248fbe107\"></div>
+			</div>
+			
+			<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=5f52c4a8-0189-4d35-b1c0-691b73878741&amp;yfFilter3b417825-6aa2-4959-9224-c983f599cb29={{ str_replace(' ','+',$listTahun->EMPLOYEE_NAME) }}"></script>
+			<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=ae39381e-95d3-4aa3-b18b-710646708d20&amp;yfFilter991ce3b0-02bb-4960-9aae-220296ab0748={{ str_replace(' ','+',$listTahun->EMPLOYEE_NAME) }}"></script>
+			<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=a2baacb4-9012-4fac-97c4-3a1f2cb56683&amp;yfFilterf6832479-8eaf-49ae-83c2-09b170499583={{ str_replace(' ','+',$listTahun->EMPLOYEE_NAME) }}"></script>
+			
+			<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=921202d7-f490-4ac5-abb0-094a6f3996cc&amp;yfFilter3a292b07-de24-48cd-be95-844548a4c9ae={{ str_replace(' ','+',$listTahun->EMPLOYEE_NAME) }}"></script>
+		@endforeach
+	@else
+		<div class="row">
+			<div id=\"yfReportContainera17406ec-c9ed-44a2-8f7e-b9e248fbe107\"></div>
+		</div>
+		<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=963500f9-70c1-403b-bb61-337ade16e93d"></script>
+		<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=a17406ec-c9ed-44a2-8f7e-b9e248fbe107"></script>
+		<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=8652081c-f0d8-4241-8315-6550e849fd3c"></script>
+		
+	@endif
 @endif
 @endsection

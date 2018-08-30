@@ -19,10 +19,12 @@ class indexController extends Controller {
 
 	public function showElementyf(Request $request){
 		$roleAuth = Auth::user()->ROLE_ID;
-		$nameAuth = Auth::user()->EMPLOYEE_NAME;
-		Auth::user()->dashboard = 2; ;
+		$nameAuth = Auth::user()->EMPLOYEE_ID;
+		Auth::user()->dashboard = 2; 
+		$result = DB::table('employee')->where('employee.EMPLOYEE_ID','=',$nameAuth)
+							->get();
 
-		return view('index',compact(['yfAUTH']));
+		return view('index',compact(['yfAUTH','nameAuth','result']));
 	}
 	
 	public function photo(Request $request){
