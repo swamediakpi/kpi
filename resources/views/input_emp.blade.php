@@ -16,9 +16,9 @@
     <div class="form-horizontal form-label-left">
       
       <div class="form-group">
-        <label class="control-label col-md-1 col-sm-3 col-xs-12">No Employee</label>
+        <label class="control-label col-md-1 col-sm-3 col-xs-12">NIK</label>
         <div class="col-md-9 col-sm-9 col-xs-12">
-          <input type="number" class="form-control" id="emp-no" disabled="true">
+          <input type="number" class="form-control" id="emp-no">
         </div>
       </div>
       

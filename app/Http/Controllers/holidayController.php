@@ -10,21 +10,32 @@ use DB;
 class holidayController extends Controller
 {
 	public function show(){			
-
+		$tahun = DB::table('t_tahun')->get();
 		$holidays = DB::table('holiday')->get();
 
-		return view('holiday',compact(['holidays']));
+		return view('holiday',compact(['holidays','tahun']));
 	}
 
 	public function getholiday(Request $request){
 		if($request -> ajax())
     	{
-    		$showDate = DB::table('holiday')->select('day')					 							 
+    		$showDate = DB::table('holiday')->select('day')		 							 
     									 	->get();
-    	
     		return json_encode($showDate);
     	}
 	}
+	public function filter_tahun_holiday(Request $request){
+    	$tahun   = $request->get('tahun');
+    	//dd($tahun);
+        //$dataPrjct = DB::select("call spMandaysfilter_prjct('".$emp_id."', '".$prjct_id."')");
+        $dataHoliday = DB::table('holiday')
+        	->whereYear('day','=',$tahun )
+        	->get();
+		$data ['content'] = $dataHoliday;
+        //dd($data);
+
+        return json_encode($data);
+    }
 
 	public function input_holiday(Request $request){
 		$holiday = $request->get('holiday');

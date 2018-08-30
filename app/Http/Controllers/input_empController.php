@@ -34,9 +34,15 @@ class input_empController extends Controller
         $saveData = array("EMPLOYEE_ID"=>$noemp,"ROLE_ID"=>$role,"UNIT_ID"=>$unit,"EMPLOYEE_NAME"=>$name,"EMPLOYEE_EMAIL"=>$email,"EMPLOYEE_TITLE"=>$title,"username"=>$username,"password"=>bcrypt($password));
 		
 
-        DB::raw("call spInputEmp('".$noemp."', '".$role."', '".$unit."', '".$name."', '".$email."', '".$title."', '".$username."', '".bcrypt($password)."')");
+        $simpan = DB::raw("call spInputEmp('".$noemp."', '".$role."', '".$unit."', '".$name."', '".$email."', '".$title."', '".$username."', '".bcrypt($password)."')");
+        //dd($simpan);
+        if($simpan){
+                    $msg['msg'] = 'Success Insert';
+        }
+        else{
+                    $msg['msg'] = 'Gagal Insert';
+        }
 
-        $msg['msg'] = 'Success Insert';
 
         return json_encode($msg);
 	}
