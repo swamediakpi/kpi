@@ -170,7 +170,22 @@
 						<div class="clearfix"></div>        
 					</div>
 					<div class="x_content">
-						<table class="table table-bordered table-responsive table-hover">
+						<div class="form-group">
+							<div class="col-md-9 col-sm-9 col-xs-12">
+								<select id="ddl_tahun" class="form-control ddl_tahun">
+									@foreach ($tahun as $value)
+										<option value="{{ $value->TAHUN }}">{{ $value->TAHUN }}</option>
+									@endforeach
+								</select>
+							</div>
+						</div>
+						<hr/>
+						<br>
+						<table class="table_holiday_dyn table table-bordered table-responsive table-hove">
+
+						</table>
+
+						<!-- <table class="table table-bordered table-responsive table-hover">
 							<thead>
 								<th class="table-head" ><center>NO</center></th>
 								<th class="table-head" ><center>Date Holiday</center></th>
@@ -199,7 +214,7 @@
 									</tr>
 								@endforeach
 							</tbody>
-						</table>
+						</table> -->
 					</div>
 				</div>
 			</div>
@@ -300,91 +315,248 @@
 </div>
 
 <script type="text/javascript">
-$(document).ready(function () {
-	//Date Picker
-	//var holidays = ["2017-08-17","2017-09-01","2017-09-21","2017-12-01","2017-12-25","2017-12-26"];
-	var holidays = "";
-	$.ajaxSetup({
-	    headers : {
-	      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-	    }
-	  });
+	$(document).ready(function () {
+		$('.ddl_tahun')
+		function formatDate(tgl) {
+		  var monthNames = [
+		    "Januari", "Februari", "Maret",
+		    "April", "Mei", "Juni", "Juli",
+		    "Agustus", "September", "Oktober",
+		    "November", "Desember"
+		  ];
 
-	$.ajax({ 
-		 type: "GET",   
-		 url: '{{ URL::to('getHoliday') }}',         
-		 dataType: 'json',
-		 success : function(data)
-		 {
-			var holiday = [];            
-			for (var i = 0; i < data.length; i++)
-			{
-			  var obj = data[i];
-			  holiday[i] = obj.day;          
+		  var day = tgl.getDate();
+		  var monthIndex = tgl.getMonth();
+		  var year = tgl.getFullYear();
+
+		  return day + ' ' + monthNames[monthIndex] + ' ' + year;
+		}
+		//Date Picker
+		//var holidays = ["2017-08-17","2017-09-01","2017-09-21","2017-12-01","2017-12-25","2017-12-26"];
+		var holidays = "";
+		$.ajaxSetup({
+		    headers : {
+		      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		    }
+		  });
+		$.ajax({ 
+			 type: "GET",   
+			 url: '{{ URL::to('getHoliday') }}',         
+			 dataType: 'json',
+			 success : function(data)
+			 {
+				var holiday = [];            
+				for (var i = 0; i < data.length; i++)
+				{
+				  var obj = data[i];
+				  holiday[i] = obj.day;          
+				}
+							  
+				holidays = holiday;         	
+
+				$("#startdate").datepicker({
+
+				//disable Weekend dan Holidays      
+					beforeShowDay: function(date){
+
+						var day = date.getDay();
+						if(day == 0 || day == 6){
+
+						  return [false];
+								
+						}else if(holidays != ""){
+
+						  var datestring = jQuery.datepicker.formatDate('yy-mm-dd', date);
+						  var x = holidays.indexOf(datestring) == -1 ;
+						  return [x];
+
+						}else{
+							
+						  return [true];
+						}       
+					},
+					dateFormat : 'yy-mm-dd'
+				});
+				$("#tb_holidays_date").datepicker({
+
+				//disable Weekend dan Holidays      
+					beforeShowDay: function(date){
+
+						var day = date.getDay();
+						if(day == 0 || day == 6){
+
+						  return [false];
+								
+						}else if(holidays != ""){
+
+						  var datestring = jQuery.datepicker.formatDate('yy-mm-dd', date);
+						  var x = holidays.indexOf(datestring) == -1 ;
+						  return [x];
+
+						}else{
+							
+						  return [true];
+						}       
+					},
+					dateFormat : 'yy-mm-dd'
+				});
+			 }
+		});    
+
+		$('.btn-input-holiday').click(function(){
+			var holiday = $("#startdate").val();
+			var ket     = $("#txtket").val();
+					
+			if( holiday == "" || ket == "" ){
+				$("#error1").html("Your Data is not complete!");
+				$('#myModal1').modal("show");
+			}else{
+				var val = {'holiday': holiday, 'ket' : ket};
+				httpSend(baseUrl +'/holiday/input', val).done(r => {
+					if(r.msg){
+						 $("#error2").html(r.msg);
+							$('#myModal2').modal("show");
+							setTimeout(function(){
+								location.reload(); 
+							  }, 1000); 
+					}
+				});
+				// old method input 
+			   /*$.ajax({
+					url : baseUrl +'/holiday/input',
+					type: 'POST',
+					data: {'holiday': holiday, 'ket' : ket},
+					dataType: 'json',
+					success:function(r){
+						if(r.msg == 'Success Insert'){
+						  $("#error2").html(r.msg);
+						  $('#myModal2').modal("show");
+						  setTimeout(function(){
+							location.reload(); 
+						  }, 1000); 
+						}
+					}
+				});*/
 			}
-						  
-			holidays = holiday;         	
-
-			$("#startdate").datepicker({
-
-			//disable Weekend dan Holidays      
-				beforeShowDay: function(date){
-
-					var day = date.getDay();
-					if(day == 0 || day == 6){
-
-					  return [false];
-							
-					}else if(holidays != ""){
-
-					  var datestring = jQuery.datepicker.formatDate('yy-mm-dd', date);
-					  var x = holidays.indexOf(datestring) == -1 ;
-					  return [x];
-
-					}else{
-						
-					  return [true];
-					}       
-				},
-				dateFormat : 'yy-mm-dd'
+		});
+		$('.button_holiday_edit').click(function(){
+			//alert(this.value);
+			document.getElementById("holiday_ddl_edit").selectedIndex = this.value;
+			var String_holiday = $(".holiday_ddl_edit option:Selected").html();
+			var String_holiday_date = String_holiday.slice(0,10);
+			var String_holiday_ket = String_holiday.slice(11,String_holiday.length);
+			$("#tb_holidays_date").val(String_holiday_date);
+			$("#tb_holidays_ket").val(String_holiday_ket);
+		});
+		$('.button_holiday_delete').click(function(){
+			//alert(this.value);
+			document.getElementById("holiday_ddl_del").selectedIndex = this.value;
+			var String_holiday = $(".holiday_ddl_del option:Selected").html();
+			var String_holiday_date = String_holiday.slice(0,10);
+			var String_holiday_ket = String_holiday.slice(11,String_holiday.length);
+			$("#tb_holidays_date_del").val(String_holiday_date);
+			$("#tb_holidays_ket_del").val(String_holiday_ket);
+		});
+		$('#ddl_tahun').change(function(){
+			var Str_tab='';''
+			var Str_tahun = $('.ddl_tahun').val();
+			var val = {'tahun': Str_tahun};
+			httpSend(baseUrl +'/holiday/filter', val).done(r => {
+				var t = '';
+                var no = 1;
+            	t+= '<thead>'
+				t+=		'<th class="table-head" ><center>NO</center></th>'
+				t+=		'<th class="table-head" ><center>Date Holiday</center></th>'
+				t+=		'<th class="table-head" >Information</th>'
+				t+=		'<th class="table-head"><center>Action</center>'
+				t+=	'</thead><tbody>'
+        		$('.table_holiday_dyn tr').remove();
+        		$.each(r.content, function(k, v){
+        			//v.day = Date.parse(v.day);
+        			//v.day = v.day.toString('yyyy-MMMMM-dd');
+        			t+=	'<tr>';
+        			t+=		'<td style="text-align:center">'+no+'</td>';
+        			t+=		'<td style="text-align:center">'+formatDate(new Date(v.day))+'</td>';
+        			t+=		'<td style="text-align:left">'+v.keterangan+'</td>';
+        			t+=		'<td><center>';
+					t+=		'<button  type="button" class="btn btn-primary button_holiday_edit" data-toggle="modal" data-target="#modal_holiday_edit" value='+v.day_id+'>Update</button>';
+					t+=		'<button  type="button" class="btn btn-primary button_holiday_delete" data-toggle="modal" data-target="#modal_holiday_delete" value='+v.day_id+'>Delete</button>';
+					t+=		'</center></td>';
+					no++;
+        		});
+				$('.table_holiday_dyn').append(t);
 			});
-			$("#tb_holidays_date").datepicker({
+		});
+		/*$.ajax({
+    		url : baseUrl +'/holiday/filter',
+	        type: 'POST',
+	        data: {'tahun': Str_tahun},
+	        dataType: 'json',
+	        success:function(r)
+	        {
+	        	var t = '';
+                var no = 1;
+        		
+        		$('.table_holiday_dyn tr').remove();
 
-			//disable Weekend dan Holidays      
-				beforeShowDay: function(date){
-
-					var day = date.getDay();
-					if(day == 0 || day == 6){
-
-					  return [false];
-							
-					}else if(holidays != ""){
-
-					  var datestring = jQuery.datepicker.formatDate('yy-mm-dd', date);
-					  var x = holidays.indexOf(datestring) == -1 ;
-					  return [x];
-
-					}else{
-						
-					  return [true];
-					}       
-				},
-				dateFormat : 'yy-mm-dd'
+        		$.each(r.content, function(k, v){
+        			t+=	'<tr>';
+                	t+=     '<input type="hidden" class="prjct_id" value="'+v.project_detail_id+'">'
+                	t+=     '<input type="hidden" class="emp_id" value="'+v.EMPLOYEE_ID+'">'
+                	t+=     '<input type="hidden" class="PROJECT_id" value="'+v.PROJECT_ID+'">'
+        			t+=			'<td style="text-align:center">'+no+'</td>';
+        			t+=			'<td style="text-align:center">'+v.PROJECT_NAME+'</td>';
+        			t+=			'<td style="text-align:center">'+v.PROJECT_ROLE_EMP+'</td>';
+        			t+=			'<td style="text-align:center"><input type="text" style="width:120px" class="form-control startdate" value="'+v.START_WORK+'"></td>';
+        			t+=	'<tr>';
+        			t+=		'<td style="text-align:center">'+no+'</td>';
+        			t+=		'<td style="text-align:center"></td>';
+        			t+=		'<td style="text-align:center">'+v.keterangan+'</td>';
+        			t+=		'<td><center>'
+					t+=		'<button  type="button" class="btn btn-primary button_holiday_edit" data-toggle="modal" data-target="#modal_holiday_edit" value='+v.day_id+'>Update</button>'
+					t+=		'<button  type="button" class="btn btn-primary button_holiday_delete" data-toggle="modal" data-target="#modal_holiday_delete" value='+v.day_id+'>Delete</button>'
+					t+=		'</center></td>'
+        		}
+				$('.table_holiday_dyn').append(Str_tab);
+			}
+		});*/
+		/*$('.holiday_ddl_edit').change(function(){
+			var String_holiday = $(".holiday_ddl_edit option:Selected").html();
+			var String_holiday_date = String_holiday.slice(0,10);
+			var String_holiday_ket = String_holiday.slice(11,String_holiday.length);
+			$("#tb_holidays_date").val(String_holiday_date);
+			$("#tb_holidays_ket").val(String_holiday_ket);
+		});
+		$('.holiday_ddl_del').change(function(){
+			var String_holiday = $(".holiday_ddl_del option:Selected").html();
+			var String_holiday_date = String_holiday.slice(0,10);
+			var String_holiday_ket = String_holiday.slice(11,String_holiday.length);
+			$("#tb_holidays_date_del").val(String_holiday_date);
+			$("#tb_holidays_ket_del").val(String_holiday_ket);
+		});*/
+		$('.btn-update-holiday').click(function(){
+			    				
+			var String_holiday_id   = $(".holiday_ddl_edit option:Selected").val();
+			var String_holiday = $(".holiday_ddl_edit option:Selected").html();
+			var String_holiday_date = $("#tb_holidays_date").val();
+			var String_holiday_ket = $("#tb_holidays_ket").val();
+			var val = {'holiday_id': String_holiday_id, 'holiday_date' : String_holiday_date, 'holiday_ket':String_holiday_ket};
+			httpSend(baseUrl +'/holiday/update', val).done(r => {
+				if(r.msg){
+					setTimeout(function(){
+						location.reload(); 
+						 }, 1000);
+					$("#error2").html(r.msg);
+					$('#myModal2').modal("show");
+				}
 			});
-		 }
-
-	});    
-
-	$('.btn-input-holiday').click(function(){
-		var holiday = $("#startdate").val();
-		var ket     = $("#txtket").val();
-				
-		if( holiday == "" || ket == "" ){
-			$("#error1").html("Your Data is not complete!");
-			$('#myModal1').modal("show");
-		}else{
-			var val = {'holiday': holiday, 'ket' : ket};
-			httpSend(baseUrl +'/holiday/input', val).done(r => {
+		});
+		$('.btn-delete-holiday').click(function(){
+							
+			var String_holiday_id   = $(".holiday_ddl_del option:Selected").val();
+			//alert(String_holiday_id);
+			var val = { 'holiday_id': String_holiday_id };
+			httpSend(baseUrl +'/holiday/delete', val).done(r => {
 				if(r.msg){
 					 $("#error2").html(r.msg);
 						$('#myModal2').modal("show");
@@ -393,92 +565,8 @@ $(document).ready(function () {
 						  }, 1000); 
 				}
 			});
-			// old method input 
-		   /*$.ajax({
-				url : baseUrl +'/holiday/input',
-				type: 'POST',
-				data: {'holiday': holiday, 'ket' : ket},
-				dataType: 'json',
-				success:function(r){
-					if(r.msg == 'Success Insert'){
-					  $("#error2").html(r.msg);
-					  $('#myModal2').modal("show");
-					  setTimeout(function(){
-						location.reload(); 
-					  }, 1000); 
-					}
-				}
-			});*/
-		}
-	});
-	$('.button_holiday_edit').click(function(){
-		//alert(this.value);
-		document.getElementById("holiday_ddl_edit").selectedIndex = this.value;
-		var String_holiday = $(".holiday_ddl_edit option:Selected").html();
-		var String_holiday_date = String_holiday.slice(0,10);
-		var String_holiday_ket = String_holiday.slice(11,String_holiday.length);
-		$("#tb_holidays_date").val(String_holiday_date);
-		$("#tb_holidays_ket").val(String_holiday_ket);
-	});
-	$('.button_holiday_delete').click(function(){
-		//alert(this.value);
-		document.getElementById("holiday_ddl_del").selectedIndex = this.value;
-		var String_holiday = $(".holiday_ddl_del option:Selected").html();
-		var String_holiday_date = String_holiday.slice(0,10);
-		var String_holiday_ket = String_holiday.slice(11,String_holiday.length);
-		$("#tb_holidays_date_del").val(String_holiday_date);
-		$("#tb_holidays_ket_del").val(String_holiday_ket);
-	});
-	/*$('.holiday_ddl_edit').change(function(){
-		var String_holiday = $(".holiday_ddl_edit option:Selected").html();
-		var String_holiday_date = String_holiday.slice(0,10);
-		var String_holiday_ket = String_holiday.slice(11,String_holiday.length);
-		$("#tb_holidays_date").val(String_holiday_date);
-		$("#tb_holidays_ket").val(String_holiday_ket);
-	});
-	$('.holiday_ddl_del').change(function(){
-		var String_holiday = $(".holiday_ddl_del option:Selected").html();
-		var String_holiday_date = String_holiday.slice(0,10);
-		var String_holiday_ket = String_holiday.slice(11,String_holiday.length);
-		$("#tb_holidays_date_del").val(String_holiday_date);
-		$("#tb_holidays_ket_del").val(String_holiday_ket);
-	});*/
-
-	$('.btn-update-holiday').click(function(){
-		    				
-		var String_holiday_id   = $(".holiday_ddl_edit option:Selected").val();
-		var String_holiday = $(".holiday_ddl_edit option:Selected").html();
-		var String_holiday_date = $("#tb_holidays_date").val();
-		var String_holiday_ket = $("#tb_holidays_ket").val();
-		var val = {'holiday_id': String_holiday_id, 'holiday_date' : String_holiday_date, 'holiday_ket':String_holiday_ket};
-		httpSend(baseUrl +'/holiday/update', val).done(r => {
-			if(r.msg){
-				setTimeout(function(){
-					location.reload(); 
-					 }, 1000);
-				$("#error2").html(r.msg);
-				$('#myModal2').modal("show");
-			}
-		});
-
-	});
-	$('.btn-delete-holiday').click(function(){
-						
-		var String_holiday_id   = $(".holiday_ddl_del option:Selected").val();
-		//alert(String_holiday_id);
-		var val = { 'holiday_id': String_holiday_id };
-		httpSend(baseUrl +'/holiday/delete', val).done(r => {
-			if(r.msg){
-				 $("#error2").html(r.msg);
-					$('#myModal2').modal("show");
-					setTimeout(function(){
-						location.reload(); 
-					  }, 1000); 
-			}
 		});
 	});
-
-});
 </script>
 
 @endsection

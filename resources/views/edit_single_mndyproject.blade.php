@@ -35,17 +35,6 @@
 	                	</select>
 	              	</div>
                 </div>
-<<<<<<< HEAD
-=======
-                <!--div class="form-group">
-	            	<label class="control-label col-md-1 col-sm-3 col-xs-12">Start Date</label>
-	            	<div class="col-md-9 col-sm-9 col-xs-12">
-	            		<select class="form-control strtdate">
-	                		<option value="" disabled="true" selected="true">Choose Employee name First</option>
-	                	</select>
-	              	</div>
-                </div-->
->>>>>>> 49aa73e2c9d5844f8ee7e338fe14744f1f7fb270
                 <div class="form-group">
                   <div class="col-md-9 col-sm-9 col-xs-12 col-md-9">     
                     <button class="btn btn-success pull-right btn-view-prjct">Search</button>
