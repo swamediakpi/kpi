@@ -30,6 +30,7 @@ class holidayController extends Controller
         //$dataPrjct = DB::select("call spMandaysfilter_prjct('".$emp_id."', '".$prjct_id."')");
         $dataHoliday = DB::table('holiday')
         	->whereYear('day','=',$tahun )
+        	->orderBy('day','asc')
         	->get();
 		$data ['content'] = $dataHoliday;
         //dd($data);

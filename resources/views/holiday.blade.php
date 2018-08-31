@@ -173,6 +173,7 @@
 						<div class="form-group">
 							<div class="col-md-9 col-sm-9 col-xs-12">
 								<select id="ddl_tahun" class="form-control ddl_tahun">
+									<option value="">Pilih Tahun !</option>
 									@foreach ($tahun as $value)
 										<option value="{{ $value->TAHUN }}">{{ $value->TAHUN }}</option>
 									@endforeach
@@ -439,15 +440,16 @@
 				});*/
 			}
 		});
-		$('.button_holiday_edit').click(function(){
-			//alert(this.value);
-			document.getElementById("holiday_ddl_edit").selectedIndex = this.value;
+		$(this).on('click', '.button_holiday_edit', (function(e){
+			//alert($(this).attr('data-index'));
+			$("#holiday_ddl_edit").val($(this).val());
 			var String_holiday = $(".holiday_ddl_edit option:Selected").html();
 			var String_holiday_date = String_holiday.slice(0,10);
 			var String_holiday_ket = String_holiday.slice(11,String_holiday.length);
 			$("#tb_holidays_date").val(String_holiday_date);
 			$("#tb_holidays_ket").val(String_holiday_ket);
-		});
+		}));
+	
 		$('.button_holiday_delete').click(function(){
 			//alert(this.value);
 			document.getElementById("holiday_ddl_del").selectedIndex = this.value;
@@ -479,7 +481,7 @@
         			t+=		'<td style="text-align:center">'+formatDate(new Date(v.day))+'</td>';
         			t+=		'<td style="text-align:left">'+v.keterangan+'</td>';
         			t+=		'<td><center>';
-					t+=		'<button  type="button" class="btn btn-primary button_holiday_edit" data-toggle="modal" data-target="#modal_holiday_edit" value='+v.day_id+'>Update</button>';
+					t+=		'<button  type="button" data-index='+no+' class="btn btn-primary button_holiday_edit" data-toggle="modal" data-target="#modal_holiday_edit" value='+v.day_id+'>Update</button>';
 					t+=		'<button  type="button" class="btn btn-primary button_holiday_delete" data-toggle="modal" data-target="#modal_holiday_delete" value='+v.day_id+'>Delete</button>';
 					t+=		'</center></td>';
 					no++;
