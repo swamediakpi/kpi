@@ -12,7 +12,7 @@
 			<div class="col-md-12">
 				<div class="box">
 					<div class="box-header with-border">
-						<h3 class="box-title"><i class="fa fa-bar-chart"></i> Total OBU</h3>
+						<h3 class="box-title"><i class="fa fa-bar-chart"></i> Registration OBU</h3>
 						<div class="box-tools pull-right">
 							<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 						</div>
@@ -40,7 +40,18 @@
 					</div>
 
 					<div class="box-body">
-
+						<div class="row">
+							<div class="col-md-2">
+								<div class="form-group">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="control-label">
+										<input type="radio" name="obu_type" class="flat-red kontrak_radio"
+											value="type_l" checked> Lokasi&nbsp;&nbsp;
+										<input type="radio" name="obu_type" class="flat-red kontrak_radio"
+											value="type_s"> Saldo
+									</label>
+								</div>
+							</div>
+						</div>
 						<div class="row">
 							<div class="col-lg-9">
 								<div id="ChartPerLoc"></div>
@@ -88,28 +99,46 @@
 					headers: { 'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content') }
 				});
 
+				$('input[type="radio"].flat-red').iCheck({
+					checkboxClass: 'icheckbox_flat-green',
+					radioClass: 'iradio_flat-green'
+				});
+
+				$('input[name="obu_type"]').on('ifChecked', function(){
+					if ( $(this).is(':checked') ) { drawPerLoc(); }
+				});
+
 				drawTotalChart();
 				drawPerLoc();
 				drawChartPercent();
 			});
+
+			var titleText = ''; var seriesText = ''; var pointFormatStr = '';
+
 			function drawTotalChart(){
 				var val = { _token: $('meta[name="csrf_token"]').attr('content') }
 				httpSend('getObuTotal', val).done(r => {
 					Highcharts.chart('chartTotalObu', {
 						chart: { type: 'column' },
 						title: { text: '' },
-						xAxis: { type: 'category'},
-						yAxis: {
-							title: { text: "Total" }
+						xAxis: {
+							categories: ['Belum Registrasi', 'Registrasi'],
+							title: { text: null }
 						},
-						legend: { enabled: true },
+						yAxis: {
+							min: 0,
+							title: { text: 'Total' },
+							labels: { overflow: 'justify' }
+							// title: { text: "Total" }
+						},
+						legend: { enabled: false },
 						tooltip: {
 							headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-							pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b><br/>',
+							pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b><br/>'
 						},
 						plotOptions: {
 							series: {
-								borderWidth: 0, dataLabels: { enabled: true, format: '<span style="font-size:8px">{point.y}</span><br>' }
+								borderWidth: 0, dataLabels: { enabled: false, format: '<span style="font-size:8px">{point.y}</span><br>' }
 							},
 						},
 						series: [r.seriesData]
@@ -118,30 +147,44 @@
 			}
 
 			function drawPerLoc(){
-				var val = { _token: $('meta[name="csrf_token"]').attr('content') };
+				var type = $("input[name='obu_type']:checked").val();
+				var val = {
+					_token: $('meta[name="csrf_token"]').attr('content'),
+					type: type
+				};
+
+				if(type == 'type_l'){
+					titleText = 'Total Per-Lokasi';
+					seriesText = '<span style="font-size:8px">{point.y}</span><br>';
+					pointFormatStr = '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b><br/>';
+				}else {
+					titleText = 'Saldo Per-Lokasi';
+					seriesText = '<span style="font-size:8px">Rp. {point.y}</span><br>';
+					pointFormatStr = '<span style="color:{point.color}">{point.name}</span>: <b>Rp. {point.y}</b><br/>';
+				}
+
 				httpSend('getOBUData', val).done(r => {
 					tempData = r.legend;
 					for (var i=0; i < tempData.length; i++) {
 						tempData[i].jmlh = formatStrRupiah(tempData[i].jmlh);
 					}
 					r.legend = tempData;
-					drawKontrak(r);
+					drawKontrak(type, r);
 				});
 			}
 
-			function drawKontrak(data) {
+			function drawKontrak(valtype, data) {
 				$('#miniChartOBU').html('');
 
 				var legend = data.legend;
 				var strLegend =
-					'<label>Saldo Per-Lokasi</label>'+
+					'<label>Total Tarif Per-Lokasi</label>'+
 					'<ul class="chart-legend clearfix">';
 				for (var i= 0; i < legend.length; i++) {
 					strLegend +=
-							'<li>'+
-								'<i class="fa fa-caret-right"></i> '+
-								legend[i].name+' - '+legend[i].jmlh+
-							'</li>';
+						'<li>'+
+							'<i class="fa fa-caret-right"></i> '+ legend[i].name+' - '+legend[i].jmlh+
+						'</li>';
 				};
 				strLegend += '</ul>';
 				$('#miniChartOBU').html(strLegend);
@@ -154,20 +197,14 @@
 					subtitle: { text: 'Click the columns to view details.' },
 					xAxis: { type: 'category' },
 					yAxis: {
-						title: { text: 'Total Per-Lokasi' }
+						title: { text: titleText }
 					},
-					legend: { enabled: true },
+					legend: { enabled: false },
 					plotOptions: {
-						series: { borderWidth: 0, dataLabels: {
-								enabled: true,
-								format: '<span style="font-size:8px">{point.y}</span><br>'
-							}
+						series: { borderWidth: 0, dataLabels: { enabled: true, format: seriesText }
 						}
 					},
-					tooltip: {
-						headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-						pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b><br/>'
-					},
+					tooltip: { headerFormat: '<span style="font-size:11px">{series.name}</span><br>', pointFormat: pointFormatStr },
 					series: [seriesData],
 					drilldown: {
 						series: drilldownData
@@ -223,10 +260,14 @@
 
 			function formatStrRupiah(number) {
 				var val = 0; var str = "";
-				if(number >= 1000000 && number < 1000000000){
+				if(number >= 1000 && number < 1000000){
+					val = number / 1000;
+					str = "Rp. "+Highcharts.numberFormat(val,0,',','.')+" Ribu"; return str;
+				}
+				else if(number >= 1000000 && number < 1000000000){
 					val = number / 1000000;
 					str = "Rp. "+Highcharts.numberFormat(val,0,',','.')+" Juta"; return str;
-				}else{
+				}else if(number >= 1000000000){
 					val = number / 1000000000;
 					str = "Rp. "+Highcharts.numberFormat(val,0,',','.')+" M"; return str;
 				}
@@ -241,13 +282,13 @@
 	@endsection
 
 	@section('content')
-		<script type="text/javascript" src="http://localhost:8090/JsAPI?reportUUID=f17f670e-5c1b-4356-b787-2dd508e89c17"></script>
-		<script type="text/javascript" src="http://localhost:8090/JsAPI?reportUUID=7ce6b7de-d391-4c6d-863b-f57c4c4b8dcc"></script>
+		<script type="text/javascript" src="http://localhost:8090/JsAPI?reportUUID=2a6974c2-c069-4bcf-81d2-6c95085debab"></script>
+		<script type="text/javascript" src="http://localhost:8090/JsAPI?reportUUID=947e114a-25ee-4743-bfe4-38f860e6b0b7"></script>
 	@endsection
 
-	@push('script')
+	@push('scripts')
 		<script>
-			$(function() {
+			$(function(){
 				$('#LiobuYf').addClass('active');
 			});
 		</script>

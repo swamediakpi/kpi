@@ -11,7 +11,7 @@ class obuController extends Controller {
 		$input = $request->all();
 		$data['seriesData'] = new \stdClass;
 		$data['seriesData']->name = 'Total';
-		$data['seriesData']->colorByPoint = 'true';
+		$data['seriesData']->colorByPoint = 'false';
 		$totalNonRegis = DB::connection('mysql2')->select(DB::raw('SELECT COUNT(1) jmlh FROM obu WHERE id_obu IS NULL or id_obu = ""'));
 		$data['seriesData']->data[0] = new \stdClass;
 		$data['seriesData']->data[0]->name = 'Belum Registrasi';
@@ -26,49 +26,48 @@ class obuController extends Controller {
 
 	function getOBUData(Request $request){
 		$input = $request->all();
-		$listUnit = DB::connection('mysql2')->select(DB::raw('SELECT erp_1_loc loc FROM obu WHERE erp_1_loc IS NOT NULL GROUP BY erp_1_loc'));
+		$listSeriesDataStr = ''; $listDrilldownDatastr = '';
+		$listUnit = DB::connection('mysql2')->select(DB::raw('SELECT erp_1_loc loc FROM obu WHERE erp_1_loc IS NOT NULL GROUP BY erp_1_loc ASC'));
 		$data['seriesData'] = new \stdClass;
 		$data['seriesData']->name = 'Loc';
 		$data['seriesData']->colorByPoint = 'true';
 		$data['drilldownData'] = array();
 		
 		for($i = 0; $i < sizeof($listUnit); $i++) {
-			$listSeriesData = DB::connection('mysql2')
-								->select(DB::raw(
-									'SELECT COUNT(1) jmlh FROM obu WHERE erp_1_loc = "'.$listUnit[$i]->loc.'" AND erp_1_loc IS NOT NULL'
-								));
-			$legend = DB::connection('mysql2')
-						->select(DB::raw(
-							'SELECT erp_1_loc loc, SUM(saldo_obu_total) jmlh FROM obu WHERE erp_1_loc = "'.$listUnit[$i]->loc.'"
-							AND erp_1_loc IS NOT NULL'
-						));
-			$data['legend'][$i] = new \stdClass;
-			if($legend[0]->loc != null){
-				$data['legend'][$i]->name = ucwords($legend[0]->loc);
-				$data['legend'][$i]->jmlh = $legend[0]->jmlh;
+			if($input['type'] == 'type_l'){
+				$listSeriesDataStr = 'SELECT COUNT(1) jmlh FROM obu WHERE erp_1_loc = "'.$listUnit[$i]->loc.'"';
+				$listDrilldownDatastr = 'SELECT erp_2_loc loc2, COUNT(1) jmlh FROM obu
+					WHERE erp_1_loc = "'.$listUnit[$i]->loc.'" GROUP BY erp_2_loc';
 			}else {
-				$data['legend'][$i]->name = ucwords($listUnit[$i]->loc);
-				$data['legend'][$i]->jmlh = 0;
+				$listSeriesDataStr = 'SELECT SUM(tarif_erp_1) jmlh FROM obu WHERE erp_1_loc = "'.$listUnit[$i]->loc.'"';
+				$listDrilldownDatastr = 'SELECT * FROM obu WHERE erp_1_loc = "'.$listUnit[$i]->loc.'" ORDER BY saldo_obu_total DESC LIMIT 10';
 			}
+			$listSeriesData = DB::connection('mysql2')->select(DB::raw( $listSeriesDataStr ));
+			$legend = DB::connection('mysql2')->select(DB::raw(
+				'SELECT erp_1_loc loc, MAX(saldo_obu_total) jmlh FROM obu WHERE erp_1_loc = "'.$listUnit[$i]->loc.'"'
+			));
+			$data['legend'][$i] = new \stdClass;
+			if($legend[0]->loc != null){ $data['legend'][$i]->name = ucwords($legend[0]->loc); $data['legend'][$i]->jmlh = $legend[0]->jmlh; }
+			else { $data['legend'][$i]->name = ucwords($listUnit[$i]->loc); $data['legend'][$i]->jmlh = 0; }
 			$data['seriesData']->data[$i] = new \stdClass;
 			$data['seriesData']->data[$i]->name = ucwords($listUnit[$i]->loc);
-			$data['seriesData']->data[$i]->y = $listSeriesData[0]->jmlh;
+			if($input['type'] == 'type_l') $data['seriesData']->data[$i]->y = $listSeriesData[0]->jmlh;
+			else $data['seriesData']->data[$i]->y = (int)$listSeriesData[0]->jmlh;
 			$data['seriesData']->data[$i]->drilldown = $listUnit[$i]->loc;
 
-			$listDrilldownData = DB::connection('mysql2')
-									->select(DB::raw(
-										'SELECT erp_2_loc loc2, COUNT(1) jmlh FROM obu
-										WHERE erp_1_loc = "'.$listUnit[$i]->loc.'" AND erp_1_loc IS NOT NULL GROUP BY erp_2_loc'
-									));
+			$listDrilldownData = DB::connection('mysql2')->select(DB::raw( $listDrilldownDatastr ));
 			$data['drilldownData'][$i] = new \stdClass;
 			if($listDrilldownData != null) {
-				$data['drilldownData'][$i]->name = ucwords($listUnit[$i]->loc);
 				$data['drilldownData'][$i]->id = $listUnit[$i]->loc;
 				for($j = 0; $j < sizeof($listDrilldownData); $j++) {
-					if($listDrilldownData[$j]->loc2 != '' && $listDrilldownData[$j]->loc2 != null){
-						$list = [ucwords($listDrilldownData[$j]->loc2), $listDrilldownData[$j]->jmlh];
-					}else {
-						$list = ['Belum Ada Tujuan', $listDrilldownData[$j]->jmlh];
+					if($input['type'] == 'type_l'){
+						if($listDrilldownData[$j]->loc2 != '' && $listDrilldownData[$j]->loc2 != null){
+							$list = [ucwords($listDrilldownData[$j]->loc2), $listDrilldownData[$j]->jmlh];
+						}else {
+							$list = [$listUnit[$i]->loc, $listDrilldownData[$j]->jmlh];
+						}
+					}else{
+						$list = [ucwords($listDrilldownData[$j]->plat_nomor), $listDrilldownData[$j]->saldo_obu_total];
 					}
 					$data['drilldownData'][$i]->data[] = $list;
 				}
