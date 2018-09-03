@@ -282,8 +282,8 @@
 	@endsection
 
 	@section('content')
-		<script type="text/javascript" src="http://localhost:8090/JsAPI?reportUUID=2a6974c2-c069-4bcf-81d2-6c95085debab"></script>
-		<script type="text/javascript" src="http://localhost:8090/JsAPI?reportUUID=947e114a-25ee-4743-bfe4-38f860e6b0b7"></script>
+		<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=be859577-0ff6-463a-a24f-10e3af9df1f8"></script>
+		<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=abd25c36-cba2-4ccf-8985-060d13a9b55b"></script>
 	@endsection
 
 	@push('scripts')
