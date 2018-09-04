@@ -99,7 +99,7 @@ class asmanController extends Controller
         $compareDB =  DB::select("call spcompareDBinserheader_kpi('$nama', '$bulan', '$tahun', '$role')");
 
         if($compareDB == null){
-            DB::raw("call spinsertpenilaiankpi('".$nama."', '".$bulan."', '".$tahun."', '".$role."', '".$kritik."', '".$total."')");
+            DB::select("call spinsertpenilaiankpi('".$nama."', '".$bulan."', '".$tahun."', '".$role."', '".$kritik."', '".$total."')");
 
             $b = DB::table('penilaian')->select('PENILAIAN_ID')
                                        ->orderby('PENILAIAN_ID','DESC')                                      
@@ -112,7 +112,7 @@ class asmanController extends Controller
                 foreach ($list as $key) {
                     $listid = $key['list_id'];
                     $bobot = $key['bobot'];
-                    DB::raw("call spinsertpenilaian_hasil_kinerja('".$getLastID."', '".$listid."', '".$bobot."')");
+                    DB::select("call spinsertpenilaian_hasil_kinerja('".$getLastID."', '".$listid."', '".$bobot."')");
                 }
                 $msg['msg'] = 'Success Insert';
             }else{

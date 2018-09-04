@@ -29,19 +29,24 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('getEmployeeFromUnithrd','hrdController@getEmployeeFromUnit');
 	Route::get('getEmployeeFromUnit1hrd','hrdController@getEmployeeFromUnit1');	
 	Route::post('/hrd/search','hrdController@filter_hrd');
-	Route::post('/hrd/input','hrdController@insert_hrd');
+	Route::post('/hrd/input','hrdController@insert_hrd');	
+	Route::post('/hrd/update','hrdController@update_hr_nilai');
+	Route::post('/hrd/delete','holidayController@delete_holiday');
 
 	Route::get('/asman','asmanController@showElement');
 	Route::get('getEmployeeFromUnitasman','asmanController@getEmployeeFromUnit');
 	Route::get('getEmployeeFromUnit1asman','asmanController@getEmployeeFromUnit1');
 	Route::post('/asman/search','asmanController@filter_asman');
 	Route::post('/asman/input','asmanController@insert_asman');
+	Route::post('/asman/update','asmanController@update_asman_nilai');
+	Route::post('/asman/delete','holidayController@delete_asman');
 
 	Route::get('/pmo','pmoController@showElement');
 	Route::get('getEmployeeFromUnitpmo','pmoController@getEmployeeFromUnit');
 	Route::get('getEmployeeFromUnit1pmo','pmoController@getEmployeeFromUnit1');
 	Route::post('/pmo/search','pmoController@filter_pmo');
 	Route::post('/pmo/input','pmoController@insert_pmo');	
+	Route::post('/pmo/update','pmoController@update_pmo_nilai');
 
 	Route::get('/pl','plController@showElement');
 	Route::post('/pl/search','plController@filter_pl');

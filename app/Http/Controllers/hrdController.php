@@ -99,20 +99,20 @@ class hrdController extends Controller
 
         if($compareDB == null){
 
-            DB::raw("call spinsertpenilaiankpi('".$nama."', '".$bulan."', '".$tahun."', '".$role."', '".$kritik."', '".$total."')");
+            $a = DB::select("call spinsertpenilaiankpi('".$nama."', '".$bulan."', '".$tahun."', '".$role."', '".$kritik."', '".$total."')");
 
             $b = DB::table('penilaian')->select('PENILAIAN_ID')
                                       ->orderby('PENILAIAN_ID','DESC')                                      
                                       ->take(1)
-                                      ->get();
-
+                                      ->get();           
+			
             $getLastID = json_encode($b[0]->PENILAIAN_ID);
 
             if (is_array($list) || is_object($list)){                                 
                 foreach ($list as $key) {
                     $listid = $key['list_id'];
                     $bobot = $key['bobot'];
-                    DB::raw("call spinsertpenilaian_hasil_kinerja('".$getLastID."', '".$listid."', '".$bobot."')");
+                    DB::select("call spinsertpenilaian_hasil_kinerja('".$getLastID."', '".$listid."', '".$bobot."')");
                 }
                 $msg['msg'] = 'Success Insert';
             }else{
@@ -127,4 +127,26 @@ class hrdController extends Controller
        
         return json_encode($msg);
     }
+	public function update_hr_nilai(Request $request){
+		$hasil_id = $request->get('hr_id');
+		$bobot = $request->get('hr_nilai');
+		//dd(bobot);
+
+		$updateArr = array('bobot' => $bobot);
+		//dd($updateArr);
+		DB::table('hasil_kinerja')
+			->where('HASIL_KINERJA_ID',$hasil_id)
+			->update($updateArr);
+		$msg['msg'] = 'Success Update';
+
+		return json_encode($msg);
+	}
+	public function delete_holiday(Request $request){
+		$holiday_id = $request->get('holiday_id');
+		DB::table('holiday')
+			->where('day_id', '=', $holiday_id)
+			->delete();
+		$msg['msg'] = 'Success Delete';
+		return json_encode($msg);
+	}	
 }
