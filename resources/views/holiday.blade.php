@@ -549,9 +549,11 @@
 						location.reload(); 
 						 }, 1000);
 					$("#error2").html(r.msg);
+					$('#modal_holiday_edit').modal("hide");
 					$('#myModal2').modal("show");
 				}
 			});
+
 		});
 		$('.btn-delete-holiday').click(function(){
 							
@@ -560,11 +562,12 @@
 			var val = { 'holiday_id': String_holiday_id };
 			httpSend(baseUrl +'/holiday/delete', val).done(r => {
 				if(r.msg){
-					 $("#error2").html(r.msg);
-						$('#myModal2').modal("show");
 						setTimeout(function(){
 							location.reload(); 
-						  }, 1000); 
+						  }, 1000);
+					$("#error2").html(r.msg);
+					$('#modal_holiday_delete').modal("hide");
+					$('#myModal2').modal("show");
 				}
 			});
 		});
