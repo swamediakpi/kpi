@@ -127,4 +127,5 @@ class asmanController extends Controller
        
         return json_encode($msg);
     }
+
 }

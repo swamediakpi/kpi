@@ -277,54 +277,69 @@
 			</div>
 		</div>
 	</div>
-</div>
-
-<div class="modal fade bd-example-modal-lg" id="modal_pmo_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg" role="document">
-	    <div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Edit Penlian PMO</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				  <span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<div class="x_panel">
-					<div class="x_content">
-						<div class="form-horizontal form-label-left">
-							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-							<div class="form-group">
-							  <label class="control-label col-md-1 col-sm-3 col-xs-12">Area Kinerja Utama</label>
-								<div class="col-md-9 col-sm-9 col-xs-12">
-									<input type="hidden" class="form-control" id="tb_pmo_id">
-									<input type="text" class="form-control" id="tb_pmo_nama" readonly>
+	<div class="modal fade bd-example-modal-lg" id="modal_pmo_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Edit Penlian PMO</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="x_panel">
+						<div class="x_content">
+							<div class="form-horizontal form-label-left">
+								<input type="hidden" name="_token" value="{{ csrf_token() }}">
+								<div class="form-group">
+								  <label class="control-label col-md-1 col-sm-3 col-xs-12">Area Kinerja Utama</label>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<input type="hidden" class="form-control" id="tb_pmo_id">
+										<input type="text" class="form-control" id="tb_pmo_nama" readonly>
+									</div>
 								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-md-1 col-sm-3 col-xs-12">Pencapaian</label>
-								<div class="col-md-9 col-sm-9 col-xs-12">
-									<select class="form-control tb_pmo_nilai" id="tb_pmo_nilai" selected>
-										<option value="">Choose Score</option>
-										<option value=4>A</option>
-										<option value=3>B</option>
-										<option value=2>C</option>
-										<option value=1>D</option>
-										<option value=0>E</option>
-									  </select
+								<div class="form-group">
+									<label class="control-label col-md-1 col-sm-3 col-xs-12">Pencapaian</label>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<select class="form-control tb_pmo_nilai" id="tb_pmo_nilai" selected>
+											<option value="">Choose Score</option>
+											<option value=4>A</option>
+											<option value=3>B</option>
+											<option value=2>C</option>
+											<option value=1>D</option>
+											<option value=0>E</option>
+										  </select
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>  
+					<button class="btn btn-success pull-right btn-update-nilai_pmo">Update</button>
+				</div>
 			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>  
-				<button class="btn btn-success pull-right btn-update-nilai_pmo">Update</button>
-			</div>
-	    </div>
+		</div>
 	</div>
 </div>
 
+
+<div class="modal fade" id="DeletePeninilaian" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+								<input type="hidden" name="_token" value="{{ csrf_token() }}">
+								<input type="hidden" name="tb_penilaian_id" id="tb_penilaian_id" >
+							<h2> Are Sure Delete Value?</h2>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>  
+					<button class="btn btn-success pull-right btn-delete-nilai_unit">Delete</button>
+				</div>
+			</div>
+		</div>
+</div>
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -351,20 +366,45 @@ $(document).ready(function(){
 			$("#tb_pmo_nama").val(splt[1]);
 			$("#tb_pmo_nilai").val(splt[2]);
 		}));
-	
-		$('.button_hrd_delete').click(function(){
-			//alert(this.value);
-			document.getElementById("holiday_ddl_del").selectedIndex = this.value;
-			var splt = $(this).val().split(',');
-			$("#tb_hr_id").val($(this).val().split(',',1));
-			$("#tb_hr_nama").val(splt[1]);
-			$("#tb_hr_nilai").val(splt[2]);
-			
-			var String_holiday = $(".holiday_ddl_del option:Selected").html();
-			var String_holiday_date = String_holiday.slice(0,10);
-			var String_holiday_ket = String_holiday.slice(11,String_holiday.length);
-			$("#tb_holidays_date_del").val(String_holiday_date);
-			$("#tb_holidays_ket_del").val(String_holiday_ket);
+		$(this).on('click', '.DeletePeninilai', function(e){
+			  var splt = $(this).val().split('*');
+			  console.log(splt);
+			  if (splt[0]==null||splt[0]=='-'){
+				alert('Plese Insert Value');
+			  }else{
+				$('#DeletePeninilaian').modal('show');
+			}
+		});
+		$(this).on('click', '.button_delete_nilai', (function(e){	
+			//alert($(this).attr('data-index'));
+			var splt = $(this).val().split('*');
+			$("#tb_penilaian_id").val(splt[0]);
+		
+		}));
+		$('.btn-delete-nilai_unit').click(function(){
+			    				
+			var String_penilaian_id   = $("#tb_penilaian_id").val();
+			var val = {'nilai_id': String_penilaian_id};		
+			  $.ajax({
+              url : baseUrl +'/penilaian/del',
+              type: 'POST',
+              data: val,      
+              dataType: 'json',
+              beforeSend: function(){
+                $('.ajax-loader').css("visibility", "visible");
+              },
+              success:function(r){
+                $('#DeletePeninilaian').modal('hide');
+                setTimeout(function(){// wait for 5 secs(2)
+                    location.reload(); // then reload the page.(3)
+                  }, 1000);
+				   $("#error2").html(r.msg);
+                  $('#myModal2').modal("show");              
+              },
+                complete: function(){
+                 $('.ajax-loader').css("visibility", "hidden");
+               }
+          });
 		});
 		$('.btn-update-nilai_pmo').click(function(){
 			    				
@@ -515,7 +555,7 @@ $(document).ready(function(){
                       t += '<td style="text-align:center">' + v.BOBOT_GP + '</td>';//PENCAPAIAN
 					  t	+= '<td><center>';
 					  t	+= 		'<button   type="button" class="btn UpdatePenilaianpmo btn-primary button_pmo_edit" data-toggle="modal"  value="'+ v.HASIL_KINERJA_ID +'*' + v.KINERJA_NAME + '*' + v.BOBOT + '">Update</button>';
-					  t += 		'<button  type="button" class="btn btn-primary button_hrd_delete" data-toggle="modal" data-target="#modal_hrd_delete" value='+ v.PENILAIAN_ID +'>Delete '+ v.PENILAIAN_ID +'</button>';
+					  t += 		'<button  type="button" class="btn DeletePeninilai btn-primary button_delete_nilai" data-toggle="modal" value="'+ v.PENILAIAN_ID +'*'+ v.KINERJA_NAME +'">Delete</button>';
 					  t += '</center></td>';
                       t += '</td>'+ count_total(v.BOBOT) + '</td>';
                       t += '</tr>';
