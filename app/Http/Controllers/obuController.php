@@ -39,7 +39,7 @@ class obuController extends Controller {
 				$listDrilldownDatastr = 'SELECT erp_2_loc loc2, COUNT(1) jmlh FROM obu
 					WHERE erp_1_loc = "'.$listUnit[$i]->loc.'" GROUP BY erp_2_loc';
 			}else {
-				$listSeriesDataStr = 'SELECT SUM(tarif_erp_1) jmlh FROM obu WHERE erp_1_loc = "'.$listUnit[$i]->loc.'"';
+				$listSeriesDataStr = 'SELECT MAX(saldo_obu_total) jmlh FROM obu WHERE erp_1_loc = "'.$listUnit[$i]->loc.'"';
 				$listDrilldownDatastr = 'SELECT * FROM obu WHERE erp_1_loc = "'.$listUnit[$i]->loc.'" ORDER BY saldo_obu_total DESC LIMIT 10';
 			}
 			$listSeriesData = DB::connection('mysql2')->select(DB::raw( $listSeriesDataStr ));
