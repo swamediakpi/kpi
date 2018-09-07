@@ -100,7 +100,7 @@ class pmoController extends Controller
         $compareDB =  DB::select("call spcompareDBinserheader_kpi('$nama', '$bulan', '$tahun', '$role')");
 
         if($compareDB == null){
-            DB::raw("call spinsertpenilaiankpi('".$nama."', '".$bulan."', '".$tahun."', '".$role."', '".$kritik."', '".$total."')");
+            DB::select("call spinsertpenilaiankpi('".$nama."', '".$bulan."', '".$tahun."', '".$role."', '".$kritik."', '".$total."')");
 
             $b = DB::table('penilaian')->select('PENILAIAN_ID')
                                        ->orderby('PENILAIAN_ID','DESC')                                      
@@ -113,7 +113,7 @@ class pmoController extends Controller
                 foreach ($list as $key) {
                     $listid = $key['list_id'];
                     $bobot = $key['bobot'];
-                    DB::raw("call spinsertpenilaian_hasil_kinerja('".$getLastID."', '".$listid."', '".$bobot."')");
+                    DB::select("call spinsertpenilaian_hasil_kinerja('".$getLastID."', '".$listid."', '".$bobot."')");
                 }
                 $msg['msg'] = 'Success Insert';
             }else{
@@ -128,4 +128,16 @@ class pmoController extends Controller
        
         return json_encode($msg);
     }
+	public function update_pmo_nilai(Request $request){
+		$hasil_id = $request->get('pmo_id');
+		$bobot = $request->get('pmo_nilai');
+		$updateArr = array('bobot' => $bobot);
+		//dd($updateArr);
+		DB::table('hasil_kinerja')
+			->where('HASIL_KINERJA_ID',$hasil_id)
+			->update($updateArr);
+		$msg['msg'] = 'Success Update';
+
+		return json_encode($msg);
+	}
 }
