@@ -8,8 +8,8 @@
 		<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 		<meta name="csrf_token" content="{{ csrf_token() }}">
 
-		<link type="text/css" rel="stylesheet" href="{{ asset("Public/bower_components/components.css") }}" />
-		<link type="text/css" rel="stylesheet" href="{{ asset("Public/bower_components/custom.css") }}" />
+		<link type="text/css" rel="stylesheet" href="{{ asset("public/bower_components/components.css") }}" />
+		<link type="text/css" rel="stylesheet" href="{{ asset("public/bower_components/custom.css") }}" />
 
 		<meta name="application-name" content="&nbsp;"/>
 		<meta name="msapplication-TileColor" content="#FFFFFF" />
@@ -19,14 +19,14 @@
 		<meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
 		<meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
 
-		<link href="{{ asset("Public/bower_components/AdminLTE/bootstrap/css/bootstrap.min.css") }}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset("Public/bower_components/AdminLTE/plugins/select2/select2.min.css") }}" rel="stylesheet" >
-		<link href="{{ asset("Public/bower_components/AdminLTE/plugins/iCheck/all.css") }}" rel="stylesheet" >
-		<link href="{{ asset("Public/bower_components/AdminLTE/plugins/iCheck/all.css") }}" rel="stylesheet">
-		<link href="{{ asset("Public/bower_components/AdminLTE/dist/css/AdminLTE.min.css")}}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset("Public/bower_components/AdminLTE/plugins/datatables.net-bs/css/dataTables.bootstrap.min.css") }}" rel="stylesheet" >
-		<link href="{{ asset("Public/bower_components/AdminLTE/plugins/datepicker/datepicker3.css")}}" rel="stylesheet" type="text/css" />
-		<link href="{{ asset("Public/bower_components/AdminLTE/dist/css/skins/skin-blue.min.css")}}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset("public/bower_components/AdminLTE/bootstrap/css/bootstrap.min.css") }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset("public/bower_components/AdminLTE/plugins/select2/select2.min.css") }}" rel="stylesheet" >
+		<link href="{{ asset("public/bower_components/AdminLTE/plugins/iCheck/all.css") }}" rel="stylesheet" >
+		<link href="{{ asset("public/bower_components/AdminLTE/plugins/iCheck/all.css") }}" rel="stylesheet">
+		<link href="{{ asset("public/bower_components/AdminLTE/dist/css/AdminLTE.min.css")}}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset("public/bower_components/AdminLTE/plugins/datatables.net-bs/css/dataTables.bootstrap.min.css") }}" rel="stylesheet" >
+		<link href="{{ asset("public/bower_components/AdminLTE/plugins/datepicker/datepicker3.css")}}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset("public/bower_components/AdminLTE/dist/css/skins/skin-blue.min.css")}}" rel="stylesheet" type="text/css" />
 
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" >
@@ -36,7 +36,7 @@
 				background-color: #ddd !important;
 			}
 		</style>
-		<script type="text/javascript" src="{{ asset("Public/js/FungsiSend.js") }}"></script>
+		<script type="text/javascript" src="{{ asset("public/js/FungsiSend.js") }}"></script>
 		<script type="text/javascript">
 			var urlbase = "{{ asset("") }}";
 		</script>
@@ -103,18 +103,18 @@
 			</footer>
 		</div>
 
-		<script src="{{ asset ("Public/bower_components/AdminLTE/plugins/jQuery/jquery-2.2.3.min.js") }}"></script>
-		<script src="{{ asset ("Public/bower_components/AdminLTE/bootstrap/js/bootstrap.min.js") }}" type="text/javascript"></script>
-		<script src="{{ asset ("Public/bower_components/AdminLTE/dist/js/app.min.js") }}" type="text/javascript"></script>
-		<script src="{{ asset ("Public/bower_components/AdminLTE/plugins/datatables.net/js/jquery.dataTables.min.js") }}"></script>
-		<script src="{{ asset ("Public/bower_components/AdminLTE/plugins/datatables.net-bs/js/dataTables.bootstrap.min.js") }}"></script>
-		<script src="{{ asset ("Public/bower_components/AdminLTE/plugins/select2/select2.full.min.js") }}"></script>
-		<script src="{{ asset ("Public/bower_components/AdminLTE/plugins/datepicker/bootstrap-datepicker.js") }}"></script>
-		<script src="{{ asset ("Public/bower_components/AdminLTE/plugins/iCheck/icheck.min.js") }}"></script>
-		<script src="{{ asset ("Public/js/bootstrap3-typeahead.min.js") }}"></script>
-		<script src="{{ asset ("Public//js/jquery.formautofill.min.js") }}"></script>
-		<script src="{{ asset ("Public//js/jquery.form.min.js") }}"></script>
-		<script src="{{ asset ("Public/js/marquee.js") }}" type="text/javascript"></script>
+		<script src="{{ asset ("public/bower_components/AdminLTE/plugins/jQuery/jquery-2.2.3.min.js") }}"></script>
+		<script src="{{ asset ("public/bower_components/AdminLTE/bootstrap/js/bootstrap.min.js") }}" type="text/javascript"></script>
+		<script src="{{ asset ("public/bower_components/AdminLTE/dist/js/app.min.js") }}" type="text/javascript"></script>
+		<script src="{{ asset ("public/bower_components/AdminLTE/plugins/datatables.net/js/jquery.dataTables.min.js") }}"></script>
+		<script src="{{ asset ("public/bower_components/AdminLTE/plugins/datatables.net-bs/js/dataTables.bootstrap.min.js") }}"></script>
+		<script src="{{ asset ("public/bower_components/AdminLTE/plugins/select2/select2.full.min.js") }}"></script>
+		<script src="{{ asset ("public/bower_components/AdminLTE/plugins/datepicker/bootstrap-datepicker.js") }}"></script>
+		<script src="{{ asset ("public/bower_components/AdminLTE/plugins/iCheck/icheck.min.js") }}"></script>
+		<script src="{{ asset ("public/js/bootstrap3-typeahead.min.js") }}"></script>
+		<script src="{{ asset ("public//js/jquery.formautofill.min.js") }}"></script>
+		<script src="{{ asset ("public//js/jquery.form.min.js") }}"></script>
+		<script src="{{ asset ("public/js/marquee.js") }}" type="text/javascript"></script>
 
 		<script src="https://www.gstatic.com/charts/loader.js" type="text/javascript"></script>
 		<script src="https://code.highcharts.com/highcharts.js"></script>

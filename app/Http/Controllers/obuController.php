@@ -44,7 +44,7 @@ class obuController extends Controller {
 			}
 			$listSeriesData = DB::connection('mysql2')->select(DB::raw( $listSeriesDataStr ));
 			$legend = DB::connection('mysql2')->select(DB::raw(
-				'SELECT erp_1_loc loc, MAX(saldo_obu_total) jmlh FROM obu WHERE erp_1_loc = "'.$listUnit[$i]->loc.'"'
+				'SELECT erp_1_loc loc, SUM(tarif_erp_1) jmlh FROM obu WHERE erp_1_loc = "'.$listUnit[$i]->loc.'"'
 			));
 			$data['legend'][$i] = new \stdClass;
 			if($legend[0]->loc != null){ $data['legend'][$i]->name = ucwords($legend[0]->loc); $data['legend'][$i]->jmlh = $legend[0]->jmlh; }
