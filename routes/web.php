@@ -101,6 +101,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/editGPHRD/update','edit_given_pointController@update');
 	Route::post('/editGPPMO/update','edit_given_pointController@update');
 	Route::post('/editGPUNIT/update','edit_given_pointController@update');
+  	Route::post('/givenpoint/update','edit_given_pointController@update_value');
+  	Route::post('/givenpoint/delete','edit_given_pointController@delete_value');
 
 	Route::get('/edit_mandays_project','edit_mandays_projectController@showElement');
 	Route::get('getProjectFromUnitEM','edit_mandays_projectController@getProjectFromUnit');
@@ -142,6 +144,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/touchstart/del','edit_days_project_touchController@delete_touch_start');
 	Route::post('/touchpause/del','edit_days_project_touchController@delete_touch_pause');
 	Route::post('/touchstop/del','edit_days_project_touchController@delete_touch_stop');
+	Route::post('/penilaian/del','globalController@delete_penilaian');
 
 });
 

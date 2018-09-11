@@ -69,7 +69,12 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
-
+    // CSRF Setup
+    $.ajaxSetup({
+        headers : {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 	$('.unitname').change(function(){
 	    
 	    var id = $(this).val();
@@ -156,9 +161,9 @@ $(document).ready(function(){
             		$.each(r.content, function(k, v){
 	                	
 	                	t+=	'<tr>';
-	                	t+=     '<input type="hidden" class="prjct_id" value="'+v.project_detail_id+'">'
+	                	t+=     '<input type="text" class="prjct_id" value="'+v.project_detail_id+'">+v.project_detail_id+'
 	                	t+=     '<input type="hidden" class="emp_id" value="'+v.EMPLOYEE_ID+'">'
-	                	t+=     '<input type="hidden" class="PROJECT_id" value="'+v.PROJECT_ID+'">'
+	                	t+=     '<input type="hidden" class="PROJECT_id" value="'+prjct+'">'
             			t+=			'<td style="text-align:center">'+no+'</td>';
             			t+=			'<td style="text-align:center">'+v.PROJECT_NAME+'</td>';
             			t+=			'<td style="text-align:center">'+v.PROJECT_ROLE_EMP+'</td>';

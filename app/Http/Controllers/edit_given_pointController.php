@@ -39,22 +39,37 @@ class edit_given_pointController extends Controller
     }    
 	public function update_value(Request $request){
 
-        $list = $request->get('list_final');
+		$p_LIST_ID		=$request->get('list_id');
+		$p_ROLE_ID 		=$request->get('role_id');
+		$p_KINERJA_ID 	=$request->get('id_kinerja');
+		$p_KPI_ID 		=$request->get('id_kpi');
+		$p_KPI_NAME 	=$request->get('kpi_pmo');
 
-        if (is_array($list) || is_object($list)){ 
-            foreach ($list as $key) {
-                
-                $listid = $key['list'];
-                $status = $key['status'];
+        if ($p_LIST_ID=null&&$p_ROLE_ID =null&&$p_KINERJA_ID=null&&$p_KPI_ID ==null&&$p_KPI_NAME){
+			$msg['msg'] = 'Data Not Complite';
+		}else{
+			DB::select("call spupdate('".$p_LIST_ID."','".$p_ROLE_ID."','".$p_KINERJA_ID."', '".$p_KPI_ID."','".$p_KPI_NAME."')");                   
+			$msg['msg'] = 'Success Update';
+		}
+        return json_encode($msg);
+    }
+	public function delete_value(Request $request){
 
-                DB::raw("call spupdateheader_kpi('".$listid."', '".$status."')");               
-            }
-            $msg['msg'] = 'Success Update';
-        }
-
+		$p_LIST_ID		=$request->get('list_id');
+		$p_ROLE_ID 		=$request->get('role_id');
+		$p_KINERJA_ID 	=$request->get('id_kinerja');
+		$p_KPI_ID 		=$request->get('id_kpi');
+		
+		if ($p_LIST_ID=null&&$p_ROLE_ID =null&&$p_KINERJA_ID=null&&$p_KPI_ID ==null&&$p_KPI_NAME){
+			$msg['msg'] = 'Data Not Complite';
+		}else{
+			DB::select("call spdeletemandays('".$p_LIST_ID."','".$p_ROLE_ID."','".$p_KINERJA_ID."', '".$p_KPI_ID."')");                   
+			$msg['msg'] = 'Success Update';
+		}
         return json_encode($msg);
     }
 }
+
 
 
 ?>

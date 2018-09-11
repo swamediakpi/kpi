@@ -89,7 +89,7 @@
 							<th class="table-head" >KPI</th>
 							<th class="table-head" >BOBOT</th>
 							<th class="table-head" >Pencapaian</th> 
-							<th class="table-head" >Action</th> 
+							<th class="table-head" >Action Bobot</th> 
 
 						  </tr>
 					  </thead>
@@ -379,7 +379,7 @@ $(document).ready(function(){
 		$(this).on('click', '.DeletePeninilai', function(e){
 			  var splt = $(this).val().split('*');
 			  console.log(splt);
-			  if (splt[0]==null||splt[0]=='-'){
+			  if (splt[0]==null||splt[0]=='-'||splt[0]=='undefined'){
 				alert('Plese Insert Value');
 			  }else{
 				$('#DeletePeninilaian').modal('show');
@@ -562,8 +562,7 @@ $(document).ready(function(){
                       t += '<td style="text-align:center">' + v.BOBOT + '</td>';
 					  t += '<td style="text-align:center">' + v.BOBOT_GP + '</td>';//PENCAPAIAN
 					  t	+= '<td><center>';
-					  t	+= 		'<button   type="button" class="btn UpdatePenilaian btn-primary button_hrd_edit" data-toggle="modal"  value="'+ v.HASIL_KINERJA_ID +'*' + v.KINERJA_NAME + '*' + v.BOBOT + '">Update</button>';
-					  t += 		'<button  type="button" class="btn DeletePeninilai btn-primary button_delete_nilai" data-toggle="modal" value="'+ v.PENILAIAN_ID +'*'+ v.KINERJA_NAME +'">Delete</button>';
+					  t	+= 		'</i><button   type="button" class="btn UpdatePenilaian btn-primary button_hrd_edit" data-toggle="modal"  value="'+ v.HASIL_KINERJA_ID +'*' + v.KINERJA_NAME + '*' + v.BOBOT + '"><i class="fa fa-edit">Update</button>';
 					  t += '</center></td>';
                       t += '</td>'+ count_total(v.BOBOT) + '</td>';
                       t += '</tr>';

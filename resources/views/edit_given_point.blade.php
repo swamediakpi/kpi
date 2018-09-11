@@ -57,8 +57,8 @@
 									</td>
 									<td>
 										<center>
-										  <button  type="button" class="btn Updategivenpoint btn-primary button_givenpoint_edit" data-toggle="modal"  value="{{$list->LIST_ID}}*{{$list->ROLE_ID}}*{{$list->KINERJA_ID}}*{{ $list->KPI_NAME }}">Update{{$list->LIST_ID}}</button>';
-										  <button  type="button" class="btn Deletegivenpoint btn-primary button_delete_nilai" data-toggle="modal" value="'+ v.PENILAIAN_ID +'*'+ v.KINERJA_NAME +'">Delete{{$list->LIST_ID}}</button>';
+										  <button  type="button" class="btn Updategivenpoint btn-primary button_givenpoint_edit" data-toggle="modal"  value="{{$list->LIST_ID}}*{{$list->ROLE_ID}}*{{$list->KINERJA_ID}}*{{ $list->KPI_ID }}*{{ $list->KPI_NAME }}">Update</button>
+										  <button  type="button" class="btn DeleteGivenPoint btn-primary button_delete_nilai" data-toggle="modal" value="{{$list->LIST_ID}}*{{$list->ROLE_ID}}*{{$list->KINERJA_ID}}*{{ $list->KPI_ID }}*{{ $list->KPI_NAME }}">Delete</button>
 										</center>
 									</td>
 								</tr>
@@ -114,8 +114,8 @@
 									@endphp
 									</td>
 									<td><center>
-										<button  type="button" class="btn Updategivenpoint btn-primary button_pmo_edit" data-toggle="modal"  value="'+ v.HASIL_KINERJA_ID +'*' + v.KINERJA_NAME + '*' + v.BOBOT + '">Update</button>';
-										<button  type="button" class="btn Deletegivenpoint btn-primary button_delete_nilai" data-toggle="modal" value="'+ v.PENILAIAN_ID +'*'+ v.KINERJA_NAME +'">Delete</button>';
+										<button  type="button" class="btn Updategivenpoint btn-primary button_givenpoint_edit" data-toggle="modal"  value="{{$list->LIST_ID}}*{{$list->ROLE_ID}}*{{$list->KINERJA_ID}}*{{ $list->KPI_ID }}*{{ $list->KPI_NAME }}">Update</button>
+										<button  type="button" class="btn DeleteGivenPoint btn-primary button_delete_nilai" data-toggle="modal" value="{{$list->LIST_ID}}*{{$list->ROLE_ID}}*{{$list->KINERJA_ID}}*{{ $list->KPI_ID }}*{{ $list->KPI_NAME }}">Delete</button>
 									  </center>
 									</td>
 								</tr>
@@ -172,8 +172,8 @@
 									@endphp
 									</td>
 									<td><center>
-									  <button  type="button" class="btn Updategivenpoint btn-primary button_givenpoint_edit" data-toggle="modal"  value="'+ v.HASIL_KINERJA_ID +'*' + v.KINERJA_NAME + '*' + v.BOBOT + '">Update</button>';
-									  <button  type="button" class="btn Deletegivenpoint btn-primary button_delete_nilai" data-toggle="modal" value="'+ v.PENILAIAN_ID +'*'+ v.KINERJA_NAME +'">Delete</button>';
+										<button  type="button" class="btn Updategivenpoint btn-primary button_givenpoint_edit" data-toggle="modal"  value="{{$list->LIST_ID}}*{{$list->ROLE_ID}}*{{$list->KINERJA_ID}}*{{ $list->KPI_ID }}*{{ $list->KPI_NAME }}">Update</button>
+										<button  type="button" class="btn DeleteGivenPoint btn-primary button_delete_nilai" data-toggle="modal" value="{{$list->LIST_ID}}*{{$list->ROLE_ID}}*{{$list->KINERJA_ID}}*{{ $list->KPI_ID }}*{{ $list->KPI_NAME }}">Delete</butto>
 									  </center>
 									</td>
 								 </tr>
@@ -220,9 +220,10 @@
 										<div class="form-group">
 											<label class="control-label col-md-1 col-sm-3 col-xs-12">KPI</label>
 											<div class="col-md-9 col-sm-9 col-xs-12">
-											  <input type="hidden" class="form-control list_id" id="kpi-pmo">
-											  <input type="hidden" class="form-control role_id" id="kpi-pmo">
-											  <input type="text" class="form-control kpi-pmo" id="kpi-pmo">
+											  <input type="hidden" class="form-control id_kpi" id="id_kpi">
+											  <input type="hidden" class="form-control list_id" id="list_id">
+											  <input type="hidden" class="form-control role_id" id="role_id">
+											  <input type="text" class="form-control kpi_pmo" id="kpi_pmo">
 											</div>
 										</div>
 									</div>
@@ -238,7 +239,24 @@
 		</div>
 	</div>
 </div>
-
+<div class="modal fade" id="DeleteGiven" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+								<input type="hidden" name="_token" value="{{ csrf_token() }}">
+								<input type="hidden" name="list_id" id="list_id" >
+								<input type="hidden" name="role_id" id="role_id" >
+								<input type="hidden" name="id_kinerja" id="id_kinerja" >
+								<input type="hidden" name="id_kpi" id="id_kpi" >
+							<h2> Are Sure Delete Value?</h2>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>  
+					<button class="btn btn-success pull-right btn-delete-givenpoint">Delete</button>
+				</div>
+			</div>
+		</div>
+</div>
 <script type="text/javascript">
 $(document).ready(function(){
       $.ajaxSetup({
@@ -260,22 +278,26 @@ $(document).ready(function(){
 			$("#list_id").val(splt[0]);
 			$("#role_id").val(splt[1]);
 			$("#id_kinerja").val(splt[2]);
-			$("#kpi-pmo").val(splt[3]);
+			$("#id_kpi").val(splt[3]);
+			$("#kpi_pmo").val(splt[4]);
 		}));
 		
-		$(this).on('click', '.DeletePeninilai', function(e){
+		$(this).on('click', '.DeleteGivenPoint', function(e){
 			  var splt = $(this).val().split('*');
 			  console.log(splt);
 			  if (splt[0]==null||splt[0]=='-'){
 				alert('Plese Insert Value');
 			  }else{
-				$('#DeletePeninilaian').modal('show');
+				$('#DeleteGiven').modal('show');
 			}
 		});
 		$(this).on('click', '.button_delete_nilai', (function(e){	
 			//alert($(this).attr('data-index'));
 			var splt = $(this).val().split('*');
-			$("#tb_penilaian_id").val(splt[0]);
+			$("#list_id").val(splt[0]);
+			$("#role_id").val(splt[1]);
+			$("#id_kinerja").val(splt[2]);
+			$("#id_kpi").val(splt[3]);
 		
 		}));
 		
@@ -284,11 +306,11 @@ $(document).ready(function(){
 			var String_list_id  	= $("#list_id").val();
 			var String_role_id   	= $("#role_id").val();
 			var String_id_kinerja  	= $("#id_kinerja").val();
-			var String_kpi-pmo	 	= $(".kpi-pmo").val();
-			console.log(String_pmo_nilai);
-			var val = {'list_id': String_list_id, 'role_id' : String_role_id, 'id_kinerja':String_id_kinerja,'kpi-pmo':String_kpi-pmo};		
+			var String_id_kpi  		= $("#id_kpi").val();
+			var String_kpi_pmo	 	= $(".kpi_pmo").val();
+			var val = {'list_id': String_list_id, 'role_id' : String_role_id, 'id_kinerja':String_id_kinerja,'id_kpi':String_id_kpi,'kpi_pmo':String_kpi_pmo};		
 			  $.ajax({
-              url : baseUrl +'/givenpoin/update',
+              url : baseUrl +'/givenpoint/update',
               type: 'POST',
               data: val,      
               dataType: 'json',
@@ -296,7 +318,7 @@ $(document).ready(function(){
                 $('.ajax-loader').css("visibility", "visible");
               },
               success:function(r){
-                $('#modal_pmo_edit').modal('hide');
+                $('#modal_givenpoint_edit').modal('hide');
                 setTimeout(function(){// wait for 5 secs(2)
                     location.reload(); // then reload the page.(3)
                   }, 1000);
@@ -309,12 +331,15 @@ $(document).ready(function(){
           });
 		});
 		
-		$('.btn-delete-nilai_unit').click(function(){
+		$('.btn-delete-givenpoint').click(function(){
 			    				
-			var String_penilaian_id   = $("#tb_penilaian_id").val();
-			var val = {'nilai_id': String_penilaian_id};		
+			var String_list_id  	= $("#list_id").val();
+			var String_role_id   	= $("#role_id").val();
+			var String_id_kinerja  	= $("#id_kinerja").val();
+			var String_id_kpi  		= $("#id_kpi").val();
+			var val = {'list_id': String_list_id, 'role_id' : String_role_id, 'id_kinerja':String_id_kinerja,'id_kpi':String_id_kpi};		
 			  $.ajax({
-              url : baseUrl +'/penilaian/del',
+              url : baseUrl +'/givenpoint/delete',
               type: 'POST',
               data: val,      
               dataType: 'json',
@@ -322,7 +347,7 @@ $(document).ready(function(){
                 $('.ajax-loader').css("visibility", "visible");
               },
               success:function(r){
-                $('#DeletePeninilaian').modal('hide');
+                $('#DeleteGiven').modal('hide');
                 setTimeout(function(){// wait for 5 secs(2)
                     location.reload(); // then reload the page.(3)
                   }, 1000);

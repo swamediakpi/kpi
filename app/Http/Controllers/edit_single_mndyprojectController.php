@@ -63,10 +63,11 @@ class edit_single_mndyprojectController extends Controller
         $duration = $request->get('duration');
         $PROJECT  = $request->get('PROJECT');
         
-        $updateArr = array('START_WORK' => $start,'END_WORK' => $finish,'WORK_DURATION' => $duration);
+        $updateArr = array('START_WORK' => $start);
         
-        DB::table('project')
-            ->where('PROJECT_ID', $PROJECT)
+        DB::table('project_employee')
+            ->where('PROJECT_DETAIL_ID', $PROJECT)
+            ->where('EMPLOYEE_ID', $emp_id)
             ->update($updateArr);            
 
         $msg['msg'] = 'Success Update';
