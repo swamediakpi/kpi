@@ -18,7 +18,7 @@ class daysProjectController extends Controller
 		$listprojectRole = DB::table('list_project_role')
 								->orderBy('PROJECT_ROLE_EMP','asc')
 								->get();
-		$employeeName = DB::table('employee')->select('EMPLOYEE_NAME','EMPLOYEE_ID')->get();
+		$employeeName = DB::table('employee')->select('EMPLOYEE_NAME','EMPLOYEE_ID','avatar')->get();
 		$projectname = DB::table('project')
 								->orderBy('PROJECT_NAME','asc')
 								->get();

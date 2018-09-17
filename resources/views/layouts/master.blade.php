@@ -116,9 +116,13 @@
 							{{-- class="img-circle profile_img" --}}
 							@if (Auth::user()->dashboard == '2')
 								<img src="<?php echo asset("public/avatars/".session('avatar')."") ; ?>" alt="..." class="img-circle profile_img" style="width: 80px;">
-							
 							@else
+								@if (substr(session('avatar'),1,28)== 'ttp://portal.swamedia.co.id/')
+										<img src="<?php echo asset("".session('avatar')."") ; ?>" alt="..." class="img-circle profile_img" style="width: 80px;">
+								@else
+								
 								<img src="<?php echo asset("public/avatars/".session('avatar')."") ; ?>" alt="..." class="img-circle profile_img" style="width: 80px;">
+								@endif
 							@endif
 						</div>
 						<div class="profile_info">
@@ -178,6 +182,7 @@
 
 								<li><a href="#"><i class="fa fa-check-square-o"></i> Input <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
+										<li><a href="{{ url('/integrasi') }}">Integrasi</a></li>
 										<li><a href="{{ url('/input_emp') }}">Employee</a></li>
 										<li><a href="{{ url('/project') }}">Project</a></li>
 										<li><a href="{{ url('/holiday') }}">Holiday</a></li>
