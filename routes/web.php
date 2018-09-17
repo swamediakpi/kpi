@@ -76,6 +76,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/days-emp/search','daysController@filter_days_emp');
 	Route::get('getEmployeeFromUnit','daysController@getEmployeeFromUnit');
 
+	Route::any('/edit_employee','edit_employeeController@showRoleUnit');
+	Route::any('/edit_employee/edit','edit_employeeController@edit_employee');
+
 	Route::get('/absensi','absensiController@showData');
 	Route::post('/absensi/search','absensiController@filter_absensi');
 	Route::get('getEmployeeFromUnit','absensiController@getEmployeeFromUnit');

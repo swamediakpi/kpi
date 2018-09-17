@@ -170,6 +170,7 @@
 											</ul>
 										</li>
 										<li><a href="{{ url('/edit_given_point') }}">Given Point</a></li>  
+										<li><a href="{{ url('/edit_employee') }}">Employee</a></li>  
 										<li><a href="{{ url('/edit_mandays_project') }}">Mandays Project</a></li>
 										<li><a href="{{ url('/edit_single_mndyproject') }}">Single Mandays Project</a></li>
 										<li><a href="{{ url('/edit_project') }}">Project</a></li>                      
