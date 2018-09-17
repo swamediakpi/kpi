@@ -30,15 +30,14 @@
 							<div class="col-md-9 col-sm-9 col-xs-12">
 								<select id="emp_name" class="form-control emp_name">
 									<option value="">Select Employee</option>
-
 								</select>
 							</div>
 						</div>
-						<div id="form_edit_employee" style="visibility: hidden;">
+						<div id="form_edit_employee" style="display: none;" >
 							<div class="form-group">
 								<label class="control-label col-md-1 col-sm-3 col-xs-12">Employee Picture</label>
 								<div class="col-md-9 col-sm-9 col-xs-12">
-									<img id="emp_pict" alt="emp_pict" class="emp_pict" src="" width="80" height="80">    
+									<img id="emp_pict" alt="emp_pict" class="emp_pict" src="" width="80" height="80">
 								</div>
 							</div>
 							<div class="form-group">
@@ -155,6 +154,7 @@
 		});
     });
     $('.emp_name').change(function(){
+    	//fungsi belum jalan 
     	var splt = $(this).val().split('*');
 
     	console.log(splt[1]);
@@ -164,16 +164,14 @@
 		$( "#emp_pict" ).attr('src', splt[1] );
 		if ( this.value == '1');
 		{
-			$("#business").show();
+			$("#form_edit_employee").show();
 		}
 		else
 		{
-			$("#business").hide();
+			$("#form_edit_employee").hide();
 		}
 	});
-
-
-
+   
     $('#btn-input-emp').click(function(){
 
     	var noemp    = $('#emp-no').val();
