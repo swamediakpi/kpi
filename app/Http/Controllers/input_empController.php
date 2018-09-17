@@ -17,6 +17,23 @@ class input_empController extends Controller
 
        	return view('input_emp',compact(['showRole','showUnit']));
 	}
+	public function getapi(Request $request)
+	{
+		$unit 	= $request->get('unit');
+		$tanggal = $request->get('tanggal');
+		$url = "http://portal.swamedia.co.id/index.php/hrm/json/".$unit."/".$tanggal ;    
+		$curl = curl_init($url);
+		curl_setopt($curl, CURLOPT_HEADER, false);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-type: application/json"));
+		curl_setopt($curl, CURLOPT_HTTPGET, 1);
+
+		$json_response = curl_exec($curl);
+		curl_close($curl);
+		$response = json_decode($json_response, true);
+
+       	return json_encode($response);
+	}
 
 	public function insert_emp(Request $request){
 
@@ -29,14 +46,16 @@ class input_empController extends Controller
     	$username    = $request->get('username');        
         $password	 = $request->get('pass');
         $conpass  	 = $request->get('passcon');       
+        $avatar  	 = $request->get('emp_pict');       
+		$tahun  	 = $request->get('tahun');       
 
-
-        $saveData = array("EMPLOYEE_ID"=>$noemp,"ROLE_ID"=>$role,"UNIT_ID"=>$unit,"EMPLOYEE_NAME"=>$name,"EMPLOYEE_EMAIL"=>$email,"EMPLOYEE_TITLE"=>$title,"username"=>$username,"password"=>bcrypt($password));
+        $saveData = array("EMPLOYEE_ID"=>$noemp,"ROLE_ID"=>$role,"UNIT_ID"=>$unit,"EMPLOYEE_NAME"=>$name,"EMPLOYEE_EMAIL"=>$email,"EMPLOYEE_TITLE"=>$title,"username"=>$username,"password"=>bcrypt($password),"avatar"=> $avatar );
 		
 
-        $simpan = DB::raw("call spInputEmp('".$noemp."', '".$role."', '".$unit."', '".$name."', '".$email."', '".$title."', '".$username."', '".bcrypt($password)."')");
+        $simpan = DB::select("call spInputEmp('".$noemp."', '".$role."', '".$unit."', '".$name."', '".$email."', '".$title."', '".$username."', '".bcrypt($password)."','".$avatar."','".$tahun."')");
+       
         //dd($simpan);
-        if($simpan){
+        if($role!=null && $unit!=null && $name!=null && $email!=null && $title!=null && $username!=null && $password!=null ){
                     $msg['msg'] = 'Success Insert';
         }
         else{

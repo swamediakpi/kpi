@@ -54,6 +54,11 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/input_emp','input_empController@showRoleUnit');
 	Route::post('/input_emp/input','input_empController@insert_emp');
+	
+	Route::post('/integrasi/input','integrasiController@insert_emp');
+	Route::get('/get/emp','integrasiController@getemp');
+	Route::get('/integrasi','integrasiController@showRoleUnit');
+	Route::get('/get/api','integrasiController@getapi');
 
 	Route::get('/view_emp','view_empController@showElement');
 	Route::post('/view_emp/search','view_empController@filter_emp');
@@ -156,6 +161,8 @@ Route::get('/', function () {
 });
 
 Route::get('/home', 'HomeController@index');
+//Route::get('/api/test', ['middleware' => 'cros', function() {return "hello";}]);
+Route::get('/api/test', function() {return "hello";});
 
 Route::get('/obu', 'ObuPlnController@index');
 Route::any('/getObuTotal', 'obuController@getObuTotal');

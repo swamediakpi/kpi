@@ -39,7 +39,7 @@ class newcaseController extends Controller
             foreach ($date as $key) {
                 $listdate = $key['date'];
  
-                DB::raw("call spInputSingelMandaysproject('".$emp."', '".$prjct."', '".$prjctrole."', '".$listdate."', '".$Cdate."')" );
+                DB::select("call spInputSingelMandaysproject('".$emp."', '".$prjct."', '".$prjctrole."', '".$listdate."', '".$Cdate."')" );
             }
                 $msg['msg'] = 'Success Insert';
 	    }else{
