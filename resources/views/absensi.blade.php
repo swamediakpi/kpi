@@ -183,6 +183,8 @@
 							op+='<option value="'+data[i].KID+'">'+string_Nik+'//'+data[i].EMPLOYEE_NAME+'</option>';
 						}
 					}
+					
+					
 					$('.empname').append(op);
 				},
 				complete: function(){
