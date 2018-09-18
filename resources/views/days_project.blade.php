@@ -43,9 +43,10 @@
 											<th class="table-head" ><center>START WORK</center></th>
 											<th class="table-head" ><center>END WORK</center></th>
 											<th class="table-head" ><center>WORK DURATION</center></th>
-											<th class="table-head" ><center>START PROJECT</center></th>
+											<th class="table-head" ><center>MASA PROJECT</center></th>
+											<!-- <th class="table-head" ><center>START PROJECT</center></th>
 											<th class="table-head" ><center>FINISH PROJECT</center></th>
-											<th class="table-head" ><center>DAYS PROJECT</center></th>
+											<th class="table-head" ><center>DAYS PROJECT</center></th> -->
 											<th class="table-head" ><center>ACTION</center></th>
 											<th class="table-head" ><center>STATUS</center></th>
 											<th class="table-head" ><center>HISTORY</center></th>
@@ -375,9 +376,10 @@
 			{data: 'START_WORK'},
 			{data: 'END_WORK'},
 			{data: 'WORK_DURATION'},
-			{data: 'PROJECT_START'},
-			{data: 'PROJECT_END'},
-			{data: 'PROJECT_DURATION'},
+			{data: 'PROJECT_DETAIL_TIMELINE'},
+			//{data: 'PROJECT_START'},
+			//{data: 'PROJECT_END'},
+			//{data: 'PROJECT_DURATION'},
 			{data: 'action'},
 			{data: 'timeline_status'},
 			{data: 'history'}
