@@ -33,7 +33,7 @@
 								</select>
 							</div>
 						</div>
-						<div id="form_edit_employee" style="display: none;" >
+						<div id="form_edit_employee" class="form_edit_employee" style="display: none;" >
 							<div class="form-group">
 								<label class="control-label col-md-1 col-sm-3 col-xs-12">Employee Picture</label>
 								<div class="col-md-9 col-sm-9 col-xs-12">
@@ -112,6 +112,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		var tanggal = new Date();
     // CSRF Setup
     $.ajaxSetup({
     	headers : {
@@ -119,22 +120,24 @@
     	}
     });
     $('#unitname').change(function(){
-    	var tanggal = new Date();
     	var id_unit = $('.unitname').val();
+    	var MM = ((tanggal.getMonth()+1) < 10 ? '0' : '') + (tanggal.getMonth() + 1);
     	var op = "";
-
+    	var date_now = MM+tanggal.getFullYear();
+    	var unit     = $('.unitname').val();  
     	$.ajax({
-    		url         : "http://portal.swamedia.co.id/index.php/hrm/json/"+id_unit+"/0"+tanggal.getMonth()+tanggal.getFullYear(),
+    		
+    		url         : baseUrl+'/get/api',
     		type        : "GET",
     		dataType    : "json",
-    		headers		: {
-    			'Access-Control-Allow-Origin': '*'
-    		},
+    		crossDomain: true,
+    		contentType: "application/json",
+    		data		:{'unit':unit, 'tanggal':date_now},
     		beforeSend	: function(request) {
     			request.setRequestHeader("content-type", 'application/json');
+    			request.setRequestHeader("Access-Control-Allow-Origin", '*');
     		},
 		    //data 		: JSON.stringify(datapost),
-
 		    success     : function(response){
 		    	$('#emp_name option').remove();
 		    	if(response.absen[0].length == ""){
@@ -142,8 +145,7 @@
 		    	}else{
 		    		op+='<option value="" >Choose Employee</option>';
 		    		for(let i = 0 ; i < response.absen.length ; i++){
-		    			console.log(response.absen[i].nik);
-		    			op+='<option value="'+response.absen[i].nik+'*'+response.absen[i].foto+'">'+response.absen[i].nama+'</option>';
+		    			op+='<option value="'+response.absen[i].nik+'*'+response.absen[i].foto+'*'+response.absen[i].nama+'">'+response.absen[i].nama+'</option>';
 		    		}
 		    	}
 		    	$('#emp_name').append(op);
@@ -162,16 +164,16 @@
 		//$("#emp_pict").attr("src", $(splt[1]).val());
 		//$("#emp_pict").src= splt[1];
 		$( "#emp_pict" ).attr('src', splt[1] );
-		if ( this.value == '1');
-		{
-			$("#form_edit_employee").show();
-		}
+		/*if ( this.value == '1')
+		{*/
+			$(".form_edit_employee").show();
+		/*}
 		else
 		{
-			$("#form_edit_employee").hide();
-		}
+			$(".form_edit_employee").hide();
+		}*/
 	});
-   
+
     $('#btn-input-emp').click(function(){
 
     	var noemp    = $('#emp-no').val();
