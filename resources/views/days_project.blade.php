@@ -199,7 +199,7 @@
 						</div>
 					</div>
 					<div class="x-content">
-						<table class="table table-bordered table-responsive table-hover">
+						<table class="mandaysTable_view table table-bordered table-responsive table-hover">
 							<thead>
 								<tr>
 									<th class="table-head" >NO</th>
@@ -531,7 +531,7 @@
 						$.each(r.content, function(k, v){
 							t += '<tr>';
 							t += '<td style="text-align:center">'+no+'</td>';
-							t += '<td>' + v.EMPLOYEE_NAME + '</td>';
+							t += '<td>' + v.avatar + '</td>';
 							t += '<td>' + v.EMPLOYEE_TITLE + '</td>';
 							t += '<td>' + v.PROJECT_NAME + '</td>';
 							t += '<td>' + v.PROJECT_ROLE_EMP + '</td>';

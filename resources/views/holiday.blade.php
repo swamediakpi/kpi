@@ -7,7 +7,7 @@
 		<li role="presentation" class="active">
 			<a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Input Holiday</a>
 		</li>
-		<li role="presentation" class="">
+		<li role="presentation" >
 			<a href="#tab_content2" id="mandays-tab" role="tab" data-toggle="tab" aria-expanded="true">View Holiday</a>
 		</li>
 		<!-- <li role="presentation" class="">

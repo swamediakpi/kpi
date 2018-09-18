@@ -59,6 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/get/emp','integrasiController@getemp');
 	Route::get('/integrasi','integrasiController@showRoleUnit');
 	Route::get('/get/api','integrasiController@getapi');
+	Route::get('/integrasi/updateAPI','integrasiController@updateAPI');
 
 	Route::get('/view_emp','view_empController@showElement');
 	Route::post('/view_emp/search','view_empController@filter_emp');

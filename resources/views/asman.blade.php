@@ -552,6 +552,7 @@ $(document).ready(function(){
                       t += '<td style="text-align:center">' + v.BOBOT_GP + '</td>';//PENCAPAIAN
 					  t	+= '<td><center>';
 					  t	+= 		'<button   type="button" class="btn UpdatePenilaianpmo btn-primary button_pmo_edit" data-toggle="modal"  value="'+ v.HASIL_KINERJA_ID +'*' + v.KINERJA_NAME + '*' + v.BOBOT + '"><i class="fa fa-edit">Update</button>';
+					  /*t	+= 		'<button   type="button" class="btn UpdatePenialianpmo btn-primary button_pmo_edit" data-toggle="modal"  value="'+ v.HASIL_KINERJA_ID +'*' + v.KINERJA_NAME + '*' + v.BOBOT + '"><i class="fa fa-edit">Delete</button>';*/
 					  t += '</center></td>';
                       t += '</td>'+ count_total(v.BOBOT) + '</td>';
                       t += '</tr>';
@@ -652,7 +653,7 @@ $(document).ready(function(){
                 'role':roles,
                 'list_bobot': x
               };
-
+							
               $.ajax({
                   url : baseUrl +'/asman/input',
                   type: 'POST',
