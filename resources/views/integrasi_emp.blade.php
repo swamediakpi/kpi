@@ -3,7 +3,20 @@
 @section('content')
 
 <div class="" role="tabpanel" data-example-id="togglable-tabs">
-
+	<ul id="myTab" class="nav nav-tabs col-md-12 col-sm-4 col-xs-12" role="tablist">
+		<li role="presentation" class="active">
+			<a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Integrasi</a>
+		</li>
+		<li role="presentation" class="">
+			<a href="#tab_content2" id="updateAPI-tab" role="tab" data-toggle="tab" aria-expanded="true">Update API</a>
+		</li>
+		<!-- <li role="presentation" class="">
+			<a href="#tab_content_edit_holiday" id="edit_holiday_id" role="tab" data-toggle="tab" aria-expanded="true">Edit Holiday</a>
+		</li> -->
+		<!-- <li role="presentation" class="">
+			<a href="#tab_content_delete_holiday" id="edit_holiday_id" role="tab" data-toggle="tab" aria-expanded="true">Delete Holiday</a>
+		</li> -->	  
+	</ul>
 	<div id="myTabContent" class="tab-content">
 		<div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
 			<br>
@@ -118,6 +131,42 @@
 				</div>
 			</div>
 		</div>
+		<div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="home-tab">
+			<br>
+			<!-- start recent activity -->
+			<div class="col-md-12 col-sm-4 col-xs-12">
+				<div class="x_panel">
+					<h3>Update API Employee</h3>
+					<div class="clearfix"></div>
+
+					<div class="form-horizontal form-label-left">
+						<div class="form-group">
+							<label class="control-label col-md-1 col-sm-3 col-xs-12">Tahun</label>
+							<div class="col-md-9 col-sm-9 col-xs-12">
+								<select id="year_api" class="form-control ddl_tahun">
+									<option value="">Pilih Tahun !</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-1 col-sm-3 col-xs-12">Bulan</label>
+							<div class="col-md-9 col-sm-9 col-xs-12">
+								<select id="month_api" class="form-control emp_name" selected>
+									<option value="">Pilih Bulan</option>
+
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-1 col-sm-3 col-xs-12"></label>
+							<div class="col-md-9 col-sm-9 col-xs-12">
+								<button id="btn-update-api-emp" class="btn btn-success pull-right">Update API</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -125,20 +174,37 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		var monthNames = [
+		"Januari", "Februari", "Maret",
+		"April", "Mei", "Juni", "Juli",
+		"Agustus", "September", "Oktober",
+		"November", "Desember"
+		];
 		var min = new Date().getFullYear()-7;
-		max = min + 20;
+		max = min + 7;
 		select = document.getElementById('year');
+		selectAPI = document.getElementById('year_api');
+		selectMonth = document.getElementById('month_api');
 
 		for (var i = min; i<=max; i++){
 			var opt = document.createElement('option');
 			opt.value = i;
 			opt.innerHTML = i;
 			select.appendChild(opt);
+			selectAPI.appendChild(opt);
 		}
-
 		select.value = new Date().getFullYear();
+		selectAPI.value= new Date().getFullYear();
 		var tanggal = new Date();
+		for (var i= 0; i<12;i++){
+			var opt = document.createElement('option');
+			opt.value = i+1;
+			opt.innerHTML = monthNames[i];
+			selectMonth.appendChild(opt);
+		}
+		selectMonth.value= new Date().getMonth();
     // CSRF Setup
+
     $.ajaxSetup({
     	headers : {
     		
@@ -215,7 +281,24 @@
 		});
     });
 
+    /*$('#btn-update-api-emp').click(function(){
+    	$.ajax({
+    		url : baseUrl +'/integrasi/updateAPI',
+    		type: 'POST',
+    		data: {'noemp':noemp, 'role':role, 'unit':unit, 'name':name, 'email':email ,'title':title, 'username':username, 'pass':pass, 'passcon':passcon, 'emp_pict':pict,'tahun':tahun},
+    		dataType: 'json',
+    		success:function(r){
+    			if(r.msg == 'Success Insert'){
+    				$("#error2").html(r.msg);
+    				$('#myModal2').modal("show");
+    				setTimeout(function(){
+    					location.reload(true); 
+    				}, 1000); 
 
+    			}
+    		}
+    	});
+    };*/
     $('#btn-input-emp').click(function(){
 
     	var noemp    = $('#emp-no').val();

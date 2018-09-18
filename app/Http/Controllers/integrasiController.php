@@ -10,12 +10,12 @@ class integrasiController extends Controller
 {
 	public function showRoleUnit()
 	{
-
+		$tahun = DB::table('t_tahun')->get();
 		$showRole = DB::table('role')->get();
         $showUnit = DB::table('unit')->get();
         
 
-       	return view('integrasi_emp',compact(['showRole','showUnit']));
+       	return view('integrasi_emp',compact(['showRole','showUnit','tahun']));
 	}	
 	public function getemp(Request $request)
 	{
@@ -25,6 +25,23 @@ class integrasiController extends Controller
 		return json_encode($response);
 	}
 	public function getapi(Request $request)
+	{
+		$unit 	= $request->get('unit');
+		$tanggal = $request->get('tanggal');
+		$url = "http://portal.swamedia.co.id/index.php/hrm/json/".$unit."/".$tanggal ;    
+		$curl = curl_init($url);
+		curl_setopt($curl, CURLOPT_HEADER, false);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-type: application/json"));
+		curl_setopt($curl, CURLOPT_HTTPGET, 1);
+
+		$json_response = curl_exec($curl);
+		curl_close($curl);
+		$response = json_decode($json_response, true);
+
+       	return json_encode($response);
+	}
+	public function updateAPI(Request $request)
 	{
 		$unit 	= $request->get('unit');
 		$tanggal = $request->get('tanggal');
