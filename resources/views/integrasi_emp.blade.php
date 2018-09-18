@@ -94,6 +94,7 @@
 							<label class="control-label col-md-1 col-sm-3 col-xs-12">Year in</label>
 							<div class="col-md-9 col-sm-9 col-xs-12">
 								<select id="year" class="form-control year">
+									<option value="">Pilih Tahun !</option>
 								</select>
 								<!--input type="text" class="form-control pull-right datepicker" id="datepicker"-->
 
@@ -186,6 +187,13 @@
 		selectAPI = document.getElementById('year_api');
 		selectMonth = document.getElementById('month_api');
 
+		for (var i = min; i<=max; i++){
+			var opt = document.createElement('option');
+			opt.value = i;
+			opt.innerHTML = i;
+			selectAPI.appendChild(opt);
+			select.appendChild(opt);
+		}
 		for (var i = min; i<=max; i++){
 			var opt = document.createElement('option');
 			opt.value = i;
