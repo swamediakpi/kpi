@@ -29,7 +29,7 @@
 		<link href="{{ asset('public/css/jquery-ui.css') }}" rel="stylesheet" >
 		<link href="{{ asset('public/css/jquery-ui-timepicker-addon.css') }}" rel="stylesheet">    
 		<link href="{{ asset('public/css/dataTables.bootstrap.min.css') }}" type="text/css" rel="stylesheet"/>
-		<!-- <link href="{{ asset('public/css/Table-Head.css') }}" type="text/css" rel="stylesheet"/> -->
+		<link href="{{ asset('public/css/Table-Head.css') }}" type="text/css" rel="stylesheet"/> 
 		<style>
 			.table-head {
 				color:#fff;
@@ -88,7 +88,7 @@
 
 		<script src=" {{ asset('public/js/jquery.dataTables.min.js') }}"></script>
 		<script src=" {{ asset('public/js/dataTables.bootstrap.min.js') }}"></script>
-		<script type="text/javascript" src="{{ asset("Public/js/FungsiSend.js") }}"></script>
+		<!--script type="text/javascript" src="{{ asset("Public/js/FungsiSend.js") }}"></script-->
 	</head>
 
 <script type="text/javascript">
