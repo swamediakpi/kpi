@@ -26,13 +26,10 @@ class daysProjectController extends Controller
 		return view('days_project',compact(['data','listprojectRole','employeeName','projectname','countlist']));
 	}
 
-	public function search_mandays(Request $request){
-		
+	public function search_mandays(Request $request){	
 		$idEmployee = $request->get('nama');
-		
 		$result = DB::select("call spGetsearch_mandaysEmp('".$idEmployee."')");
 		$data ['content'] = $result;
-		
 		return json_encode($data);
 	}
 

@@ -31,27 +31,27 @@
 					</div>
 					<div class="x_content">
 						{{-- <table class="table table-striped table-bordered dataa"> --}}
-						{{-- <table class="table table-bordered table-responsive table-hover dataa"> --}}
-						<table id="mandaysTable" class="table table-striped table-bordered">
-							<thead>
-								<tr>
-									<th class="table-head" >NO</th>
-									<th class="table-head" >NAMA</th>
-									<th class="table-head" >JABATAN</th>
-									<th class="table-head" >PROJECT</th>
-									<th class="table-head" >POSISI DALAM PROJECT</th>
-									<th class="table-head" ><center>START WORK</center></th>
-									<th class="table-head" ><center>END WORK</center></th>
-									<th class="table-head" ><center>WORK DURATION</center></th>
-									<th class="table-head" ><center>START PROJECT</center></th>
-									<th class="table-head" ><center>FINISH PROJECT</center></th>
-									<th class="table-head" ><center>DAYS PROJECT</center></th>
-									<th class="table-head" ><center>ACTION</center></th>
-									<th class="table-head" ><center>STATUS</center></th>
-									<th class="table-head" ><center>HISTORY</center></th>
-								</tr>
-							</thead>
-						</table>
+							{{-- <table class="table table-bordered table-responsive table-hover dataa"> --}}
+								<table id="mandaysTable" class="table table-striped table-bordered">
+									<thead>
+										<tr>
+											<th class="table-head" >NO</th>
+											<th class="table-head" >NAMA</th>
+											<!-- <th class="table-head" >JABATAN</th> -->
+											<th class="table-head" >PROJECT</th>
+											<th class="table-head" >POSISI DALAM PROJECT</th>
+											<th class="table-head" ><center>START WORK</center></th>
+											<th class="table-head" ><center>END WORK</center></th>
+											<th class="table-head" ><center>WORK DURATION</center></th>
+											<th class="table-head" ><center>START PROJECT</center></th>
+											<th class="table-head" ><center>FINISH PROJECT</center></th>
+											<th class="table-head" ><center>DAYS PROJECT</center></th>
+											<th class="table-head" ><center>ACTION</center></th>
+											<th class="table-head" ><center>STATUS</center></th>
+											<th class="table-head" ><center>HISTORY</center></th>
+										</tr>
+									</thead>
+								</table>
 						<!-- <table class="table table-striped table-bordered dataa">
 							<thead>
 								<tr>
@@ -183,13 +183,13 @@
 								<div class="col-md-9 col-sm-9 col-xs-12">
 									<select id="f_nama" class="form-control">
 										<option value="">Select Employee Name</option>
-									@foreach ($employeeName as $list)
-								  		<option value="{{ $list->EMPLOYEE_ID}}">{{ $list->EMPLOYEE_NAME}}</option>
-									@endforeach
+										@foreach ($employeeName as $list)
+										<option value="{{ $list->EMPLOYEE_ID}}">{{ $list->EMPLOYEE_NAME}}</option>
+										@endforeach
 									</select>
 								</div>
 							</div>    
-						
+
 							<div class="form-group">
 								<div class="col-md-9 col-sm-9 col-xs-12 col-md-9">     
 									<button class="btn btn-success pull-right btn-search-mandays">Search</button>
@@ -226,102 +226,102 @@
 				<div class="x_panel">
 					<div class="x_title">    	
 						<h2>Input Pegawai</h2>
-						  <ul class="nav navbar-right panel_toolbox">
-						   </ul>
+						<ul class="nav navbar-right panel_toolbox">
+						</ul>
 						<div class="clearfix"></div>
 					</div>
 
 					<div class="x-content">
 						<div class="form-horizontal form-label-left">		
-						<fieldset>		
-							<div class="form-group">
-								<label class="col-lg-2 control-label">Employee Name</label>
+							<fieldset>		
+								<div class="form-group">
+									<label class="col-lg-2 control-label">Employee Name</label>
 									<div class="col-lg-10">
 										<select id="nama-pegawai" class="form-control col-md-7 col-xs-12">
 											<option value="">Select Employee Name</option>
 											@foreach ($employeeName as $ele)
-											   <option value="{{ $ele->EMPLOYEE_ID }}">{{ $ele->EMPLOYEE_NAME }}</option>
+											<option value="{{ $ele->EMPLOYEE_ID }}">{{ $ele->EMPLOYEE_NAME }}</option>
 											@endforeach  
 										</select>			            
-								   </div>
-							</div>
-							
-							<div class="form-group">
-							<label class="col-lg-2 control-label">JABATAN</label>         
-							  <div class="col-lg-10">
-								<input type="text" readonly="true" class="form-control col-md-7 col-xs-12" id="jabatan-pegawai">             
-							  </div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-lg-2 control-label">PROJECT</label>
-								  <div class="col-lg-10">
-									<select id="nama-project" class="form-control">	
-										<option value="">Select PROJECT Name</option>
-										@foreach ($projectname as $ele)
-											<option value="{{ $ele->PROJECT_DETAIL_ID }}">{{ $ele->PROJECT_NAME }}</option>
-										@endforeach
-									</select>            
-								  </div>
-							</div>
-
-							<div class="form-group">
-							<label class="col-lg-2 control-label">START PROJECT</label>         
-							  <div class="col-lg-10">
-								<input type="text" class="form-control" id="startprojek" readonly="true">         
-							  </div>
-							</div>
-							<div class="form-group">
-							<label class="col-lg-2 control-label">FINISH PROJECT</label>         
-							  <div class="col-lg-10">
-								<input type="text" class="form-control" id="finishprojek" readonly="true">            
-							  </div>
-							</div>
-							<div class="form-group">
-								<label class="col-lg-2 control-label">DAYS PROJECT</label>         
-								  <div class="col-lg-2">
-									  <input type="text" class="form-control" id="daysprojek" readonly="true">
-								  </div>					         
-							</div>
-
-							 <div class="form-group">
-							<label class="col-lg-2 control-label">POSITION IN PROJECT</label>         
-							  <div class="col-lg-10">
-								<select id="role-projek" class="form-control">
-									<option value="">Select Job Position</option>
-									@foreach ($listprojectRole as $list)
-										<option value="{{ $list->LIST_PROJECT_ROLE_ID}}">{{ $list->PROJECT_ROLE_EMP }}</option>
-									@endforeach
-								</select>            
-							  </div>
-							</div>
-							 
-							 <div class="form-group">
-							<label class="col-lg-2 control-label">START WORK</label>         
-							  <div class="col-lg-10">
-								<input type="text" class="form-control" id="startwork">         
-							  </div>
-							</div>
-							<div class="form-group">
-							<label class="col-lg-2 control-label">END WORK</label>         
-							  <div class="col-lg-10">
-								<input type="text" class="form-control" id="endwork">         
-							  </div>
-							</div>
-							<div class="form-group">
-							<label class="col-lg-2 control-label">WORK DURATION</label>         
-							  <div class="col-lg-2">
-								  <input type="text" readonly="true" class="form-control" id="calldays">
-							  </div>
-							</div>
-							
-							<div class="form-group">
-								<div class="col-lg-10 col-lg-offset-2">
-									<button id="btn-input-daysProjek" class="btn btn-primary btn-success">Save</button>
-									 <button id="btn-reset" class="btn btn-warning">Reset</button>
+									</div>
 								</div>
-							</div>
-						 </fieldset>
+
+								<div class="form-group">
+									<label class="col-lg-2 control-label">JABATAN</label>         
+									<div class="col-lg-10">
+										<input type="text" readonly="true" class="form-control col-md-7 col-xs-12" id="jabatan-pegawai">             
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-lg-2 control-label">PROJECT</label>
+									<div class="col-lg-10">
+										<select id="nama-project" class="form-control">	
+											<option value="">Select PROJECT Name</option>
+											@foreach ($projectname as $ele)
+											<option value="{{ $ele->PROJECT_DETAIL_ID }}">{{ $ele->PROJECT_NAME }}</option>
+											@endforeach
+										</select>            
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-lg-2 control-label">START PROJECT</label>         
+									<div class="col-lg-10">
+										<input type="text" class="form-control" id="startprojek" readonly="true">         
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-lg-2 control-label">FINISH PROJECT</label>         
+									<div class="col-lg-10">
+										<input type="text" class="form-control" id="finishprojek" readonly="true">            
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-lg-2 control-label">DAYS PROJECT</label>         
+									<div class="col-lg-2">
+										<input type="text" class="form-control" id="daysprojek" readonly="true">
+									</div>					         
+								</div>
+
+								<div class="form-group">
+									<label class="col-lg-2 control-label">POSITION IN PROJECT</label>         
+									<div class="col-lg-10">
+										<select id="role-projek" class="form-control">
+											<option value="">Select Job Position</option>
+											@foreach ($listprojectRole as $list)
+											<option value="{{ $list->LIST_PROJECT_ROLE_ID}}">{{ $list->PROJECT_ROLE_EMP }}</option>
+											@endforeach
+										</select>            
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-lg-2 control-label">START WORK</label>         
+									<div class="col-lg-10">
+										<input type="text" class="form-control" id="startwork">         
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-lg-2 control-label">END WORK</label>         
+									<div class="col-lg-10">
+										<input type="text" class="form-control" id="endwork">         
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-lg-2 control-label">WORK DURATION</label>         
+									<div class="col-lg-2">
+										<input type="text" readonly="true" class="form-control" id="calldays">
+									</div>
+								</div>
+
+								<div class="form-group">
+									<div class="col-lg-10 col-lg-offset-2">
+										<button id="btn-input-daysProjek" class="btn btn-primary btn-success">Save</button>
+										<button id="btn-reset" class="btn btn-warning">Reset</button>
+									</div>
+								</div>
+							</fieldset>
 						</div>
 					</div>
 				</div>
@@ -367,20 +367,20 @@
 				}
 			},
 			columns:[
-				{data: 'rownum'},
-				{data: 'EMPLOYEE_NAME'},
-				{data: 'EMPLOYEE_TITLE'},
-				{data: 'PROJECT_NAME'},
-				{data: 'PROJECT_ROLE_EMP'},
-				{data: 'START_WORK'},
-				{data: 'END_WORK'},
-				{data: 'WORK_DURATION'},
-				{data: 'PROJECT_START'},
-				{data: 'PROJECT_END'},
-				{data: 'PROJECT_DURATION'},
-				{data: 'action'},
-				{data: 'timeline_status'},
-				{data: 'history'}
+			{data: 'rownum'},
+			{data: 'avatar'},
+			//{data: 'EMPLOYEE_TITLE'},
+			{data: 'PROJECT_NAME'},
+			{data: 'PROJECT_ROLE_EMP'},
+			{data: 'START_WORK'},
+			{data: 'END_WORK'},
+			{data: 'WORK_DURATION'},
+			{data: 'PROJECT_START'},
+			{data: 'PROJECT_END'},
+			{data: 'PROJECT_DURATION'},
+			{data: 'action'},
+			{data: 'timeline_status'},
+			{data: 'history'}
 			]
 		});
 
@@ -399,7 +399,7 @@
 			$('#startwork').val("");
 			$('#endwork').val("");
 			$('#calldays').val("");
-		
+
 		});
 		//------------------------------------------------------//
 
@@ -451,18 +451,18 @@
 				var time = "";
 				var projectID  = $(this).attr("value");
 				var monthName = new Array(12);				
-					monthName[0] =  "January";
-					monthName[1] = "February";
-					monthName[2] = "March";
-					monthName[3] = "April";
-					monthName[4] = "May";
-					monthName[5] = "June";
-					monthName[6] = "July";
-					monthName[7] = "August";
-					monthName[8] = "September";
-					monthName[9] = "Oktober";
-					monthName[10] = "November";
-					monthName[11] = "Desember";
+				monthName[0] =  "January";
+				monthName[1] = "February";
+				monthName[2] = "March";
+				monthName[3] = "April";
+				monthName[4] = "May";
+				monthName[5] = "June";
+				monthName[6] = "July";
+				monthName[7] = "August";
+				monthName[8] = "September";
+				monthName[9] = "Oktober";
+				monthName[10] = "November";
+				monthName[11] = "Desember";
 
 				var today = new Date();
 				var year = today.getFullYear();
@@ -477,8 +477,8 @@
 				});
 				
 				var data = {
-				  'projectID':projectID,
-				  'time':time		      
+					'projectID':projectID,
+					'time':time		      
 				};
 
 				$.ajax({
@@ -494,7 +494,7 @@
 			});
 		}
 		//------------------------------------------------------//
-	
+
 		function count_total(angka){
 			var nilai_awal = 0;
 			var nilai_sementara = nilai_awal + angka;
@@ -552,7 +552,7 @@
 					},
 					complete: function(){
 						$('.ajax-loader').css("visibility", "hidden");
-				   }
+					}
 					
 				});
 			}
@@ -565,13 +565,13 @@
 			var startwork = $('#startwork').val();
 			var endwork = $('#endwork').val();
 			var workduration = $('#calldays').val();
-		
+
 
 			if( idemployee == "" || idprojek == "" || idprojekRole == "" || startwork == ""){
 				alert("Isi semua");
 			}else{
 
-			   $.ajax({
+				$.ajax({
 					url : baseUrl +'/days_project/input',
 					type: 'POST',
 					data: {'idemployee': idemployee, 'idprojek' : idprojek, 'idprojekRole' : idprojekRole, 'startwork' : startwork, 'endwork' : endwork,'workduration' : workduration},
@@ -582,16 +582,16 @@
 					success:function(r){
 
 						if(r.msg == 'Success Insert'){	                  
-						  $("#error2").html(r.msg);
-						  $('#myModal2').modal("show");
+							$("#error2").html(r.msg);
+							$('#myModal2').modal("show");
 						  setTimeout(function(){// wait for 5 secs(2)
 							location.reload(); // then reload the page.(3)
-						  }, 1000); 
+						}, 1000); 
 						}
 					},
 					complete: function(){
-					 $('.ajax-loader').css("visibility", "hidden");
-				   }
+						$('.ajax-loader').css("visibility", "hidden");
+					}
 				});
 			}
 		});
@@ -605,77 +605,77 @@
 			if($value == ""){
 
 				$('#jabatan-pegawai').val("");
-			  
+
 			}else{
 
 				$.ajax({
-				  type    : 'get',
-				  url     : '{{URL::to('getjbtn')}}',
-				  data    : {'getjbtn': $value },
-				  beforeSend: function(){
+					type    : 'get',
+					url     : '{{URL::to('getjbtn')}}',
+					data    : {'getjbtn': $value },
+					beforeSend: function(){
 						$('.ajax-loader').css("visibility", "visible");
-				  },
-				  success : function(hasil){
+					},
+					success : function(hasil){
 
-					var str = hasil; 
-					var res = str.replace("[", "");
-					var x = res.replace("]","");
+						var str = hasil; 
+						var res = str.replace("[", "");
+						var x = res.replace("]","");
 
-					if(x == ""){
-					  
-					  var warn = "Employee"+" "+$value+" "+"is not found";
-					  alert(warn);
-					  $('#jabatan-pegawai').val("");
-					
-					}else{
-				  
-					  var obj = JSON.parse(x);              
-					  $('#jabatan-pegawai').val(obj.EMPLOYEE_TITLE);
-					
-					}
-				  },
+						if(x == ""){
+
+							var warn = "Employee"+" "+$value+" "+"is not found";
+							alert(warn);
+							$('#jabatan-pegawai').val("");
+
+						}else{
+
+							var obj = JSON.parse(x);              
+							$('#jabatan-pegawai').val(obj.EMPLOYEE_TITLE);
+
+						}
+					},
 					complete: function(){
-					 $('.ajax-loader').css("visibility", "hidden");
-				   }
+						$('.ajax-loader').css("visibility", "hidden");
+					}
 				});
 			}
 		});
-	 
+
 		//Get Info Projek
 		$("#nama-project").change(function(){
 
-		  $value = $("#nama-project").val();
+			$value = $("#nama-project").val();
 
 			if($value == ""){
 
 				$('#startprojek').val("");
 				$('#finishprojek').val("");
 				$('#daysprojek').val("");
-			  
+
 			}else{
 
 				$.ajax({
-				  type    : 'get',
-				  url     : '{{URL::to('getInfoProjek')}}',
-				  data    : {'getInfoProjek': $value },
-				  beforeSend: function(){
+					type    : 'get',
+					url     : '{{URL::to('getInfoProjek')}}',
+					data    : {'getInfoProjek': $value },
+					beforeSend: function(){
 						$('.ajax-loader').css("visibility", "visible");
-				  },
-				  success : function(hasil){
+					},
+					success : function(hasil){
 
-					var str = hasil; 
-					var res = str.replace("[", "");
-					var x = res.replace("]","");
-					var obj = JSON.parse(x);
+						var str = hasil; 
+						var res = str.replace("[", "");
+						var x = res.replace("]","");
+						var obj = JSON.parse(x);
 
-					$('#startprojek').val(obj.PROJECT_START);
-					$('#finishprojek').val(obj.PROJECT_END);
-					$('#daysprojek').val(obj.PROJECT_DURATION);
-					
+						$('#startprojek').val(obj.PROJECT_START);
+						$('#finishprojek').val(obj.PROJECT_END);
+						$('#daysprojek').val(obj.PROJECT_DURATION);
+
 					},
 					complete: function(){
-					 $('.ajax-loader').css("visibility", "hidden");
-				   }
+						$('.ajax-loader').css("visibility", "hidden");
+					}
 				});
 			}
 		});
@@ -697,10 +697,10 @@
 				var holiday = [];            
 				for (var i = 0; i < data.length; i++)
 				{
-				  var obj = data[i];
-				  holiday[i] = obj.day;          
+					var obj = data[i];
+					holiday[i] = obj.day;          
 				}
-							  
+
 				holidays = holiday;
 				
 				$("#startwork").datepicker({
@@ -711,8 +711,8 @@
 						var day = date.getDay();
 						if(day == 0 || day == 6){
 
-						  return [false];
-						
+							return [false];
+
 						}else if(holidays != ""){
 
 							var datestring = jQuery.datepicker.formatDate('yy-mm-dd', date);
@@ -723,7 +723,7 @@
 							return [true];
 						}       
 					},
-					  dateFormat : 'yy-mm-dd'
+					dateFormat : 'yy-mm-dd'
 				}); 
 
 				$("#endwork").datepicker({
@@ -735,7 +735,7 @@
 						if(day == 0 || day == 6){
 
 							return [false];
-					
+
 						}else if(holidays != ""){
 
 							var datestring = jQuery.datepicker.formatDate('yy-mm-dd', date);
@@ -746,7 +746,7 @@
 						}       
 					},		        
 					dateFormat : 'yy-mm-dd',
-					  
+
 					onSelect: function () {
 						calculateDays();
 					}
@@ -754,20 +754,20 @@
 				function calculateDays(){
 					var start = $("#startwork").val();
 					var end   = $("#endwork").val();
-							
-					  if(start < end){
+
+					if(start < end){
 						
 						var numOfDays = workingDaysBetweenDates(start, end)
 						$("#calldays").val(numOfDays);
 
-					  }else if(start == end){
+					}else if(start == end){
 						
 						$("#calldays").val("1");
-					  
-					  }else{
+
+					}else{
 						
 						alert("wrong!");
-					  }         
+					}         
 				}
 
 				function workingDaysBetweenDates(d0, d1) {
@@ -807,13 +807,13 @@
 					}
 					/* Here is the code */
 					for (var i in holidays) {
-					  if ((holidays[i] >= d0) && (holidays[i] <= d1)) {
-						days--;
-					  }
+						if ((holidays[i] >= d0) && (holidays[i] <= d1)) {
+							days--;
+						}
 					}
 					return days;
 				}
-						   
+
 				function parseDate(input) {
 				  // Transform date from text to date
 				  var parts = input.match(/(\d+)/g);
@@ -827,7 +827,7 @@
 				$('.ajax-loader').css("visibility", "hidden");
 			}
 		});
-});
+	});
 
 function actionClick(id, action, pId){
 	var data = {
@@ -836,15 +836,15 @@ function actionClick(id, action, pId){
 	};
 
 	$.ajax({
-	  url : baseUrl +'/days_project/action',
-	  type: 'POST',
-	  data: data,			  
-	  dataType: 'json',
-	  success:function(r){ 	   
+		url : baseUrl +'/days_project/action',
+		type: 'POST',
+		data: data,			  
+		dataType: 'json',
+		success:function(r){ 	   
 		//location.reload();
 		table.ajax.reload( null, false );
-	  }
-	});
+	}
+});
 }
 
 function historyClick(pId, status){
