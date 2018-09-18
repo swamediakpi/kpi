@@ -5,10 +5,10 @@
 <div class="" role="tabpanel" data-example-id="togglable-tabs">
 	<ul id="myTab" class="nav nav-tabs col-md-12 col-sm-4 col-xs-12" role="tablist">
 		<li role="presentation" class="active">
-			<a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Integrasi</a>
+			<a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Employee</a>
 		</li>
 		<li role="presentation" class="">
-			<a href="#tab_content2" id="updateAPI-tab" role="tab" data-toggle="tab" aria-expanded="true">Update API</a>
+			<a href="#tab_content2" id="updateAPI-tab" role="tab" data-toggle="tab" aria-expanded="true">Absensi</a>
 		</li>
 		<!-- <li role="presentation" class="">
 			<a href="#tab_content_edit_holiday" id="edit_holiday_id" role="tab" data-toggle="tab" aria-expanded="true">Edit Holiday</a>
@@ -54,6 +54,7 @@
 							<div class="col-md-9 col-sm-9 col-xs-12">
 								<img id="emp_pict" alt="emp_pict" class="emp_pict" src="" width="80" height="80">  
 								<input type="hidden" class="form-control emppict" id="emppict" readonly>
+								<input type="hidden" class="form-control kid" id="kid" readonly>
 							</div>
 						</div>
 						<div class="form-group">
@@ -203,10 +204,14 @@
 		}
 		select.value = new Date().getFullYear();
 		selectAPI.value= new Date().getFullYear();
+		
 		var tanggal = new Date();
 		for (var i= 0; i<12;i++){
 			var opt = document.createElement('option');
-			opt.value = i+1;
+			if (i<10)
+				opt.value = '0'+(i+1);
+			else
+				opt.value = i+1;
 			opt.innerHTML = monthNames[i];
 			selectMonth.appendChild(opt);
 		}
@@ -246,7 +251,7 @@
 		    	}else{
 		    		op+='<option value="" >Choose Employee</option>';
 		    		for(let i = 0 ; i < response.absen.length ; i++){
-		    			op+='<option value="'+response.absen[i].nik+'*'+response.absen[i].foto+'*'+response.absen[i].nama+'">'+response.absen[i].nama+'</option>';
+		    			op+='<option value="'+response.absen[i].nik+'*'+response.absen[i].kid+'*'+response.absen[i].foto+'*'+response.absen[i].nama+'">'+response.absen[i].nama+'*'+response.absen[i].kid+'</option>';
 		    		}
 		    	}
 		    	$('#emp_name').append(op);
@@ -255,13 +260,47 @@
 		    	alert ("Load API Point Error!",errorThrown,"error");
 		    }
 		});
+    });    
+	$('#btn-update-api-emp').click(function(){
+    	var id_unit = $('.unitname').val();
+    	var MM = ((tanggal.getMonth()+1) < 10 ? '0' : '') + (tanggal.getMonth() + 1);
+    	var op = "";
+    	var date_now = MM+tanggal.getFullYear();
+    	var unit     = $('.unitname').val();
+		var month = $('#month_api').val();
+		var year = $('#year_api').val(); 
+		console.log(year);
+    	$.ajax({
+    		
+    		url         : baseUrl+'/integrasi/update_data',
+    		type        : "GET",
+    		dataType    : "json",
+    		crossDomain: true,
+    		contentType: "application/json",
+    		data		:{'month':month, 'year':year},
+    		beforeSend: function(){
+                $('.ajax-loader').css("visibility", "visible");
+              },
+              success:function(r){
+                $('#DeletePeninilaian').modal('hide');
+                setTimeout(function(){// wait for 5 secs(2)
+                    location.reload(); // then reload the page.(3)
+                  }, 1000);
+				   $("#error2").html(r.msg);
+                  $('#myModal2').modal("show");              
+              },
+		    error 		: function(xhr, textStatus, errorThrown){
+		    	alert ("Load API Point Error!",errorThrown,"error");
+		    }
+		});
     });
     $('.emp_name').change(function(){
     	var splt = $(this).val().split('*');
     	$("#emp-no").val(splt[0]);
-    	$("#emppict").val(splt[1]);
-    	$("#empname").val(splt[2]);
-    	$( "#emp_pict" ).attr('src', splt[1] );
+    	$("#kid").val(splt[1]);
+    	$("#emppict").val(splt[2]);
+    	$("#empname").val(splt[3]);
+    	$( "#emp_pict" ).attr('src', splt[2] );
     	var nik =$(this).val().split('*')[0];
     	
     	$.ajax({
@@ -320,7 +359,8 @@
     	var pass     = $('#emp-password').val();
     	var passcon  = $('#emp-passconf').val();    
     	var tahun    = $('#year').val();    
-    	
+    	var kid    	 = $('#kid').val();    
+    	console.log(kid);
     	if(noemp == "" || role == "" || unit == "" || name == "" || email == ""  || title == "" || username == "" || pass =="" || passcon ==""){
     		
     		$("#error1").html("Your Data is not complete!");
@@ -336,7 +376,7 @@
     		$.ajax({
     			url : baseUrl +'/integrasi/input',
     			type: 'POST',
-    			data: {'noemp':noemp, 'role':role, 'unit':unit, 'name':name, 'email':email ,'title':title, 'username':username, 'pass':pass, 'passcon':passcon, 'emp_pict':pict,'tahun':tahun},
+    			data: {'noemp':noemp, 'role':role, 'unit':unit, 'name':name, 'email':email ,'title':title, 'username':username, 'pass':pass, 'passcon':passcon, 'emp_pict':pict,'tahun':tahun, 'kid':kid},
     			dataType: 'json',
     			success:function(r){
     				if(r.msg == 'Success Insert'){

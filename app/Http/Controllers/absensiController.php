@@ -43,6 +43,7 @@ class absensiController extends Controller
 
 		$emp_id   = $request->get('emp_id');
 		$month   = $request->get('month');
+		$year   = $request->get('year');
 		
 		if($month == "komulatif"){
 		    
@@ -50,7 +51,7 @@ class absensiController extends Controller
 		    
 		}else{
 		    
-    		$query =  DB::select("call spViewAbsen('$emp_id','$month')");		    
+    		$query =  DB::select("call spViewAbsen('$emp_id','$month','$year')");		    
 		}
 
 		$data ['content'] = $query;		

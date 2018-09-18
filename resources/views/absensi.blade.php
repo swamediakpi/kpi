@@ -178,8 +178,9 @@
 					}else {
 						op+='<option value="" >Choose Employee</option>';
 						for(var i = 0 ; i < data.length ; i++) {
-							var string_Nik = data[i].EMPLOYEE_ID;
-							op+='<option value="'+data[i].EMPLOYEE_ID+'">'+string_Nik+'//'+data[i].EMPLOYEE_NAME+'</option>';
+							//var string_Nik = data[i].EMPLOYEE_ID;
+							var string_Nik = data[i].KID;
+							op+='<option value="'+data[i].KID+'">'+string_Nik+'//'+data[i].EMPLOYEE_NAME+'</option>';
 						}
 					}
 					$('.empname').append(op);
@@ -201,7 +202,9 @@
 		}
 		//result-search-absen
 		$('.btn-search-absen').click(function() {
-			var emp_id = $('.empname').val(); var month  = $('.month').val();
+			var emp_id = $('.empname').val(); 
+			var month  = $('.month').val();
+			var year  = $('.year').val();
 			//var year   = $('.year').val();
 
 			if(emp_id == "" || emp_id == null || month == "" || month == null) {
@@ -211,7 +214,7 @@
 				$.ajax({
 					url : baseUrl +'/absensi/search',
 					type: 'POST',
-					data: {'emp_id': emp_id , 'month': month }, //, 'year': year
+					data: {'emp_id': emp_id , 'month': month, 'year':year}, //, 'year': year
 					dataType: 'json',
 					beforeSend: function(){
 						$('.ajax-loader').css("visibility", "visible");
