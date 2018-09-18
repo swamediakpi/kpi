@@ -144,6 +144,7 @@ public function insertJSONtoDB($kode_unit,$month,$date)
         $tahun  	 = $request->get('tahun');       
         $kid  	 	 = $request->get('kid'); 
 
+		
         $saveData = array("EMPLOYEE_ID"=>$noemp,"ROLE_ID"=>$role,"UNIT_ID"=>$unit,"EMPLOYEE_NAME"=>$name,"EMPLOYEE_EMAIL"=>$email,"EMPLOYEE_TITLE"=>$title,"username"=>$username,"password"=>bcrypt($password),"avatar"=> $avatar );
 		
 

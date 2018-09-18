@@ -51,6 +51,7 @@ class absensiController extends Controller
 		    
 		}else{
 		    
+			
     		$query =  DB::select("call spViewAbsen('$emp_id','$month','$year')");		    
 		}
 
