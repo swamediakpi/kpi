@@ -347,6 +347,7 @@
     		}
     	});
     };*/
+	
     $('#btn-input-emp').click(function(){
 
     	var noemp    = $('#emp-no').val();
