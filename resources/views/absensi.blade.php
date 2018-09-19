@@ -265,7 +265,7 @@
 							t+=  '</tr>';
 							t+=  '<tr>';
 							t+=     '<td class="table-head-absensi">Jumlah Jam Masuk Kerja :</td>';
-							t+=     '<td class="number-absensi" style="width: 30%">'+delimiter(v.total_jam_kerja)+'</td>';  
+							t+=     '<td class="number-absensi" style="width: 30%">'+v.total_jam_kerja+'</td>';  
 							t+=  '</tr>';
 							t+=  '<tr>';
 							t+=    '<td class="table-head-absensi">Jumlah Ijin (menit) :</td>';
