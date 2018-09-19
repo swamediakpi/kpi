@@ -154,7 +154,7 @@
 						<div class="form-group">
 							<label class="control-label col-md-1 col-sm-3 col-xs-12">Bulan</label>
 							<div class="col-md-9 col-sm-9 col-xs-12">
-								<select id="month_api" class="form-control emp_name" selected>
+								<select id="month_api" class="form-control month_api" selected>
 									<option value="">Pilih Bulan</option>
 
 								</select>
