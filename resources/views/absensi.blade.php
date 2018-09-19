@@ -228,6 +228,7 @@
 						$.each(r.content, function(k, v){
 							t += '<table class="table table-hover table-bordered">';
 							t += '<tr>';
+							
 							t +=    '<td class="table-head-absensi" style="width: 25%">Nama Karyawan:</td>';
 							t +=    '<td style="width: 25%" >'+(v.EMPLOYEE_NAME)+'</td>';
 							t +=    '<td class="table-head-absensi" style="width: 25%">Jumlah Hari Kerja</td>';
