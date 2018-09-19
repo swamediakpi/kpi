@@ -33,13 +33,13 @@
 		<style>
 			.table-head {
 				color:#fff;
-				background-color:#212529;
+				background-color:#2A3F54;
 				border-color:#32383e;
 				text-align:center;
 			}
 			.table-head-absensi {
 				color:#fff;
-				background-color:gray;
+				background-color:#2A3F54;
 				border-color:#32383e;
 				text-align:left;
 			}
