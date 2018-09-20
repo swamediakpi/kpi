@@ -62,8 +62,8 @@ public function insertJSONtoDB($kode_unit,$month,$date)
     $periode = $array['periode']['date1'];
     $periode1 = $array['periode']['date2'];
     $harikerja = $array['jmlharikerja'];
-	$save = DB::select("call spinsertharikerjabulan('".$harikerja."', '".$month."','".$date."')");
-    dd($save);
+	$save1 = DB::select("call spinsertharikerjabulan('".$harikerja."', '".$month."','".$date."')");
+    dd($save1);
 
     $hadir = $array['absen'][0]['hadir'];
 
