@@ -88,7 +88,7 @@
 
 		<script src=" {{ asset('public/js/jquery.dataTables.min.js') }}"></script>
 		<script src=" {{ asset('public/js/dataTables.bootstrap.min.js') }}"></script>
-		<!--script type="text/javascript" src="{{ asset("Public/js/FungsiSend.js") }}"></script-->
+		<script type="text/javascript" src="{{ asset("public/js/FungsiSend.js") }}"></script>
 	</head>
 
 <script type="text/javascript">
