@@ -43,7 +43,6 @@ class integrasiController extends Controller
 	}
 public function insertJSONtoDB($kode_unit,$month,$date)
 {
-    $connect = mysqli_connect("172.17.3.11","kpibim","kpi123","petamudi_kpi");
 
     $tanggal =  date("mY");
     $url = "http://portal.swamedia.co.id/index.php/hrm/json/".$kode_unit."/".$month.$date; 
