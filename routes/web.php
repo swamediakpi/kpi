@@ -57,6 +57,7 @@ Route::group(['middleware' => 'auth'], function () {
 	
 	Route::post('/integrasi/input','integrasiController@insert_emp');
 	Route::get('/integrasi/update_data','integrasiController@update_data');
+	Route::get('/integrasi/cek','integrasiController@cek_data');
 	Route::get('/get/emp','integrasiController@getemp');
 	Route::get('/integrasi','integrasiController@showRoleUnit'); 
 	Route::get('/get/api','integrasiController@getapi');

@@ -270,10 +270,10 @@
     	var unit     = $('.unitname').val();
 		var month = $('#month_api').val();
 		var year = $('#year_api').val(); 
-		console.log(year);
+		
     	$.ajax({
     		
-    		url         : baseUrl+'/integrasi/update_data',
+    		url         : baseUrl+'/integrasi/cek_data',
     		type        : "GET",
     		dataType    : "json",
     		crossDomain: true,
@@ -283,12 +283,12 @@
                 $('.ajax-loader').css("visibility", "visible");
               },
               success:function(r){
-                $('#DeletePeninilaian').modal('hide');
-                setTimeout(function(){// wait for 5 secs(2)
-                    location.reload(); // then reload the page.(3)
-                  }, 1000);
-				   $("#error2").html(r.msg);
-                  $('#myModal2').modal("show");              
+					
+					setTimeout(function(){// wait for 5 secs(2)
+						location.reload(); // then reload the page.(3)
+					  }, 1000);
+					   $("#error2").html(r.msg);
+					  $('#myModal2').modal("show");              
               },
 		    error 		: function(xhr, textStatus, errorThrown){
 		    	alert ("Load API Point Error!",errorThrown,"error");
@@ -363,6 +363,7 @@
     	var tahun    = $('#year').val();    
     	var kid    	 = $('#kid').val();    
     	console.log(kid);
+		
     	if(noemp == "" || role == "" || unit == "" || name == "" || email == ""  || title == "" || username == "" || pass =="" || passcon ==""){
     		
     		$("#error1").html("Your Data is not complete!");

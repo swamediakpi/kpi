@@ -125,8 +125,18 @@ public function insertJSONtoDB($kode_unit,$month,$date)
 		for ($kd_unit=1;$kd_unit<=11;$kd_unit++)
 		$this->insertJSONtoDB($kd_unit,$month,$year);
 		
-  $msg['msg'] = 'Success Insert';
-        return json_encode($msg);	}
+		$msg['msg'] = 'Success Insert';
+    return json_encode($msg);	
+	}
+	public function cek_data(Request $request)
+	{
+		$year =  $request->get('year');
+		$month =  $request->get('month'); 
+		$cek = ("call ('".$year."','".$month."')");
+		dd($cek);
+		$msg['msg'] = 'Success Insert';
+    return json_encode($cek);	
+	}
 
 	public function insert_emp(Request $request){
 
