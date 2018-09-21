@@ -273,7 +273,7 @@
 		
     	$.ajax({
     		
-    		url         : baseUrl+'/integrasi/cek_data',
+    		url         : baseUrl+'/integrasi/cek',
     		type        : "GET",
     		dataType    : "json",
     		crossDomain: true,
