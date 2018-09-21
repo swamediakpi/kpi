@@ -294,6 +294,7 @@
 		    	alert ("Load API Point Error!",errorThrown,"error");
 		    }
 		});
+		console.log(response.jml);
     });
     $('.emp_name').change(function(){
     	var splt = $(this).val().split('*');
