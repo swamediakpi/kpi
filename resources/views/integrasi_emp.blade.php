@@ -283,55 +283,17 @@
                 $('.ajax-loader').css("visibility", "visible");
               },
               success:function(r){
-				if (r[0].jml==0){
-					alert('tes');
-				}else{
-						$.ajax({		
-							url         : baseUrl+'/integrasi/update_data',
-							type        : "GET",
-							dataType    : "json",
-							crossDomain: true,
-							contentType: "application/json",
-							data		:{'month':month, 'year':year},
-							beforeSend: function(){
-								$('.ajax-loader').css("visibility", "visible");
-							  },
-							  success:function(r){
-									
-									setTimeout(function(){// wait for 5 secs(2)
-										location.reload(); // then reload the page.(3)
-									  }, 1000);
-									   $("#error2").html(r.msg);
-									  $('#myModal2').modal("show");              
-							  },
-							error 		: function(xhr, textStatus, errorThrown){
-								alert ("Load API Point Error!",errorThrown,"error");
-							}
-						});
-					
-				}
-					//setTimeout(function(){// wait for 5 secs(2)
-					//	location.reload(); // then reload the page.(3)
-					  //}, 1000);
-					  // $("#error2").html(r.msg);
-					  //$('#myModal2').modal("show");              
+                $('#DeletePeninilaian').modal('hide');
+                setTimeout(function(){// wait for 5 secs(2)
+                    location.reload(); // then reload the page.(3)
+                  }, 1000);
+				   $("#error2").html(r.msg);
+                  $('#myModal2').modal("show");              
               },
 		    error 		: function(xhr, textStatus, errorThrown){
 		    	alert ("Load API Point Error!",errorThrown,"error");
 		    }
 		});
-    });	
-	
-	$('.coba').click(function(){
-    	var id_unit = $('.unitname').val();
-    	var MM = ((tanggal.getMonth()+1) < 10 ? '0' : '') + (tanggal.getMonth() + 1);
-    	var op = "";
-    	var date_now = MM+tanggal.getFullYear();
-    	var unit     = $('.unitname').val();
-		var month = $('#month_api').val();
-		var year = $('#year_api').val(); 
-		
-    
     });
     $('.emp_name').change(function(){
     	var splt = $(this).val().split('*');

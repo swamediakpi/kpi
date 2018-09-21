@@ -63,7 +63,6 @@ public function insertJSONtoDB($kode_unit,$month,$date)
     $periode1 = $array['periode']['date2'];
     $harikerja = $array['jmlharikerja'];
 	$save1 = DB::select("call spinsertharikerjabulan('".$harikerja."', '".$month."','".$date."')");
-    dd($save1);
 
     $hadir = $array['absen'][0]['hadir'];
 
@@ -125,17 +124,8 @@ public function insertJSONtoDB($kode_unit,$month,$date)
 		for ($kd_unit=1;$kd_unit<=11;$kd_unit++)
 		$this->insertJSONtoDB($kd_unit,$month,$year);
 		
-		$msg['msg'] = 'Success Insert';
-    return json_encode($msg);	
-	}
-	public function cek_data(Request $request)
-	{
-		$year =  $request->get('year');
-		$month =  $request->get('month'); 
-		$cek =  DB::select("call spcekrincian('".$year."','".$month."')");
-		$msg['msg'] = 'Success Insert';
-    return json_encode($cek);	
-	}
+	$msg['msg'] = 'Success Insert';
+        return json_encode($msg);	}
 
 	public function insert_emp(Request $request){
 
