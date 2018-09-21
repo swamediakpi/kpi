@@ -279,22 +279,23 @@
     		crossDomain: true,
     		contentType: "application/json",
     		data		:{'month':month, 'year':year},
-    		beforeSend: function(){
+    		beforeSend: function(request){
                 $('.ajax-loader').css("visibility", "visible");
               },
-              success:function(r){
+              success:function(response){
+		console.log(response[0].jml);
+
 					
-					setTimeout(function(){// wait for 5 secs(2)
-						location.reload(); // then reload the page.(3)
-					  }, 1000);
-					   $("#error2").html(r.msg);
-					  $('#myModal2').modal("show");              
+					//setTimeout(function(){// wait for 5 secs(2)
+					//	location.reload(); // then reload the page.(3)
+					//  }, 1000);
+					//   $("#error2").html(r.msg);
+					//  $('#myModal2').modal("show");              
               },
 		    error 		: function(xhr, textStatus, errorThrown){
 		    	alert ("Load API Point Error!",errorThrown,"error");
 		    }
 		});
-		console.log(response.jml);
     });
     $('.emp_name').change(function(){
     	var splt = $(this).val().split('*');
