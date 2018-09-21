@@ -132,8 +132,7 @@ public function insertJSONtoDB($kode_unit,$month,$date)
 	{
 		$year =  $request->get('year');
 		$month =  $request->get('month'); 
-		$cek = ("call ('".$year."','".$month."')");
-		dd($cek);
+		$cek = ("call spcekrincian('".$year."','".$month."')");
 		$msg['msg'] = 'Success Insert';
     return json_encode($cek);	
 	}
