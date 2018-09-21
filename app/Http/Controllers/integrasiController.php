@@ -132,7 +132,7 @@ public function insertJSONtoDB($kode_unit,$month,$date)
 	{
 		$year =  $request->get('year');
 		$month =  $request->get('month'); 
-		$cek = ("call spcekrincian('".$year."','".$month."')");
+		$cek =  DB::select("call spcekrincian('".$year."','".$month."')");
 		$msg['msg'] = 'Success Insert';
     return json_encode($cek);	
 	}
