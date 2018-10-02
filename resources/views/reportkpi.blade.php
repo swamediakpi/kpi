@@ -70,7 +70,7 @@
                     <th>Value KPI</th>
                     <th>Target</th>
                     <th>Unit</th>
-                    <th>Year and Realization</th>
+                    <th>Realization</th>
                     <th>Score</th>
                     <th>Final Score</th>
                     <th>Note</th>
@@ -88,6 +88,7 @@
                     <td class="result-absen-skor"></td>
                     <td class="result-absen-skorakhir"></td>
                     <td class="result-absen-ket"></td>  
+                  </tr>
                   </tr>
                   <tr>
                     <td>2</td>
@@ -157,7 +158,7 @@
                     <td></td>
                     <td></td>
                     <td colspan="2"><center>FINAL RESULT</center></td>
-                    <td class="result-score-akhir"></td>
+                    <td class="result_score_akhir"></td>
                     <td></td>
                   </tr>
               </tbody>
@@ -282,7 +283,7 @@ $('.btn-search-report').click(function(){
               $('.result-unit-skorakhir span').remove();
               $('.result-unit-ket span').remove();
 
-              $('.result-score-akhir span').remove();
+              $('.result_score_akhir span').remove();
 
 
               $.each(r.content, function(k, v){
@@ -376,8 +377,8 @@ $('.btn-search-report').click(function(){
                   $('.result-unit-ket').append(unit_ket);  
 
                   var resultKPI = parseInt(final_score.split('<span>').join('').split('</span>').join('')) + parseInt(daysproject_skorakhir.split('<span>').join('').split('</span>').join('')) + parseInt(pmis_skorakhir.split('<span>').join('').split('</span>').join(''));
-                  
-                  $('.result-score-akhir').append("<span>"+resultKPI+"</span>");
+                  console.log(parseInt(daysproject_skorakhir.split('<span>').join('').split('</span>').join('')));
+                  $('.result_score_akhir').append("<span>"+resultKPI+"</span>");
               }
             },
             complete: function(){

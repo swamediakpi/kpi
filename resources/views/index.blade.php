@@ -409,12 +409,16 @@
 			<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=921202d7-f490-4ac5-abb0-094a6f3996cc&amp;yfFilter3a292b07-de24-48cd-be95-844548a4c9ae={{ str_replace(' ','+',$listTahun->EMPLOYEE_NAME) }}"></script>
 		@endforeach
 	@else
-		<div class="row">
-			<div id=\"yfReportContainera17406ec-c9ed-44a2-8f7e-b9e248fbe107\"></div>
-		</div>
+		
+			<div role="tabpanel" class="row tab-pane fade active in" id="tab_content1 yfReportContainera17406ec-c9ed-44a2-8f7e-b9e248fbe107\" aria-labelledby="home-tab" >
+				</div>
+						<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?dashUUID=9195c10b-60f0-40d6-80c1-0d57b0df3262"></script>
+
+		
+		<!--script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=26c7931b-812f-478c-b9df-27203b9cc376"></script>
 		<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=963500f9-70c1-403b-bb61-337ade16e93d"></script>
 		<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=a17406ec-c9ed-44a2-8f7e-b9e248fbe107"></script>
-		<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=8652081c-f0d8-4241-8315-6550e849fd3c"></script>
+		<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=8652081c-f0d8-4241-8315-6550e849fd3c"></script-->
 		
 	@endif
 @endif

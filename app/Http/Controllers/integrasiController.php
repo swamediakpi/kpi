@@ -44,7 +44,10 @@ class integrasiController extends Controller
 public function insertJSONtoDB($kode_unit,$month,$date)
 {
 
-    $tanggal =  date("mY");
+    $bulan =  date("m");
+	$tahun = date("Y");
+	
+	
     $url = "http://portal.swamedia.co.id/index.php/hrm/json/".$kode_unit."/".$month.$date; 
     $curl = curl_init($url);
     curl_setopt($curl, CURLOPT_HEADER, false);
@@ -119,13 +122,24 @@ public function insertJSONtoDB($kode_unit,$month,$date)
 }
 	public function update_data(Request $request)
 	{
+		
 		$year =  $request->get('year');
 		$month =  $request->get('month');
-		for ($kd_unit=1;$kd_unit<=11;$kd_unit++)
-		$this->insertJSONtoDB($kd_unit,$month,$year);
+		$simpan = DB::select("call spcekrincian('".$month."','".$year."')");
+		$hasil = $simpan[0]->jml;
+		if ($hasil==0){
+			for ($kd_unit=1;$kd_unit<=11;$kd_unit++)
+			$this->insertJSONtoDB($kd_unit,$month,$year);
 		
-	$msg['msg'] = 'Success Insert';
-        return json_encode($msg);	}
+			$msg['msg'] = 'Success Insert';
+		}else{
+			$msg['msg'] = 'gagal Insert';
+
+		}				
+		return json_encode($msg);	
+
+		
+	}
 
 	public function insert_emp(Request $request){
 

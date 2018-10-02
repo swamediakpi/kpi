@@ -180,4 +180,9 @@ Route::any('/getKontrakBulanData', 'plnController@getKontrakBulanData');
 Route::any('/getVsData', 'plnController@getVsData');
 Route::any('/getVsDataBulan', 'plnController@getVsDataBulan');
 
+Route::get('/indexdasboardyf', 'index_dasboard_yfController@index');
+Route::get('/indexdasboardyf/absen', 'index_dasboard_yfController@index');
+Route::get('/indexdasboardyf/duateratas', 'index_dasboard_yfController@duateratas');
+Route::get('/indexdasboardyf/duaterbawah', 'index_dasboard_yfController@duaterbawah');
+
 Auth::routes();
