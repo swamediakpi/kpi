@@ -72,8 +72,8 @@
 
 							<ul class="treeview-menu">
 									<li><a href="{{ url('/indexdasboardyf/absen') }}"><i class="fa fa-home"></i>Absen</a></li>
-										<li><a href="{{ url('indexdasboardyf/duateratas') }}"><i class="fa fa-home"></i>Datang Tercepat</a></li>
-										<li><a href="{{ url('/indexdasboardyf/duaterbawah') }}"><i class="fa fa-home"></i>Datang Terlambat</a></li>
+										<li><a href="{{ url('indexdasboardyf/duateratas') }}"><i class="fa fa-home"></i>Project Berjalan</a></li>
+										<li><a href="{{ url('/indexdasboardyf/duaterbawah') }}"><i class="fa fa-home"></i>Rekap absen</a></li>
 							</ul>
 						</li>
 					</ul>
