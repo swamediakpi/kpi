@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang='en'>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta name="csrf-token" content="{!! csrf_token() !!}"/>
-		<!-- Meta, title, CSS, favicons, etc. -->
-		<meta charset="utf-8">
+		<meta charset="UTF-8">
+		<title>{{ $page_title or "KPI PEGAWAI" }}</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+		<meta name="csrf_token" content="{{ csrf_token() }}">
+
+		<link type="text/css" rel="stylesheet" href="{{ asset("public/bower_components/components.css") }}" />
+		<link type="text/css" rel="stylesheet" href="{{ asset("public/bower_components/custom.css") }}" />
 
 		<meta name="application-name" content="&nbsp;"/>
 		<meta name="msapplication-TileColor" content="#FFFFFF" />
@@ -16,192 +19,120 @@
 		<meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
 		<meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
 
-		<title>KPI PEGAWAI</title>
+		<link href="{{ asset("public/bower_components/AdminLTE/bootstrap/css/bootstrap.min.css") }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset("public/bower_components/AdminLTE/plugins/select2/select2.min.css") }}" rel="stylesheet" >
+		<link href="{{ asset("public/bower_components/AdminLTE/plugins/iCheck/all.css") }}" rel="stylesheet" >
+		<link href="{{ asset("public/bower_components/AdminLTE/plugins/iCheck/all.css") }}" rel="stylesheet">
+		<link href="{{ asset("public/bower_components/AdminLTE/dist/css/AdminLTE.min.css")}}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset("public/bower_components/AdminLTE/plugins/datatables.net-bs/css/dataTables.bootstrap.min.css") }}" rel="stylesheet" >
+		<link href="{{ asset("public/bower_components/AdminLTE/plugins/datepicker/datepicker3.css")}}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset("public/bower_components/AdminLTE/dist/css/skins/skin-blue.min.css")}}" rel="stylesheet" type="text/css" />
 
-		 <!-- Bootstrap -->
-		<link href= "{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet">
-		<!-- Font Awesome -->
-		<link href="{{ asset('public/css/font-awesome.min.css') }}" rel="stylesheet">
-		<!--  Theme Style -->
-		<link href= " {{ asset('public/css/custom.min.css') }}" rel="stylesheet">
-		
-
-		<link href="{{ asset('public/css/jquery-ui.css') }}" rel="stylesheet" >
-		<link href="{{ asset('public/css/jquery-ui-timepicker-addon.css') }}" rel="stylesheet">    
-		<link href="{{ asset('public/css/dataTables.bootstrap.min.css') }}" type="text/css" rel="stylesheet"/>
-		<link href="{{ asset('public/css/Table-Head.css') }}" type="text/css" rel="stylesheet"/> 
-		<style>
-			.table-head {
-				color:#fff;
-				background-color:#2A3F54;
-				border-color:#32383e;
-				text-align:center;
-			}
-			.table-head-absensi {
-				color:#fff;
-				background-color:#2A3F54;
-				border-color:#32383e;
-				text-align:left;
-			}
-			.number-absensi {
-				text-align:right;
-			}
-			.ajax-loader {
-				visibility: hidden;
-				background-color: rgba(255,255,255,0.7);        
-				position: absolute;
-				z-index: +100 !important;
-				width: 100%;
-				height:100%;
-			}
-
-			.ajax-loader img {
-				position: relative;
-				top:50%;
-				left:50%;
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" >
+		<style type="text/css">
+			tr.group,
+			tr.group:hover {
+				background-color: #000 !important;
 			}
 		</style>
-
-		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="ico/apple-touch-icon-57x57.png" />
-		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114x114.png" />
-		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72x72.png" />
-		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144x144.png" />
-		<link rel="apple-touch-icon-precomposed" sizes="60x60" href="ico/apple-touch-icon-60x60.png" />
-		<link rel="apple-touch-icon-precomposed" sizes="120x120" href="ico/apple-touch-icon-120x120.png" />
-		<link rel="apple-touch-icon-precomposed" sizes="76x76" href="ico/apple-touch-icon-76x76.png" />
-		<link rel="apple-touch-icon-precomposed" sizes="152x152" href="ico/apple-touch-icon-152x152.png" />
-		<link rel="icon" type="image/png" href="ico/favicon-196x196.png" sizes="196x196" />
-		<link rel="icon" type="image/png" href="ico/favicon-96x96.png" sizes="96x96" />
-		<link rel="icon" type="image/png" href="ico/favicon-32x32.png" sizes="32x32" />
-		<link rel="icon" type="image/png" href="ico/favicon-16x16.png" sizes="16x16" />
-		<link rel="icon" type="image/png" href="ico/favicon-128.png" sizes="128x128" />
-
-		<script src=" {{ asset('public/js/jquery.min.js') }}"></script>
-		<script src=" {{ asset('public/js/jquery.js') }}"></script>
-
-		<script src="{{ asset('public/js/jquery-ui.js') }} "></script>
-		<script src="{{ asset('public/js/jquery-ui-timepicker-addon.js') }}"></script>    
-
-		<script src=" {{ asset('public/js/highcharts.js') }}"></script>
-		<script src=" {{ asset('public/js/drilldown.js') }}"></script>
-		<script src=" {{ asset('public/js/exporting.js') }}"></script>
-
-		<script src=" {{ asset('public/js/jquery.dataTables.min.js') }}"></script>
-		<script src=" {{ asset('public/js/dataTables.bootstrap.min.js') }}"></script>
 		<script type="text/javascript" src="{{ asset("public/js/FungsiSend.js") }}"></script>
+		<script type="text/javascript">
+			var urlbase = "{{ asset("") }}";
+		</script>
 	</head>
 
-<script type="text/javascript">
-	var baseUrl = '<?php echo URL::to('/');?>';
-</script>
-<body class="nav-md"> 
-	<div class="container body">
-		<div class="main_container">
-			<div class="col-md-3 left_col">
-				<div class="left_col scroll-view">
-					<div class="navbar nav_title" style="border: 0;">
+	<body class="skin-blue">
+		<div class="wrapper">
+			
+			<!-- Header -->
+			<header class="main-header">
+				<a href="#" class="logo" style="height: 80px;">
+					<img src="{{ asset ("public/css/landingpage/img/logo white.png") }}" alt="logo-kpi">
+				</a>
+				<nav class="navbar navbar-static-top" role="navigation" style="height: 80px;">
+					<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+						<span class="sr-only">Toggle navigation</span>
+					</a>
+				</nav>
+			</header>
 
-						<img src="../public/css/landingpage/img/logo white.png" alt="logo-kpi" style="width:90px; margin-left:5%; margin-top:5%;" class="responesive">
+			<!-- Sidebar -->
+			<aside class="main-sidebar" style="padding-top: 80px;">
+				<section class="sidebar">
+					<ul class="sidebar-menu">
+						<li class="treeview active">
+							<a href="#">
+								<i class="fa fa-home"></i>
+								<span>Dashboard Reporting</span>
+								<span class="pull-right-container">
+									<i class="fa fa-angle-left pull-right"></i>
+								</span>
+							</a>
 
-					</div>
-
-					<div class="clearfix"></div>
-					<!-- menu profile quick info -->
-					
-					<!-- /menu profile quick info -->
-					<br/>
-					<!-- sidebar menu -->
-					<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-						<div class="menu_section">
-							<h3>Menu</h3>
-							<ul class="nav side-menu">
-								<li><a href="#"><i class="fa fa-home"></i><span class="fa fa-chevron-down"></span> Dashboard Reporting</a>
-									<ul class="nav child_menu">
-										<li><a href="{{ url('/indexdasboardyf/absen') }}"><i class="fa fa-home"></i>Absen</a></li>
+							<ul class="treeview-menu">
+									<li><a href="{{ url('/indexdasboardyf/absen') }}"><i class="fa fa-home"></i>Absen</a></li>
 										<li><a href="{{ url('indexdasboardyf/duateratas') }}"><i class="fa fa-home"></i>Datang Tercepat</a></li>
 										<li><a href="{{ url('/indexdasboardyf/duaterbawah') }}"><i class="fa fa-home"></i>Datang Terlambat</a></li>
-									</ul>
-								</li>
-								
 							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- top navigation -->
-			<div class="top_nav">
-				<div class="nav_menu">
-					<nav>
-						<div class="nav toggle">
-							<a id="menu_toggle"><i class="fa fa-bars"></i></a>
-						</div>
-
-						
-					</nav>
-				</div>
-			</div>
-
-			
-
-			<!-- Modal -->
-			<div class="modal fade" id="myModal1" role="dialog">
-				<div class="modal-dialog modal-sm">    
-					<!-- Modal content-->
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Error!</h4>
-						</div>
-				
-						<div class="modal-body">
-							<p style="color: red; text-align: center; font-size: 15px; font-weight: bold;" id="error1"></p>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Modal -->
-			<div class="modal fade" id="myModal2" role="dialog">
-				<div class="modal-dialog modal-sm">    
-					<!-- Modal content-->
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Success!</h4>
-						</div>
+						</li>
+					</ul>
 					
-						<div class="modal-body">
-							<p style="color: green; text-align: center; font-size: 15px; font-weight: bold;" id="error2"></p>
-						</div>
-					</div>
-				</div>
+					
+				</section>
+			</aside>
+
+			<div class="content-wrapper">
+				<section class="content-header">
+					<h1>
+						{{ $page_title or "" }}
+					</h1>
+					@yield('contentLevel')
+				</section>
+
+				<!-- Main content -->
+				<section class="content">
+					@yield('content')
+				</section>
 			</div>
 
-			<div class="ajax-loader">
-				<img src="{{ url('public/images/spinner.gif') }}" />
-			</div>
-			
-			<div class="right_col" role="main">
-				<div class="row">@yield('content')</div>
-			</div>
-
-			<!-- footer content -->
-			<footer>
-				<div class="pull-right">
-					<a href="https://colorlib.com"></a>Copyright &copy; KPI BIM 2017 
+			<!-- Footer -->
+			<footer class="main-footer">
+				<div class="pull-right hidden-xs">
+					KPI BIM
 				</div>
-				<div class="clearfix"></div>
+				<strong>Copyright © 2017 <a href="#">PT. Swamedia Informatika</a>.</strong>
 			</footer>
-			<!-- /footer content -->
 		</div>
-	</div>
-	<script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
-	<!--  Theme Scripts -->
-	<script src="{{ asset('public/js/custom.min.js') }}"> </script>
+
+		<script src="{{ asset ("public/bower_components/AdminLTE/plugins/jQuery/jquery-2.2.3.min.js") }}"></script>
+		<script src="{{ asset ("public/bower_components/AdminLTE/bootstrap/js/bootstrap.min.js") }}" type="text/javascript"></script>
+		<script src="{{ asset ("public/bower_components/AdminLTE/dist/js/app.min.js") }}" type="text/javascript"></script>
+		<script src="{{ asset ("public/bower_components/AdminLTE/plugins/datatables.net/js/jquery.dataTables.min.js") }}"></script>
+		<script src="{{ asset ("public/bower_components/AdminLTE/plugins/datatables.net-bs/js/dataTables.bootstrap.min.js") }}"></script>
+		<script src="{{ asset ("public/bower_components/AdminLTE/plugins/select2/select2.full.min.js") }}"></script>
+		<script src="{{ asset ("public/bower_components/AdminLTE/plugins/datepicker/bootstrap-datepicker.js") }}"></script>
+		<script src="{{ asset ("public/bower_components/AdminLTE/plugins/iCheck/icheck.min.js") }}"></script>
+		<script src="{{ asset ("public/js/bootstrap3-typeahead.min.js") }}"></script>
+		<script src="{{ asset ("public//js/jquery.formautofill.min.js") }}"></script>
+		<script src="{{ asset ("public//js/jquery.form.min.js") }}"></script>
+		<script src="{{ asset ("public/js/marquee.js") }}" type="text/javascript"></script>
+
+		<script src="https://www.gstatic.com/charts/loader.js" type="text/javascript"></script>
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/modules/data.js"></script>
+		<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+
+		@stack('scripts')
+	</body>
+</html>
+	
 	<script>
-              setTimeout(function(){// wait for 5 secs(2)
-                    location.reload(); // then reload the page.(3)
-                  }, 60000);
+            var doSth = function () {
+
+  var $md = $("#absen");
+  // Do something here
+};
+setInterval(doSth, 1000);
 </script>
 </body>

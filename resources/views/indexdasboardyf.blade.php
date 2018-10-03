@@ -2,15 +2,16 @@
 
 @section('content')
 @if ($dashboard== '1')
-			<div class="row">
+			<div class="row" id="absen">
 				<div id=\"yfReportContainera17406ec-c9ed-44a2-8f7e-b9e248fbe107\"></div>
 			</div>
-<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=15284fd5-838a-41aa-b7c7-fd0f86a0a735"></script>
+<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=6b49b8e3-9f3c-442d-9d0c-1bcb103c5187"></script>
 @elseif ($dashboard== '2')
+
 			<div class="row">
 				<div id=\"yfReportContainera17406ec-c9ed-44a2-8f7e-b9e248fbe107\"></div>
 			</div>
-<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=9ea8aa63-1645-4f94-a7f6-3da255dcbc6e"></script>
+	<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=f5194245-7830-4c02-a6f4-054368671844"></script>
 @elseif ($dashboard== '3')
 			<div class="row">
 				<div id=\"yfReportContainera17406ec-c9ed-44a2-8f7e-b9e248fbe107\"></div>
