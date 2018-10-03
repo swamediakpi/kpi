@@ -199,4 +199,9 @@
 	<script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
 	<!--  Theme Scripts -->
 	<script src="{{ asset('public/js/custom.min.js') }}"> </script>
+	<script>
+              setTimeout(function(){// wait for 5 secs(2)
+                    location.reload(); // then reload the page.(3)
+                  }, 60000);
+</script>
 </body>
