@@ -10,7 +10,7 @@ use Image;
 class index_dasboard_yfController extends Controller {
 
 	public function index(){
-		$page_title = "Absen Harian";
+		$page_title = "Dashboard Absen";
 		$dashboard = 0;
 		return view('indexdasboardyf',compact(['page_title', 'dashboard']));
 	}
@@ -27,7 +27,7 @@ class index_dasboard_yfController extends Controller {
 		return view('indexdasboardyf',compact(['page_title', 'dashboard']));
 	}
 		public function index2(){
-		$page_title = "Dashboard Absen";
+		$page_title = "Absen Harian";
 		$dashboard = 1;
 		return view('indexdasboardyf',compact(['page_title', 'dashboard']));
 	}
