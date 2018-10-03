@@ -10,19 +10,19 @@ use Image;
 class index_dasboard_yfController extends Controller {
 
 	public function index(){
-		$page_title = "Dashboard Absen";
+		$page_title = "Absen Harian";
 		$dashboard = 0;
 		return view('indexdasboardyf',compact(['page_title', 'dashboard']));
 	}
 
 	public function duateratas(){
-		$page_title = "Dashboard 2 Tercepat";
+		$page_title = "Project Berjalan";
 		$dashboard = 2;
 		return view('indexdasboardyf',compact(['page_title', 'dashboard']));
 	}
 
 	public function duaterbawah(){
-		$page_title = "Dashboard 2 Telambat";
+		$page_title = "Rekap Absen";
 		$dashboard = 3;
 		return view('indexdasboardyf',compact(['page_title', 'dashboard']));
 	}
