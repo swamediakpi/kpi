@@ -22,6 +22,6 @@
 		    <div class="row">
 				<div id=\"yfReportContainera17406ec-c9ed-44a2-8f7e-b9e248fbe107\"></div>
 			</div>
-			<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=8d33151a-3aee-4fa6-be1b-9025e81f7685&amp;width=939&amp;height=617"></script>
+			<script type="text/javascript" src="http://149.129.217.187:8080/JsAPI?reportUUID=8d33151a-3aee-4fa6-be1b-9025e81f7685"></script>
 @endif
 @endsection
