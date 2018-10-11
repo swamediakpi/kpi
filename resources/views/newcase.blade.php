@@ -142,6 +142,9 @@ $(document).ready(function(){
             dataType: 'json',
             success:function(r){
               if(r.msg == 'Success Insert'){
+				   setTimeout(function(){// wait for 5 secs(2)
+                    location.reload(); // then reload the page.(3)
+                  }, 1000);
                 $("#error2").html(r.msg);
                 $('#myModal2').modal("show");
               }else if(r.msg == 'Assembly Error!'){

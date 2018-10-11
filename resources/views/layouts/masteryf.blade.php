@@ -127,12 +127,13 @@
 	</body>
 </html>
 	
-	<script>
-            var doSth = function () {
-
-  var $md = $("#absen");
-  // Do something here
-};
-setInterval(doSth, 1000);
+<script src="http://code.jquery.com/jquery-3.1.1.js"></script>
+<script type="text/javascript">
+    function doRefresh(){
+        $("#yfReportContainera17406ec-c9ed-44a2-8f7e-b9e248fbe107").load("LOG.txt");
+    }
+    $(function() {
+        setInterval(doRefresh, 5000);
+    });
 </script>
 </body>

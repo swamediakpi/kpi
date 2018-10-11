@@ -46,8 +46,7 @@
 									<th class ="table-head">NO</th>
 									<th class ="table-head">Employee Name</th>
 									<th class ="table-head">Employee Title</th>
-									<th class ="table-head">Unit</th>
-									<th class ="table-head">Role</th>
+							
 								</tr>
 							</thead>
 							
@@ -109,8 +108,7 @@ function setContentTable(val, arr){
 					'<td style="text-align: center">'+arr[0]+'</td>'+
 					'<td>' + arr[1] + '</td>'+
 					'<td>' + arr[2] + '</td>'+
-					'<td>' + arr[3] + '</td>'+
-					'<td>' + arr[4] + '</td>'+
+		
 				'</tr>';
 		break;
 	}

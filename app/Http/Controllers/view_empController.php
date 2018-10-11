@@ -23,19 +23,18 @@ class view_empController extends Controller {
 		$obj = json_decode($json);
 		// $data  = $obj;
 
-		$showemp = DB::table("employee")
-
-						->join("user","employee.EMPLOYEE_ID","=","user.EMPLOYEE_ID")
-						->join("unit","user.UNIT_ID","=","unit.UNIT_ID")
-						->join("role","user.ROLE_ID","=","role.ROLE_ID")
-						->join("periode_employee","employee.EMPLOYEE_ID","=","periode_employee.EMPLOYEE_ID")
-						->join("t_tahun","periode_employee.TAHUN_ID","=","t_tahun.TAHUN_ID")
-						->select("EMPLOYEE_NAME","EMPLOYEE_TITLE","UNIT","ROLE_NAME")
-						->where("user.UNIT_ID","=",$unit)
-						->where("t_tahun.TAHUN","=",$tahun)
-						->get();
+		$showemp = DB::select("CALL spunitemp('".$unit."', '".$tahun."')");
 
 		 $data ['content'] = $showemp;
 		 return json_encode($data);
+	}
+	public function forunit(Request $request){
+
+	$unit_id = $request->get('unit');
+	$tahun= date("Y");
+		
+		$data = DB::select("CALL spunitemp('".$unit_id."', '".$tahun."')");
+				
+		return json_encode($data);
 	}
 }

@@ -86,6 +86,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::any('/edit_employee','edit_employeeController@showRoleUnit');
 	Route::any('/edit_employee/edit','edit_employeeController@edit_employee');
+	Route::any('/for/unit','view_empController@forunit');
 
 	Route::get('/absensi','absensiController@showData');
 	Route::post('/absensi/search','absensiController@filter_absensi');

@@ -179,7 +179,7 @@
 						op+='<option value="" >Choose Employee</option>';
 						for(var i = 0 ; i < data.length ; i++) {
 							//var string_Nik = data[i].EMPLOYEE_ID;
-							var string_Nik = data[i].KID;
+							var string_Nik = data[i].EMPLOYEE_ID;
 							op+='<option value="'+data[i].KID+'">'+string_Nik+'//'+data[i].EMPLOYEE_NAME+'</option>';
 						}
 					}

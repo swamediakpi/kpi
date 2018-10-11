@@ -84,10 +84,12 @@ public function insertJSONtoDB($kode_unit,$month,$date)
        $periode_akhir = $array['periode']['date2'];
     	//var_dump($periode_awal);   
     	//var_dump($jmlharikerja);
-
-        $simpan = DB::select("call spinsertabsen('".$no."', '".$hadir."', '". $tidakabsen."', '".$terlambat."', '".$jmlharikerja."', '".$periode_awal."', '".$periode_akhir."', '".$kid."')");
-       
-	   
+		$cekabsen = DB::select("call spcekabsen('".$kid."','".$periode_awal."','".$periode_akhir."')");
+		if ($cekabsen[0]->jml == 0 ){
+			$simpan = DB::select("call spinsertabsen('".$no."', '".$hadir."', '". $tidakabsen."', '".$terlambat."', '".$jmlharikerja."', '".$periode_awal."', '".$periode_akhir."', '".$kid."')");	
+		}else{
+			echo "Data sudah rincian ada";
+		}
        for ($j=0; $j < count($array['absen'][$i]['rincian']); $j++) 
        { 
           $no = $array['absen'][$i]['no'];
@@ -99,10 +101,12 @@ public function insertJSONtoDB($kode_unit,$month,$date)
           $pulang = $array['absen'][$i]['rincian'][$j]['pulang'];
           $telat = $array['absen'][$i]['rincian'][$j]['telat'];
           $keterangan = $array['absen'][$i]['rincian'][$j]['keterangan'];
-
-			$simpan = DB::select("call spinsertrincianabsen('".$no."','".$kid."', '". $hari ."', '".$tanggal."', '".$masuk."', '".$pulang."', '". $telat ."')");
-		
-		   
+			$cekrincian=DB::select("CALL spcekrincian('".$kid."','".$tanggal."','".$masuk."')");
+			if ($cekrincian[0]->jml2 == 0){
+				$simpan = DB::select("call spinsertrincianabsen('".$no."','".$kid."', '". $hari ."', '".$tanggal."', '".$masuk."', '".$pulang."', '". $telat ."')");
+			}else{
+				echo "Data sudah rincian ada";
+			}
     		// var_dump($hari);
     		// var_dump($tanggal);
     		// var_dump($masuk);
@@ -125,17 +129,13 @@ public function insertJSONtoDB($kode_unit,$month,$date)
 		
 		$year =  $request->get('year');
 		$month =  $request->get('month');
-		$simpan = DB::select("call spcekrincian('".$month."','".$year."')");
-		$hasil = $simpan[0]->jml;
-		if ($hasil==0){
+
 			for ($kd_unit=1;$kd_unit<=11;$kd_unit++)
 			$this->insertJSONtoDB($kd_unit,$month,$year);
 		
 			$msg['msg'] = 'Success Insert';
-		}else{
-			$msg['msg'] = 'gagal Insert';
 
-		}				
+					
 		return json_encode($msg);	
 
 		

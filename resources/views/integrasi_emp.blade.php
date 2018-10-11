@@ -252,7 +252,7 @@
 		    	}else{
 		    		op+='<option value="" >Choose Employee</option>';
 		    		for(let i = 0 ; i < response.absen.length ; i++){
-		    			op+='<option value="'+response.absen[i].nik+'*'+response.absen[i].kid+'*'+response.absen[i].foto+'*'+response.absen[i].nama+'">'+response.absen[i].nama+'*'+response.absen[i].kid+'</option>';
+		    			op+='<option value="'+response.absen[i].nik+'*'+response.absen[i].kid+'*'+response.absen[i].foto+'*'+response.absen[i].nama+'">'+response.absen[i].nama+'</option>';
 		    		}
 		    	}
 		    	$('#emp_name').append(op);
@@ -291,7 +291,7 @@
                   $('#myModal2').modal("show");              
               },
 		    error 		: function(xhr, textStatus, errorThrown){
-		    	alert ("Load API Point Error!",errorThrown,"error");
+		    	alert ("Sebagian Data Gagal Load!",errorThrown,"error");
 		    }
 		});
     });
@@ -324,7 +324,7 @@
 
 		    },
 		    error 		: function(xhr, textStatus, errorThrown){
-		    	alert ("Load API Point Error!",errorThrown,"error");
+		    	alert ("Sebagian Data Gagal Load!",errorThrown,"error");
 		    }
 		});
     });

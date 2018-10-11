@@ -84,7 +84,7 @@
                     <td>20</td>
                     <td>95%</td>
                     <td>%</td>
-                    <td></td>
+                    <td class="result-absen-realis"></td>
                     <td class="result-absen-skor"></td>
                     <td class="result-absen-skorakhir"></td>
                     <td class="result-absen-ket"></td>  
@@ -97,7 +97,7 @@
                     <td>11</td>
                     <td>2</td>
                     <td>hari</td>
-                    <td></td>
+                    <td  class="result-daysproject-rilis"></td>
                     <td class="result-daysproject-skor"></td>
                     <td class="result-daysproject-skorakhir"></td>
                     <td class="result-daysproject-ket"></td> 
@@ -121,7 +121,7 @@
                     <td>15</td>
                     <td>13</td>
                     <td>skor</td>
-                    <td></td>
+                    <td class="result-hrd-relis"></td>
                     <td class="result-hrd-skor"></td>
                     <td class="result-hrd-skorakhir"></td>
                     <td class="result-hrd-ket"></td>                       
@@ -133,7 +133,7 @@
                     <td>16</td>
                     <td>14</td>
                     <td>skor</td>
-                    <td></td>
+                    <td  class="result-pmo-relis"></td>
                     <td class="result-pmo-skor"></td>  
                     <td class="result-pmo-skorakhir"></td>
                     <td class="result-pmo-ket"></td>  
@@ -145,7 +145,7 @@
                     <td>18</td>
                     <td>16</td>
                     <td>skor</td>
-                    <td></td>
+                    <td class="result-unit-rilis"></td>
                     <td class="result-unit-skor"></td>  
                     <td class="result-unit-skorakhir"></td> 
                     <td class="result-unit-ket"></td> 
@@ -212,9 +212,12 @@ $('.btn-search-report').click(function(){
   
     var nama = $('#f_nama').val();
     var bulan = $('#f_bulan').val();
-    var tahun = $('#f_tahun').val();     
+    var tahun = $('#f_tahun').val();    
+	if ( bulan ==""){
+		 var bulan = 0;
+	}
                     
-    if( nama == "" || tahun == "" || bulan == ""){
+    if( nama == "" || tahun == "" ){
 
         $("#error1").html("Your Data is not complete!");
         $('#myModal1').modal("show");
@@ -234,7 +237,7 @@ $('.btn-search-report').click(function(){
               var pmis_skor ='';
               var pmis_skorakhir ='';
               var pmis_note ='';
-              
+              var realiz='';
               var absen_skor = '';
               var absen_skorakhir = '';
               var absen_ket = '';
@@ -261,24 +264,29 @@ $('.btn-search-report').click(function(){
               $('.result-pmis-skorakhir span').remove();
               $('.result-pmis-note span').remove()
               
+              $('.result-absen-realis span').remove();
               $('.result-absen-skor span').remove();
               $('.result-absen-skorakhir span').remove();
               $('.result-absen-ket span').remove()
 
+              $('.result-daysproject-rilis span').remove();
               $('.result-daysproject-skor span').remove();
               $('.result-daysproject-skorakhir span').remove();
               $('.result-daysproject-ket span').remove()
 
               $('.result-pmis-skor span').remove();
                   
+              $('.result-hrd-relis span').remove();
               $('.result-hrd-skor span').remove();
               $('.result-hrd-skorakhir span').remove();
               $('.result-hrd-ket span').remove()
               
+              $('.result-pmo-relis span').remove();
               $('.result-pmo-skor span').remove();
               $('.result-pmo-skorakhir span').remove();
               $('.result-pmo-ket span').remove();
               
+              $('.result-unit-rilis span').remove();
               $('.result-unit-skor span').remove();
               $('.result-unit-skorakhir span').remove();
               $('.result-unit-ket span').remove();
@@ -291,7 +299,8 @@ $('.btn-search-report').click(function(){
                   pmis_skor += '<span>'+v.PMIS_score+'</span>';
                   pmis_skorakhir += '<span>'+v.PMIS_final_score+'</span>';
                   pmis_note += '<span>'+v.NOTE_PMIS+'</span>';
-                  
+                 
+                  realiz += '<span>'+v.score_absen+'</span>';
                   absen_skor += '<span>'+v.score_absensi+'</span>';
                   absen_skorakhir += '<span>'+v.final_score_absensi+'</span>';
                   absen_ket += '<span>'+v.note_absensi+'</span>';
@@ -311,15 +320,11 @@ $('.btn-search-report').click(function(){
                   unit_ket += '<span>'+v.KRITIK_UNIT+'</span>';
 
                   final_score += '<span>'+v.FINAL_SCORE+'</span>';
-
-              });
-
-              $.each(r.contentdays, function(k, v){
-
-                  daysproject_skor += '<span>'+v.final+'</span>';
+				    daysproject_skor += '<span>'+v.final+'</span>';
                   daysproject_skorakhir += '<span>'+v.fixdays+'</span>';       
 
               });
+
               
 
               if(r.content == "" || r.contentdays == ""){
@@ -328,22 +333,27 @@ $('.btn-search-report').click(function(){
                   $('.result-pmis-skorakhir').append("<span>0</span>");
                   $('.result-pmis-note').append("<span>-</span>");
                   
+                  $('.result-absen-realis').append("<span>0</span>");
                   $('.result-absen-skor').append("<span>0</span>");
                   $('.result-absen-skorakhir').append("<span>0</span>");
                   $('.result-absen-ket').append("<span>-</span>");
                    
+                  $('.result-daysproject-rilis').append("<span>0</span>");
                   $('.result-daysproject-skor').append("<span>0</span>");
                   $('.result-daysproject-skorakhir').append("<span>0</span>");
                   $('.result-daysproject-ket').append("<span>-</span>");
 
+                  $('.result-hrd-relis').append("<span>0</span>");
                   $('.result-hrd-skor').append("<span>0</span>");
                   $('.result-hrd-skorakhir').append("<span>0</span>");
                   $('.result-hrd-ket').append("<span>-</span>");
                   
+                  $('.result-pmo-relis').append("<span>0</span>");
                   $('.result-pmo-skor').append("<span>0</span>");
                   $('.result-pmo-skorakhir').append("<span>0</span>");
                   $('.result-pmo-ket').append("<span>-</span>");
                   
+                  $('.result-unit-rilis').append("<span>0</span>");
                   $('.result-unit-skor').append("<span>0</span>");
                   $('.result-unit-skorakhir').append("<span>0</span>");
                   $('.result-unit-ket').append("<span>-</span>");  
@@ -356,27 +366,32 @@ $('.btn-search-report').click(function(){
                   $('.result-pmis-skorakhir').append(pmis_skorakhir);
                   $('.result-pmis-note').append(pmis_note);
                   
+                  $('.result-absen-realis').append(realiz);
                   $('.result-absen-skor').append(absen_skor);
                   $('.result-absen-skorakhir').append(absen_skorakhir);
                   $('.result-absen-ket').append(absen_ket);
 
+                  $('.result-daysproject-rilis').append(daysproject_skor);
                   $('.result-daysproject-skor').append(daysproject_skor);
                   $('.result-daysproject-skorakhir').append(daysproject_skorakhir);
                   $('.result-daysproject-ket').append(daysproject_ket);
  
                   $('.result-hrd-skor').append(hrd_skor);
+                  $('.result-hrd-relis').append(hrd_skorakhir);
                   $('.result-hrd-skorakhir').append(hrd_skorakhir);
                   $('.result-hrd-ket').append(hrd_ket);
                   
                   $('.result-pmo-skor').append(pmo_skor);
+                  $('.result-pmo-relis').append(pmo_skorakhir);
                   $('.result-pmo-skorakhir').append(pmo_skorakhir);
                   $('.result-pmo-ket').append(pmo_ket);
                   
                   $('.result-unit-skor').append(unit_skor);
+                  $('.result-unit-rilis').append(unit_skorakhir);
                   $('.result-unit-skorakhir').append(unit_skorakhir);
                   $('.result-unit-ket').append(unit_ket);  
 
-                  var resultKPI = parseInt(final_score.split('<span>').join('').split('</span>').join('')) + parseInt(daysproject_skorakhir.split('<span>').join('').split('</span>').join('')) + parseInt(pmis_skorakhir.split('<span>').join('').split('</span>').join(''));
+                  var resultKPI = parseInt(final_score.split('<span>').join('').split('</span>').join('')) +  parseInt(pmis_skorakhir.split('<span>').join('').split('</span>').join(''));
                   console.log(parseInt(daysproject_skorakhir.split('<span>').join('').split('</span>').join('')));
                   $('.result_score_akhir').append("<span>"+resultKPI+"</span>");
               }
