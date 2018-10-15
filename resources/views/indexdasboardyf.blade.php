@@ -1,7 +1,7 @@
 @extends('layouts.masteryf')
 
 @section('content')
-@if ($dashboard== '1')
+@if ($dashboard== '1')  
 			<div class="row" id="absen">
 				<div id="yfReportContainera17406ec-c9ed-44a2-8f7e-b9e248fbe107\"></div>
 			</div>

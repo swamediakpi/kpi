@@ -11,7 +11,7 @@ class index_dasboard_yfController extends Controller {
 
 	public function index(){
 		$page_title = "Dashboard Absen";
-		$dashboard = 0;
+		$dashboard = 0;  
 		return view('indexdasboardyf',compact(['page_title', 'dashboard']));
 	}
 
