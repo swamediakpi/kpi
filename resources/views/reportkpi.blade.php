@@ -77,12 +77,13 @@
                   </tr>
               </thead>
               <tbody>
+			    @foreach ($showTarget as $list_target)
                   <tr>
                     <td>1</td>
                     <td>Attendance</td>
                     <td colspan="2">Attendance Employee</td>
                     <td>20</td>
-                    <td>95%</td>
+                    <td>{{ $list_target->absen_target}}%</td>
                     <td>%</td>
                     <td class="result-absen-realis"></td>
                     <td class="result-absen-skor"></td>
@@ -95,7 +96,7 @@
                     <td>Project</td>
                     <td colspan="2">Days Project</td>
                     <td>11</td>
-                    <td>2</td>
+                    <td>{{ $list_target->days_target}}</td>
                     <td>hari</td>
                     <td  class="result-daysproject-rilis"></td>
                     <td class="result-daysproject-skor"></td>
@@ -107,7 +108,7 @@
                     <td>PMIS</td>
                     <td colspan="2">PMIS</td>
                     <td>20</td>
-                    <td>90%</td>
+                    <td>{{ $list_target->pmis_target}}%</td>
                     <td>%</td>
                     <td></td>
                     <td class="result-pmis-skor"></td>
@@ -119,7 +120,7 @@
                     <td></td>                
                     <td colspan="2">Human Resource Department</td>
                     <td>15</td>
-                    <td>13</td>
+                    <td>{{ $list_target->hrd_target}}</td>
                     <td>skor</td>
                     <td class="result-hrd-relis"></td>
                     <td class="result-hrd-skor"></td>
@@ -131,7 +132,7 @@
                     <td><center>Givent Point</center></td>       
                     <td colspan="2">Project Management Officer</td>
                     <td>16</td>
-                    <td>14</td>
+                    <td>{{ $list_target->pmo_target}}</td>
                     <td>skor</td>
                     <td  class="result-pmo-relis"></td>
                     <td class="result-pmo-skor"></td>  
@@ -143,7 +144,7 @@
                     <td></td>
                     <td colspan="2">UNIT</td>                
                     <td>18</td>
-                    <td>16</td>
+                    <td>{{ $list_target->unit_target}}</td>
                     <td>skor</td>
                     <td class="result-unit-rilis"></td>
                     <td class="result-unit-skor"></td>  
@@ -161,6 +162,7 @@
                     <td class="result_score_akhir"></td>
                     <td></td>
                   </tr>
+				@endforeach
               </tbody>
             </table>
         </div>

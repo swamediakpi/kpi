@@ -14,7 +14,7 @@ class reportkpiController extends Controller
         $unitAuth = Auth::user()->UNIT_ID;                                       
         $bulan = DB::table('t_bulan')->get();
         $tahun = DB::table('t_tahun')->get();
-
+		$showTarget = DB::table('kpi_target')->get();	
         if(Auth::user()->ROLE_ID == '4'){
 
             $showUnit  = DB::table('unit')->where('UNIT_ID','=',$unitAuth)
@@ -41,7 +41,7 @@ class reportkpiController extends Controller
             $showUnit = DB::table('unit')->whereNotIn('UNIT',['HRD','NON Unit'])->get();            
         }
 
-        return view('reportkpi',compact(['showUnit','bulan','tahun']));
+        return view('reportkpi',compact(['showUnit','bulan','tahun','showTarget']));
     }
 
     public function filter_report(Request $request){
@@ -69,7 +69,7 @@ class reportkpiController extends Controller
         }
 
         
-        $resultdays = DB::select("call spGetScoreDaysReporting('$idEmployee','$idTahun')");
+        $resultdays = DB::select("call spGetScoreDaysReporting('".$idEmployee."','".$idTahun."')");
 
         $data ['content'] = $result;
         $data ['contentdays'] = $resultdays;        
@@ -81,11 +81,13 @@ class reportkpiController extends Controller
         
         $idUnit  = $request->get('id');
         $empAuth = Auth::user()->EMPLOYEE_ID;
-        
+        		$tahun = date('Y');
+
         if(Auth::user()->ROLE_ID == '4'){
         $data = DB::select('call spGetEmployeeFromUnitLogin('.$empAuth.')');}
         else{
-        $data = DB::select('call spGetEmployeeFromUnit('.$idUnit.')');}
+        $data = DB::select("call spGetEmployeeFromUnit('".$idUnit."','".$tahun."')");
+		}
 
         return response()->json($data);
     }

@@ -43,8 +43,8 @@ class daysController extends Controller
 
     public function getEmployeeFromUnit(Request $request){
         $idUnit = $request->get('id');
-
-        $data = DB::select('call spGetEmployeeFromUnit('.$idUnit.')');                                    
+		$tahun = date('Y');
+        $data = DB::select("call spunitemp('".$idUnit."','".$tahun."')");    
 
         return response()->json($data);
     }

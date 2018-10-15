@@ -54,11 +54,11 @@ class pmoController extends Controller
 
         $idUnit = $request->get('id');
         $empAuth    = Auth::user()->EMPLOYEE_ID;
-        
+        $tahun = date('Y');
         if(Auth::user()->ROLE_ID == '4'){
         $data = DB::select('call spGetEmployeeFromUnitLogin('.$empAuth.')');}
         else{
-        $data = DB::select('call spGetEmployeeFromUnit('.$idUnit.')');}
+        $data = DB::select("call spGetEmployeeFromUnit('".$idUnit."', '".$tahun."')");}
         return response()->json($data);                                                      
     }
 
@@ -66,9 +66,10 @@ class pmoController extends Controller
 
         $nameAuth = Auth::user()->EMPLOYEE_NAME;
         $idUnit = $request->get('id');
+		$tahun = date('Y');
 
 
-        $data = DB::select('call spGetEmployeeFromUnit('.$idUnit.')');
+        $data = DB::select("call spGetEmployeeFromUnit('".$idUnit."', '".$tahun."')");
 
         return response()->json($data);                                                      
     }

@@ -157,6 +157,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/touchpause/del','edit_days_project_touchController@delete_touch_pause');
 	Route::post('/touchstop/del','edit_days_project_touchController@delete_touch_stop');
 	Route::post('/penilaian/del','globalController@delete_penilaian');
+	Route::any('/target','globalController@kpi_target');
+	Route::any('/update/target','globalController@update_target');
 
 });
 

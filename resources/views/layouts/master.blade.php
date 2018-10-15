@@ -146,17 +146,25 @@
 									</ul>
 								</li>
 								<li><a href="{{ url('/reportkpi') }}"><i class="fa fa-sticky-note"></i> Reporting KPI</a></li>
+								@if (Auth::user()->ROLE_ID == '5' or Auth::user()->ROLE_ID == '3'or Auth::user()->ROLE_ID == '2'or Auth::user()->ROLE_ID == '1')
 								<li><a href="#"><i class="fa fa-briefcase"></i> Kinerja <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu">
 										<li><a href="{{ url('/absensi') }}">Absensi</a></li>
 										<li><a href="{{ url('/days') }}">Days Project</a></li>
+										
 										<li><a href="{{ url('/pmis') }}">PMIS</a></li>
-										<li><a href="{{ url('/hrd') }}">HRD</a></li>
-										<li><a href="{{ url('/pmo') }}">PMO</a></li>
-										<li><a href="{{ url('/asman') }}">UNIT</a></li>
+										@if (Auth::user()->ROLE_ID == '5' or Auth::user()->ROLE_ID == '1')
+											<li><a href="{{ url('/hrd') }}">HRD</a></li>
+										@endif
+										@if (Auth::user()->ROLE_ID == '5' or Auth::user()->ROLE_ID == '2' )
+											<li><a href="{{ url('/pmo') }}">PMO</a></li>
+										@endif
+										@if (Auth::user()->ROLE_ID == '5' or Auth::user()->ROLE_ID == '3')
+											<li><a href="{{ url('/asman') }}">UNIT</a></li>
+										@endif
 									</ul>
 								</li>
-
+								@endif
 								@if (Auth::user()->ROLE_ID == '5') {{--
 									<li><a href="#"><i class="fa fa-user"></i> Admin <span class="fa fa-chevron-down"></span></a>
 										<ul class="nav child_menu">
@@ -175,7 +183,7 @@
 											</ul>
 										</li>
 										<li><a href="{{ url('/edit_given_point') }}">Given Point</a></li>  
-										<li><a href="{{ url('#') }}">Target KPI</a></li>  
+										<li><a href="{{ url('target') }}">Target KPI</a></li>  
 										<li><a href="{{ url('/edit_employee') }}">Employee</a></li>  
 										<li><a href="{{ url('/edit_mandays_project') }}">Mandays Project</a></li>
 										<li><a href="{{ url('/edit_single_mndyproject') }}">Single Mandays Project</a></li>

@@ -52,12 +52,12 @@ class asmanController extends Controller
     public function getEmployeeFromUnit(Request $request){
         $idUnit  = $request->get('id');
         $empAuth = Auth::user()->EMPLOYEE_ID;
-        
+   		$tahun = date('Y');
         if(Auth::user()->ROLE_ID == '3'){
-        $data = DB::select('call spGetEmployeeFromUnitLogin('.$empAuth.')');}
-        else{
-        $data = DB::select('call spGetEmployeeFromUnit('.$idUnit.')');}
-        return response()->json($data);                                                      
+        $data = DB::select('call spGetEmployeeFromUnitLogin('.$empAuth.')');
+		}else{
+        $data = DB::select("call spGetEmployeeFromUnit('".$idUnit."','".$tahun."')");
+		}
 
         return response()->json($data);
     }
@@ -65,9 +65,10 @@ class asmanController extends Controller
     public function getEmployeeFromUnit1(Request $request){
         
         $idUnit = $request->get('id');
+		$tahun = date('Y');
         $nameAuth = Auth::user()->EMPLOYEE_NAME;
 
-        $data = DB::select('call spGetEmployeeFromUnit('.$idUnit.')');
+        $data = DB::select("call spGetEmployeeFromUnit('".$idUnit."','".$tahun."')");
 
         return response()->json($data);
     }

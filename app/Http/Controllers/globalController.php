@@ -26,6 +26,30 @@ class globalController extends Controller
         $data = DB::select('call spGetEmployeeFromUnit('.$idUnit.')');
 
         return response()->json($data);                                                      
+    }	
+	public function kpi_target(Request $request){
+
+		if(Auth::user()->ROLE_ID =='5' ) {
+			$showTarget = DB::table('kpi_target')->get();	
+		}
+		return view('edit_target',compact(['showTarget']));
+    }
+	public function update_target(Request $request){
+	$pmo =  $request->get('pmo');
+	$hrd =  $request->get('hrd');
+	$unit =  $request->get('unit');
+	$absen =  $request->get('absen');
+	$daysproject =  $request->get('daysproject');
+	$pmis =  $request->get('pmis');
+
+		$save = DB::select("call sptarget('".$absen."','".$daysproject."','".$pmis."','".$pmo."','".$hrd."','".$unit."')");
+	   if($pmo!=null){
+                    $msg['msg'] = 'Success Update';
+        }
+        else{
+                    $msg['msg'] = 'Gagal Update';
+        }   
+	return json_encode($msg);
     }
 
 }
