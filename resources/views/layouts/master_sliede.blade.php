@@ -129,10 +129,37 @@
 	
 <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
 <script type="text/javascript">
-    function doRefresh(){
-    setTimeout(function(){// wait for 5 secs(2)
-                    location.reload(); // then reload the page.(3)
-                  }, 10000);
-	}
+	var chartArray = 3;
+	var chartIndex = 0;
+  
+	$(document).ready(function () {
+		$("#yfReportContainerf5194245-7830-4c02-a6f4-054368671844").hide();
+		$("#yfReportContainer6b49b8e3-9f3c-442d-9d0c-1bcb103c5187").hide();
+		$("#yfReportContainer8d33151a-3aee-4fa6-be1b-9025e81f7685").hide();
+	
+		//drawGraph();
+		var slideshowFun = window.setInterval(function () {
+			chartIndex++;
+			if (chartIndex ==1){
+				$("#yfReportContainerf5194245-7830-4c02-a6f4-054368671844").show();
+				$("#yfReportContainer6b49b8e3-9f3c-442d-9d0c-1bcb103c5187").hide();
+				$("#yfReportContainer8d33151a-3aee-4fa6-be1b-9025e81f7685").hide();
+	
+				/*$('#chart1').show();
+				$('#chart2').hide();*/
+			}else if(chartIndex == 2){
+				$("#yfReportContainerf5194245-7830-4c02-a6f4-054368671844").hide();
+				$("#yfReportContainer6b49b8e3-9f3c-442d-9d0c-1bcb103c5187").show();
+				$("#yfReportContainer8d33151a-3aee-4fa6-be1b-9025e81f7685").hide();
+			}else {
+				chartIndex = 0;
+				$("#yfReportContainerf5194245-7830-4c02-a6f4-054368671844").hide();
+				$("#yfReportContainer6b49b8e3-9f3c-442d-9d0c-1bcb103c5187").hide();
+				$("#yfReportContainer8d33151a-3aee-4fa6-be1b-9025e81f7685").show();
+				/*$('#chart1').hide();
+				$('#chart2').show();*/
+			}
+		}, 5000);
+	});
 </script>
 </body>

@@ -25,10 +25,17 @@ class index_dasboard_yfController extends Controller {
 		$page_title = "Rekap Absen";
 		$dashboard = 3;
 		return view('indexdasboardyf',compact(['page_title', 'dashboard']));
+	}	
+	public function slide(){
+		$page_title = "Rekap Absen";
+		$dashboard = 4;
+		return view('slideindex',compact(['page_title', 'dashboard']));
 	}
 		public function index2(){
 		$page_title = "Absen Harian";
 		$dashboard = 1;
 		return view('indexdasboardyf',compact(['page_title', 'dashboard']));
 	}
+	
+
 }
