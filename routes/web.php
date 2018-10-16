@@ -187,6 +187,7 @@ Route::get('/indexdasboardyf', 'index_dasboard_yfController@index');
 Route::get('/indexdasboardyf/absen', 'index_dasboard_yfController@index2');
 Route::get('/indexdasboardyf/duateratas', 'index_dasboard_yfController@duateratas');
 Route::get('/indexdasboardyf/slide', 'index_dasboard_yfController@slide');
+
 Route::get('/indexdasboardyf/duaterbawah', 'index_dasboard_yfController@duaterbawah');
 
 Auth::routes();
