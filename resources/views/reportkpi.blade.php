@@ -171,7 +171,11 @@
   </div>
 </div>
 <script type="text/javascript">
-
+  $.ajaxSetup({
+    headers : {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
 $('.unitname').change(function(){
 
       var id = $('.unitname').val();
