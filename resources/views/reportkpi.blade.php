@@ -362,7 +362,7 @@ $('.btn-search-report').click(function(){
 
                   $('.result-score-akhir').append("<span>0</span>");
                   
-              }else{
+              }else{ 
                   
                   $('.result-pmis-skor').append(pmis_skor);
                   $('.result-pmis-skorakhir').append(pmis_skorakhir);
