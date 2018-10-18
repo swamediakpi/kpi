@@ -129,10 +129,8 @@
 	
 <script src="http://code.jquery.com/jquery-3.1.1.js"></script>
 <script type="text/javascript">
-    function doRefresh(){
-    setTimeout(function(){// wait for 5 secs(2)
+setTimeout(function(){// wait for 5 secs(2)
                     location.reload(); // then reload the page.(3)
-                  }, 10000);
-	}
+                  }, 360000);
 </script>
 </body>

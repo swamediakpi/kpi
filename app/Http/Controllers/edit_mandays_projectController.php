@@ -66,7 +66,7 @@ class edit_mandays_projectController extends Controller
         $duration = $request->get('duration');
         $PROJECT  = $request->get('PROJECT');
 
-        $updateArr = array('START_WORK' => $start,'END_WORK' => $finish,'WORK_DURATION' => $duration);
+        $updateArr = array('START_WORK' => $start,'END_WORK' => $finish,'WORK_DURATION' => $duration,'REALIZE_TIME'=> $duration);
         
         DB::table('project_employee')
             ->where('PROJECT_ID', $PROJECT)            
