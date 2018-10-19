@@ -119,7 +119,7 @@ $(document).ready(function(){
 
             			t+=	'<tr>';
             			t+=		'<td style="text-align:center">'+no+'</td>';
-            			t+=		'<td>'+v.PROJECT_NAME+'</td>';
+            			t+=		'<td><input type="text"  class="form-control projectname" value="'+v.PROJECT_NAME+'"></td>';
             			t+=     '<input type="hidden" class="prjct_id" value="'+v.PROJECT_DETAIL_ID+'">'
             			t+=		'<td><input type="text" style="width:120px" class="form-control startdate" value="'+v.PROJECT_START+'"></td>';
             			t+=		'<td><input type="text" style="width:120px" class="form-control finishdate" value="'+v.PROJECT_END+'"></td>';
@@ -273,21 +273,25 @@ $(document).ready(function(){
 						$('.result-prjct').append(t);
 		    			$('#btn_update_prjct').click(function(){
 		    				
-		    				var prjct_id   = $('.prjct_id').val();
-		    				var start      = $('.startdate').val();
-		    				var finish     = $('.finishdate').val();
-		    				var duration   = $('.calldays').val();
+		    				var prjct_id   		= $('.prjct_id').val();
+		    				var projectname     = $('.projectname').val();
+		    				var start      		= $('.startdate').val();
+		    				var finish     		= $('.finishdate').val();
+		    				var duration   		= $('.calldays').val();
 		    				 
 		    				$.ajax({
 					            url : baseUrl +'/edit_project/update',
 					            type: 'POST',
-					            data: {'prjct_id': prjct_id, 'start' : start, 'finish':finish, 'duration':duration},
+					            data: {'prjct_id': prjct_id,'projectname' : projectname, 'start' : start, 'finish':finish, 'duration':duration},
 					            dataType: 'json',
 					            success:function(r){
 					                if(r.msg == 'Success Update'){
 					                  $("#error2").html(r.msg);
 	      							  $('#myModal2').modal("show");
 					                }
+									setTimeout(function(){
+										location.reload(true); 
+									}, 1000); 
 					            }
 					        });
 

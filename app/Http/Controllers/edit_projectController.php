@@ -36,11 +36,12 @@ class edit_projectController extends Controller
 	public function update_prjct(Request $request){
 
 		$prjct_id = $request->get('prjct_id');
+		$projectname = $request->get('projectname');
 		$start    = $request->get('start');
 		$finish   = $request->get('finish');
 		$duration = $request->get('duration');
 		
-		$updateArr = array('PROJECT_START' => $start,'PROJECT_END' => $finish,'PROJECT_DURATION' => $duration);
+		$updateArr = array('PROJECT_START' => $start,'PROJECT_NAME' =>$projectname,'PROJECT_END' => $finish,'PROJECT_DURATION' => $duration);
 		
 		DB::table('project')
             ->where('PROJECT_DETAIL_ID', $prjct_id)
