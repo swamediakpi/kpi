@@ -76,13 +76,13 @@
                     <th>Note</th>
                   </tr>
               </thead>
-              <tbody>
+ <tbody>
                   <tr>
                     <td>1</td>
                     <td>Attendance</td>
                     <td colspan="2">Attendance Employee</td>
                     <td>20</td>
-                    <td>95%</td>
+                    <td>{{ $showTarget->absen_target}}%</td>
                     <td>%</td>
                     <td></td>
                     <td class="result-absen-skor"></td>
@@ -94,7 +94,7 @@
                     <td>Project</td>
                     <td colspan="2">Days Project</td>
                     <td>11</td>
-                    <td>2</td>
+                    <td>{{ $showTarget->days_target}}</td>
                     <td>hari</td>
                     <td></td>
                     <td class="result-daysproject-skor"></td>
@@ -106,19 +106,20 @@
                     <td>PMIS</td>
                     <td colspan="2">PMIS</td>
                     <td>20</td>
-                    <td>90%</td>
+                    <td>{{ $showTarget->pmis_target}}%</td>
                     <td>%</td>
                     <td></td>
                     <td class="result-pmis-skor"></td>
                     <td class="result-pmis-skorakhir"></td>
                     <td class="result-pmis-note"></td>
-                  </tr>
+                  </tr>   
                   <tr>
+				  
                     <td>4</td>                
                     <td></td>                
                     <td colspan="2">Human Resource Department</td>
                     <td>15</td>
-                    <td>13</td>
+                    <td>{{ $showTarget->hrd_target}}</td>
                     <td>skor</td>
                     <td></td>
                     <td class="result-hrd-skor"></td>
@@ -130,7 +131,7 @@
                     <td><center>Givent Point</center></td>       
                     <td colspan="2">Project Management Officer</td>
                     <td>16</td>
-                    <td>14</td>
+                    <td>{{ $showTarget->pmo_target}}</td>
                     <td>skor</td>
                     <td></td>
                     <td class="result-pmo-skor"></td>  
@@ -142,7 +143,7 @@
                     <td></td>
                     <td colspan="2">UNIT</td>                
                     <td>18</td>
-                    <td>16</td>
+                    <td>{{ $showTarget->unit_target}}</td>
                     <td>skor</td>
                     <td></td>
                     <td class="result-unit-skor"></td>  
