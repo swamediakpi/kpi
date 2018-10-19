@@ -61,6 +61,7 @@
           </div>
        <div class="ln_solid"></div>
        <div class="table-responsive">
+	                        @foreach ($showTarget as $listtarget)
             <table class="table table-bordered table-hover">
               <thead>
                   <tr>
@@ -77,7 +78,6 @@
                   </tr>
               </thead>
 			  <tbody>
-                     @foreach ($showTarget as $listtarget)
 
                   <tr>
                     <td>1</td>
@@ -163,10 +163,11 @@
                     <td class="result-score-akhir"></td>
                     <td></td>
                   </tr>
-				                      @endforeach
 
               </tbody>
             </table>
+							                      @endforeach
+
         </div>
       </div>
     </div>
